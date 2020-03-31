@@ -15,6 +15,7 @@ public class Patrol : StateMachineBehaviour
     private List<Vector3> m_patPoints = new List<Vector3>();
     private NavMeshAgent m_nav;
     private GameObject m_player;
+    private GameObject m_combatField;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -34,14 +35,15 @@ public class Patrol : StateMachineBehaviour
 
     void MyAwake(Animator _animator)
     {
-        m_maxDistance = _animator.GetFloat("maxDistance");
-        float puffer = _animator.GetFloat("puffer");
+        m_maxDistance = _animator.GetFloat("MaxDistance");
+        float puffer = _animator.GetFloat("Puffer");
 
         m_terrainWidth = (Terrain.activeTerrain.GetPosition().x + Terrain.activeTerrain.terrainData.size.x) - puffer;
         m_terrainLength = (Terrain.activeTerrain.GetPosition().z + Terrain.activeTerrain.terrainData.size.z) - puffer;
 
         m_nav = _animator.GetComponent<NavMeshAgent>();
         m_player = GameObject.FindGameObjectWithTag("Player");
+        m_combatField = (GameObject) Resources.Load("Prefabs/CombatField", typeof(GameObject));
     }
 
     void GeneratePatrolRoute(Animator _animator)
@@ -103,7 +105,7 @@ public class Patrol : StateMachineBehaviour
         float mgt = distV.magnitude;
     
         // If distance between player and enemy < than the allowed maxDistance = follow player / else go on Patrol again
-        if (mgt <= m_maxDistance && m_walkPatrol)
+        if (mgt <= m_maxDistance)
         {
             m_walkPatrol = false;
             m_nav.destination = m_player.transform.position;
