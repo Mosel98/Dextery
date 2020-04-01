@@ -1,23 +1,28 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class CombatManager : MonoBehaviour
 {
-    private GameObject m_enemy;
-    private GameObject m_combatField;
+    public bool m_combat { get; private set; }
 
+    [SerializeField]
+    private GameObject m_combatField;
     [SerializeField]
     private GameObject m_combatUI;
     [SerializeField]
     private Slider m_hpSlider;
     [SerializeField]
     private Slider m_eSlider;
+    [SerializeField]
+    private Text m_playerInfo;
+    [SerializeField]
+    private Text m_enemyInfo;
 
-    private Vector3 m_enemySpawn;
+    private GameObject m_player;
+    private GameObject m_enemy;
+    private GameObject m_tmpCombatField;
 
     private bool m_playerTurn;
-    private bool m_combat;
 
     private float m_tmpDefendPlay = 0.0f;
     private float m_tmpDefendEnemy = 0.0f;
@@ -32,10 +37,18 @@ public class CombatManager : MonoBehaviour
     private float m_enemyDef;
     private float m_enemyMana;
 
+    private float m_goldMulti;
+    private float m_exp;
+
+    private Vector3 m_pCombatPos;
+    private Vector3 m_eCombatPos;
+
     private void Update()
     {
         if (m_combat)
         {
+            CheckCombatPositions();
+
             if (!m_playerTurn)
             {
                 float rnd = Random.Range(0, 3);
@@ -49,6 +62,12 @@ public class CombatManager : MonoBehaviour
                         m_playHealth += tmp;
                         m_hpSlider.value = m_playHealth;
                         m_tmpDefendPlay = 0.0f;
+
+                        UpdateInfoBox(1, "Dextery takes damage!");
+                    }
+                    else
+                    {
+                        UpdateInfoBox(1, "Dextery blocks the attack!");
                     }
 
                     m_playerTurn = true;
@@ -56,48 +75,82 @@ public class CombatManager : MonoBehaviour
                 else
                 {
                     m_tmpDefendEnemy = m_enemyDef;
+                    UpdateInfoBox(1, "Enemey defends himself!");
+
                     m_playerTurn = true;
                 }
             }
         }
     }
 
-    public void SetDuelists(GameObject _player, GameObject _enemy, GameObject _combatField)
+    #region --- Setting Combat ---
+    public void SetCombat(GameObject _player, GameObject _enemy)
     {
-        m_enemy = _enemy;
-        m_combatField = _combatField;
+        m_player = _player;
+        m_enemy = _enemy;       
 
-        // Stop enemys animator settings for battle
-        _enemy.GetComponent<Animator>().SetBool("Idle", true);
-        _enemy.GetComponent<NavMeshAgent>().isStopped = true;
+        SetCombatField();
 
-        // Get enemy type and start position (last only necessary when player runs)
-        EnemySetter es = _enemy.GetComponent<EnemySetter>();
-        EEnemyTypes eType = es.EnemyType;
-        m_enemySpawn = es.m_spawnPos;
+        SetPlayer();
 
-        // Sets the duellists to there asigned positions
-        _player.transform.position = _combatField.transform.GetChild(0).position;
-        _enemy.transform.position = _combatField.transform.GetChild(1).position;
+        SetEnemy();
 
-        // Set Players battle parameters
-        CollisionChecker cc = _player.GetComponent<CollisionChecker>();
+        StartCombat();
+    }
+
+    private void StartCombat()
+    {
+        m_combatUI.SetActive(true);
+
+        m_playerTurn = true;
+        m_combat = true;
+
+        m_player.transform.position = m_pCombatPos;
+        m_enemy.transform.position = m_eCombatPos;
+    }
+
+    private void EndCombat(params GameObject[] _destroys)
+    {
+        m_combatUI.SetActive(false);
+        m_combat = false;
+
+        m_tmpDefendPlay = 0.0f;
+        m_tmpDefendEnemy = 0.0f;
+
+        for (int i = 0; i < _destroys.Length; i++)
+        {
+            Destroy(_destroys[i]);
+        }
+    }
+    #endregion
+
+    #region --- Setting Duellist ---
+    private void SetPlayer()
+    {
+        CollisionChecker cc = m_player.GetComponent<CollisionChecker>();
         m_hpSlider.maxValue = cc.m_maxHealth;
         m_hpSlider.value = cc.m_health;
         m_playHealth = cc.m_health;
         m_playAtk = cc.m_atk;
         m_playDef = cc.m_def;
         m_playMana = cc.m_mana;
+    }
+
+    private void SetEnemy()
+    {
+        // Get enemy type
+        EnemySetter es = m_enemy.GetComponent<EnemySetter>();
+        EEnemyTypes eType = es.EnemyType;
 
         // Set Enemy battle parameters
         switch (eType)
         {
             case EEnemyTypes.CASUAL:
-                m_eSlider.maxValue = 5.0f;
-                m_eSlider.value = 5.0f;
-                m_enemyHealth = 5.0f;
+                m_eSlider.maxValue = 50.0f;
+                m_eSlider.value = 50.0f;
+                m_enemyHealth = 50.0f;
                 m_enemyAtk = 10.0f;
-                m_enemyDef = 1.0f;
+                m_enemyDef = 10.0f;
                 m_enemyMana = 1.0f;
                 break;
             case EEnemyTypes.WRATH:
@@ -109,18 +162,34 @@ public class CombatManager : MonoBehaviour
                 m_enemyMana = 10.0f;
                 break;
         }
-
-        StartCombat();
     }
+    #endregion
 
-    private void StartCombat()
+    #region --- Combat Field Related ---
+    private void SetCombatField()
     {
-        m_combatUI.SetActive(true);
-
-        m_playerTurn = true;
-        m_combat = true;
+        m_tmpCombatField = Instantiate(m_combatField, m_player.transform.position, m_player.transform.rotation, transform.parent);
+        m_pCombatPos = m_tmpCombatField.transform.GetChild(0).position;
+        m_eCombatPos = m_tmpCombatField.transform.GetChild(1).position;
     }
 
+    private void CheckCombatPositions()
+    {
+        Vector2 tmpP = new Vector2(m_player.transform.position.x, m_player.transform.position.z);
+        Vector2 tmpE = new Vector2(m_enemy.transform.position.x, m_enemy.transform.position.z);
+
+        Vector2 tmpCP = new Vector2(m_pCombatPos.x, m_pCombatPos.z);
+        Vector2 tmpCE = new Vector2(m_eCombatPos.x, m_eCombatPos.z);
+
+        if (tmpP != tmpCP)
+            m_player.transform.position = m_pCombatPos;
+
+        if (tmpE != tmpCE)
+            m_enemy.transform.position = m_eCombatPos;
+    }
+    #endregion
+
+    #region --- Combat UI---
     public void Attack()
     {
         if (m_playerTurn)
@@ -133,11 +202,16 @@ public class CombatManager : MonoBehaviour
                 m_eSlider.value = m_enemyHealth;
                 m_tmpDefendEnemy = 0.0f;
 
-                if (m_enemyHealth == 0.0f)
+                UpdateInfoBox(0, "Enemey takes damage!");
+
+                if (m_enemyHealth <= 0.0f)
                 {
-                    Destroy(m_enemy);
-                    Destroy(m_combatField);
+                    EndCombat(m_enemy, m_tmpCombatField);
                 }
+            }
+            else
+            {
+                UpdateInfoBox(0, "Enemy blocks the attack!");
             }
 
             m_playerTurn = false;
@@ -149,6 +223,8 @@ public class CombatManager : MonoBehaviour
         if (m_playerTurn)
         {
             m_tmpDefendPlay = m_playDef;
+            UpdateInfoBox(0, "Dextery defends himself!");
+
             m_playerTurn = false;
         }
     }
@@ -157,11 +233,21 @@ public class CombatManager : MonoBehaviour
     {
         // Restart enemys Animator
         m_enemy.GetComponent<Animator>().SetBool("Idle", false);
-        m_enemy.GetComponent<NavMeshAgent>().isStopped = false;
 
-        // Set enemy back to his original spawn point
-        m_enemy.transform.position = m_enemySpawn;
-
-        Destroy(m_combatField);
+        EndCombat(m_tmpCombatField);
     }
+
+    private void UpdateInfoBox(int _id, string _info)
+    {
+        switch (_id)
+        {
+            case 0:
+                m_playerInfo.text = _info;
+                break;
+            case 1:
+                m_enemyInfo.text = _info;
+                break;
+        }
+    }
+    #endregion
 }

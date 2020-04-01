@@ -15,7 +15,8 @@ public class Patrol : StateMachineBehaviour
     private List<Vector3> m_patPoints = new List<Vector3>();
     private NavMeshAgent m_nav;
     private GameObject m_player;
-    private GameObject m_combatField;
+
+    private CombatManager m_cm;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -27,10 +28,17 @@ public class Patrol : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(m_walkPatrol)
-            WalkPatrolRoute(animator);
+        if (!m_cm.m_combat)
+        {
+            if (m_walkPatrol)
+                WalkPatrolRoute(animator);
 
-        CheckDistancePE(animator);
+            CheckDistancePE(animator);
+        }
+        else
+        {
+            animator.SetBool("Idle", true);
+        }
     }
 
     void MyAwake(Animator _animator)
@@ -43,7 +51,8 @@ public class Patrol : StateMachineBehaviour
 
         m_nav = _animator.GetComponent<NavMeshAgent>();
         m_player = GameObject.FindGameObjectWithTag("Player");
-        m_combatField = (GameObject) Resources.Load("Prefabs/CombatField", typeof(GameObject));
+
+        m_cm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
     }
 
     void GeneratePatrolRoute(Animator _animator)
