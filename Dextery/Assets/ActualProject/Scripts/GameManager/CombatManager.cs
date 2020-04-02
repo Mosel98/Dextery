@@ -6,6 +6,8 @@ public class CombatManager : MonoBehaviour
     public bool m_combat { get; private set; }
 
     [SerializeField]
+    private GameObject m_playCamera;
+    [SerializeField]
     private GameObject m_combatField;
     [SerializeField]
     private GameObject m_combatUI;
@@ -43,6 +45,8 @@ public class CombatManager : MonoBehaviour
 
     private float m_exp;
     private int m_gold;
+
+    private int turn = 1;
 
     private Vector3 m_pCombatPos;
     private Vector3 m_eCombatPos;
@@ -91,7 +95,9 @@ public class CombatManager : MonoBehaviour
     public void SetCombat(GameObject _player, GameObject _enemy)
     {
         m_player = _player;
-        m_enemy = _enemy;       
+        m_enemy = _enemy;
+
+        m_playCamera.SetActive(false);
 
         SetCombatField();
 
@@ -125,6 +131,8 @@ public class CombatManager : MonoBehaviour
         {
             Destroy(_destroys[i]);
         }
+
+        m_playCamera.SetActive(true);
 
         if (_win)
         {
@@ -260,12 +268,14 @@ public class CombatManager : MonoBehaviour
         switch (_id)
         {
             case 0:
-                m_playerInfo.text = _info;
+                m_playerInfo.text = $"{turn}. {_info}";
                 break;
             case 1:
-                m_enemyInfo.text = _info;
+                m_enemyInfo.text = $"{turn}. {_info}";
                 break;
         }
+
+        turn++;
     }
     #endregion
 }
