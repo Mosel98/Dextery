@@ -12,11 +12,15 @@ public class CombatManager : MonoBehaviour
     [SerializeField]
     private Slider m_hpSlider;
     [SerializeField]
+    private Slider m_manaSlider;
+    [SerializeField]
     private Slider m_eSlider;
     [SerializeField]
     private Text m_playerInfo;
     [SerializeField]
     private Text m_enemyInfo;
+    [SerializeField]
+    private PlayerAttributes m_playAttr;
 
     private GameObject m_player;
     private GameObject m_enemy;
@@ -37,8 +41,8 @@ public class CombatManager : MonoBehaviour
     private float m_enemyDef;
     private float m_enemyMana;
 
-    private float m_goldMulti;
     private float m_exp;
+    private int m_gold;
 
     private Vector3 m_pCombatPos;
     private Vector3 m_eCombatPos;
@@ -83,7 +87,7 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    #region --- Setting Combat ---
+    #region --- Combat Settings ---
     public void SetCombat(GameObject _player, GameObject _enemy)
     {
         m_player = _player;
@@ -109,7 +113,7 @@ public class CombatManager : MonoBehaviour
         m_enemy.transform.position = m_eCombatPos;
     }
 
-    private void EndCombat(params GameObject[] _destroys)
+    private void EndCombat(bool _win, params GameObject[] _destroys)
     {
         m_combatUI.SetActive(false);
         m_combat = false;
@@ -121,19 +125,29 @@ public class CombatManager : MonoBehaviour
         {
             Destroy(_destroys[i]);
         }
+
+        if (_win)
+        {
+            m_playAttr.SetHealth(m_playHealth);
+            m_playAttr.SetMana(m_playMana);
+            m_playAttr.SetEarnExp(m_exp);
+            m_playAttr.SetEarnGold(m_gold);
+        }
     }
     #endregion
 
     #region --- Setting Duellist ---
     private void SetPlayer()
     {
-        CollisionChecker cc = m_player.GetComponent<CollisionChecker>();
-        m_hpSlider.maxValue = cc.m_maxHealth;
-        m_hpSlider.value = cc.m_health;
-        m_playHealth = cc.m_health;
-        m_playAtk = cc.m_atk;
-        m_playDef = cc.m_def;
-        m_playMana = cc.m_mana;
+        m_hpSlider.maxValue = m_playAttr.m_MaxHealth;
+        m_hpSlider.value = m_playAttr.m_Health;
+        m_manaSlider.maxValue = m_playAttr.m_MaxMana;
+        m_manaSlider.value = m_playAttr.m_Mana;
+
+        m_playHealth = m_playAttr.m_Health;
+        m_playMana = m_playAttr.m_Mana;
+        m_playAtk = m_playAttr.m_Atk;
+        m_playDef = m_playAttr.m_Def;
     }
 
     private void SetEnemy()
@@ -152,6 +166,8 @@ public class CombatManager : MonoBehaviour
                 m_enemyAtk = 10.0f;
                 m_enemyDef = 10.0f;
                 m_enemyMana = 1.0f;
+                m_exp = 50.0f;
+                m_gold = 10;
                 break;
             case EEnemyTypes.WRATH:
                 m_eSlider.maxValue = 20.0f;
@@ -160,6 +176,8 @@ public class CombatManager : MonoBehaviour
                 m_enemyAtk = 5.0f;
                 m_enemyDef = 10.0f;
                 m_enemyMana = 10.0f;
+                m_exp = 1000.0f;
+                m_gold = 1000;
                 break;
         }
     }
@@ -206,7 +224,7 @@ public class CombatManager : MonoBehaviour
 
                 if (m_enemyHealth <= 0.0f)
                 {
-                    EndCombat(m_enemy, m_tmpCombatField);
+                    EndCombat(true, m_enemy, m_tmpCombatField);
                 }
             }
             else
@@ -234,7 +252,7 @@ public class CombatManager : MonoBehaviour
         // Restart enemys Animator
         m_enemy.GetComponent<Animator>().SetBool("Idle", false);
 
-        EndCombat(m_tmpCombatField);
+        EndCombat(false, m_tmpCombatField);
     }
 
     private void UpdateInfoBox(int _id, string _info)
