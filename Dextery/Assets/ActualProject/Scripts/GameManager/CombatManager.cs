@@ -12,6 +12,8 @@ public class CombatManager : MonoBehaviour
     [SerializeField]
     private GameObject m_combatUI;
     [SerializeField]
+    private GameObject m_inventoryPanel;
+    [SerializeField]
     private Slider m_hpSlider;
     [SerializeField]
     private Slider m_manaSlider;
@@ -23,6 +25,8 @@ public class CombatManager : MonoBehaviour
     private Text m_enemyInfo;
     [SerializeField]
     private PlayerAttributes m_playAttr;
+    [SerializeField]
+    private Inventory m_inventory;
 
     private GameObject m_player;
     private GameObject m_enemy;
@@ -50,6 +54,7 @@ public class CombatManager : MonoBehaviour
 
     private Vector3 m_pCombatPos;
     private Vector3 m_eCombatPos;
+
 
     private void Update()
     {
@@ -141,6 +146,8 @@ public class CombatManager : MonoBehaviour
             m_playAttr.SetEarnExp(m_exp);
             m_playAttr.SetEarnGold(m_gold);
         }
+
+        CleanInfoBoxes();
     }
     #endregion
 
@@ -255,12 +262,29 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public void OpenInventory()
+    {
+        m_inventoryPanel.SetActive(true);
+    }
+
+    public void CloseInventory()
+    {
+        m_inventoryPanel.SetActive(false);
+    }
+
     public void Run()
     {
-        // Restart enemys Animator
-        m_enemy.GetComponent<Animator>().SetBool("Idle", false);
+        float rnd = Random.Range(0, 4);
 
-        EndCombat(false, m_tmpCombatField);
+        if (rnd < 3)
+        {
+            EndCombat(false, m_tmpCombatField);
+        }
+        else
+        {
+            UpdateInfoBox(0, "Run away failed!");
+            m_playerTurn = false;
+        }
     }
 
     private void UpdateInfoBox(int _id, string _info)
@@ -276,6 +300,40 @@ public class CombatManager : MonoBehaviour
         }
 
         turn++;
+    }
+
+    private void CleanInfoBoxes()
+    {
+        m_playerInfo.text = "";
+        m_enemyInfo.text = "";
+
+        turn = 1;
+    }
+
+    public void Heal()
+    {
+        m_playHealth += 10.0f;
+        m_hpSlider.value = m_playHealth;
+
+        m_inventory.RemoveItem(new Item { ItemType = EItems.HEALPOTION, Amount = 1});
+        UpdateInfoBox(0, "Dextery used Heald Potion!");
+
+        m_inventoryPanel.SetActive(false);
+
+        m_playerTurn = false;
+    }
+
+    public void Mana()
+    {
+        m_playMana += 10.0f;
+        m_manaSlider.value = m_playMana;
+
+        m_inventory.RemoveItem(new Item { ItemType = EItems.MANAPOTION, Amount = 1 });
+        UpdateInfoBox(0, "Dextery used Mana Potion!");
+
+        m_inventoryPanel.SetActive(false);
+
+        m_playerTurn = false;
     }
     #endregion
 }
