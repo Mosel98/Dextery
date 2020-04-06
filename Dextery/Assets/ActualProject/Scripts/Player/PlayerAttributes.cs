@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAttributes : MonoBehaviour
 {
     [SerializeField]
     private CombatManager m_combatManager;
+    [SerializeField]
+    private Text m_statsText;
 
     public float m_MaxHealth { get; private set; }
     public float m_Health { get; private set; }
@@ -77,6 +80,11 @@ public class PlayerAttributes : MonoBehaviour
     public void SetEarnGold(int _gold)
     {
         m_Gold += _gold;
+    }
+
+    private void UpdateStatsInfo()
+    {
+        m_statsText.text = $"Max Health: {m_MaxHealth}\n Health: {m_Health}\nMax Mana: ";
     }
     #endregion
 
