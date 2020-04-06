@@ -139,10 +139,11 @@ public class CombatManager : MonoBehaviour
 
         m_playCamera.SetActive(true);
 
+        m_playAttr.SetHealth(m_playHealth);
+        m_playAttr.SetMana(m_playMana);
+
         if (_win)
         {
-            m_playAttr.SetHealth(m_playHealth);
-            m_playAttr.SetMana(m_playMana);
             m_playAttr.SetEarnExp(m_exp);
             m_playAttr.SetEarnGold(m_gold);
         }
@@ -310,9 +311,9 @@ public class CombatManager : MonoBehaviour
         turn = 1;
     }
 
-    public void Heal()
+    public void Heal(float _heal)
     {
-        m_playHealth += 10.0f;
+        m_playHealth += _heal;
         m_hpSlider.value = m_playHealth;
 
         m_inventory.RemoveItem(new Item { ItemType = EItems.HEALPOTION, Amount = 1});
@@ -323,9 +324,9 @@ public class CombatManager : MonoBehaviour
         m_playerTurn = false;
     }
 
-    public void Mana()
+    public void Mana(float _mana)
     {
-        m_playMana += 10.0f;
+        m_playMana += _mana;
         m_manaSlider.value = m_playMana;
 
         m_inventory.RemoveItem(new Item { ItemType = EItems.MANAPOTION, Amount = 1 });

@@ -8,6 +8,8 @@ public class PlayerAttributes : MonoBehaviour
     [SerializeField]
     private Text m_statsText;
 
+    private Inventory m_inventory;
+
     public float m_MaxHealth { get; private set; }
     public float m_Health { get; private set; }
 
@@ -22,6 +24,11 @@ public class PlayerAttributes : MonoBehaviour
 
     public int m_Lvl { get; private set; }
     public int m_Gold { get; private set; }
+
+    private void Awake()
+    {
+        m_inventory = GetComponent<Inventory>();
+    }
 
     private void Start()
     {
@@ -41,17 +48,53 @@ public class PlayerAttributes : MonoBehaviour
             m_Lvl = 1;
             m_Gold = 100;
         }
+
+        UpdateStatsInfo();
     }
 
     #region --- Update Attributes ---
     public void SetHealth(float _newHealth)
     {
         m_Health = _newHealth;
+
+        UpdateStatsInfo();
     }
 
     public void SetMana(float _newMana)
     {
         m_Mana = _newMana;
+
+        UpdateStatsInfo();
+    }
+
+    public void AddHealth(float _health)
+    {
+        if(m_Health + _health > m_MaxHealth)
+        {
+            m_Health = m_MaxHealth;
+        }
+        else
+        {
+            m_Health += _health;
+        }
+
+        m_inventory.RemoveItem(new Item { ItemType = EItems.HEALPOTION, Amount = 1 });
+        UpdateStatsInfo();
+    }
+
+    public void AddMana(float _mana)
+    {
+        if(m_Mana + _mana > m_MaxMana)
+        {
+            m_Mana = m_MaxMana;
+        }
+        else
+        {
+            m_Mana += _mana;
+        }
+
+        m_inventory.RemoveItem(new Item { ItemType = EItems.MANAPOTION, Amount = 1 });
+        UpdateStatsInfo();
     }
 
     public void SetEarnExp(float _exp)
@@ -75,16 +118,20 @@ public class PlayerAttributes : MonoBehaviour
 
             m_Lvl++;
         }
+
+        UpdateStatsInfo();
     }
 
     public void SetEarnGold(int _gold)
     {
         m_Gold += _gold;
+
+        UpdateStatsInfo();
     }
 
     private void UpdateStatsInfo()
     {
-        m_statsText.text = $"Max Health: {m_MaxHealth}\n Health: {m_Health}\nMax Mana: ";
+        m_statsText.text = $"Max Health: {m_MaxHealth}\nHealth: {m_Health}\nMax Mana: {m_MaxMana}\nMana: {m_Mana}\nAttack: {m_Atk}\nDefend: {m_Def}\n---------------\nLevel: {m_Lvl}\nExperience for next Level: {m_ExpReq}\nExp: {m_Exp}\n---------------\nGold: {m_Gold}";
     }
     #endregion
 
