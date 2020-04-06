@@ -69,12 +69,12 @@ public class CombatManager : MonoBehaviour
                 if (rnd < 2)
                 {
                     float tmp = m_tmpDefendPlay - m_enemyAtk;
+                    m_tmpDefendPlay = 0.0f;
 
                     if (tmp <= 0.0f)
                     {
                         m_playHealth += tmp;
                         m_hpSlider.value = m_playHealth;
-                        m_tmpDefendPlay = 0.0f;
 
                         UpdateInfoBox(1, "Dextery takes damage!");
                     }
