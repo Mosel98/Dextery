@@ -6,9 +6,13 @@ public class CombatManager : MonoBehaviour
     public bool m_combat { get; private set; }
 
     [SerializeField]
+    private GameObject m_playCamera;
+    [SerializeField]
     private GameObject m_combatField;
     [SerializeField]
     private GameObject m_combatUI;
+    [SerializeField]
+    private GameObject m_inventoryPanel;
     [SerializeField]
     private Slider m_hpSlider;
     [SerializeField]
@@ -21,6 +25,8 @@ public class CombatManager : MonoBehaviour
     private Text m_enemyInfo;
     [SerializeField]
     private PlayerAttributes m_playAttr;
+    [SerializeField]
+    private Inventory m_inventory;
 
     private GameObject m_player;
     private GameObject m_enemy;
@@ -44,8 +50,11 @@ public class CombatManager : MonoBehaviour
     private float m_exp;
     private int m_gold;
 
+    private int turn = 1;
+
     private Vector3 m_pCombatPos;
     private Vector3 m_eCombatPos;
+
 
     private void Update()
     {
@@ -60,12 +69,12 @@ public class CombatManager : MonoBehaviour
                 if (rnd < 2)
                 {
                     float tmp = m_tmpDefendPlay - m_enemyAtk;
+                    m_tmpDefendPlay = 0.0f;
 
                     if (tmp <= 0.0f)
                     {
                         m_playHealth += tmp;
                         m_hpSlider.value = m_playHealth;
-                        m_tmpDefendPlay = 0.0f;
 
                         UpdateInfoBox(1, "Dextery takes damage!");
                     }
@@ -91,7 +100,9 @@ public class CombatManager : MonoBehaviour
     public void SetCombat(GameObject _player, GameObject _enemy)
     {
         m_player = _player;
-        m_enemy = _enemy;       
+        m_enemy = _enemy;
+
+        m_playCamera.SetActive(false);
 
         SetCombatField();
 
@@ -126,6 +137,8 @@ public class CombatManager : MonoBehaviour
             Destroy(_destroys[i]);
         }
 
+        m_playCamera.SetActive(true);
+
         if (_win)
         {
             m_playAttr.SetHealth(m_playHealth);
@@ -133,6 +146,8 @@ public class CombatManager : MonoBehaviour
             m_playAttr.SetEarnExp(m_exp);
             m_playAttr.SetEarnGold(m_gold);
         }
+
+        CleanInfoBoxes();
     }
     #endregion
 
@@ -247,12 +262,29 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public void OpenInventory()
+    {
+        m_inventoryPanel.SetActive(true);
+    }
+
+    public void CloseInventory()
+    {
+        m_inventoryPanel.SetActive(false);
+    }
+
     public void Run()
     {
-        // Restart enemys Animator
-        m_enemy.GetComponent<Animator>().SetBool("Idle", false);
+        float rnd = Random.Range(0, 4);
 
-        EndCombat(false, m_tmpCombatField);
+        if (rnd < 3)
+        {
+            EndCombat(false, m_tmpCombatField);
+        }
+        else
+        {
+            UpdateInfoBox(0, "Run away failed!");
+            m_playerTurn = false;
+        }
     }
 
     private void UpdateInfoBox(int _id, string _info)
@@ -260,12 +292,48 @@ public class CombatManager : MonoBehaviour
         switch (_id)
         {
             case 0:
-                m_playerInfo.text = _info;
+                m_playerInfo.text = $"{turn}. {_info}";
                 break;
             case 1:
-                m_enemyInfo.text = _info;
+                m_enemyInfo.text = $"{turn}. {_info}";
                 break;
         }
+
+        turn++;
+    }
+
+    private void CleanInfoBoxes()
+    {
+        m_playerInfo.text = "";
+        m_enemyInfo.text = "";
+
+        turn = 1;
+    }
+
+    public void Heal()
+    {
+        m_playHealth += 10.0f;
+        m_hpSlider.value = m_playHealth;
+
+        m_inventory.RemoveItem(new Item { ItemType = EItems.HEALPOTION, Amount = 1});
+        UpdateInfoBox(0, "Dextery used Heald Potion!");
+
+        m_inventoryPanel.SetActive(false);
+
+        m_playerTurn = false;
+    }
+
+    public void Mana()
+    {
+        m_playMana += 10.0f;
+        m_manaSlider.value = m_playMana;
+
+        m_inventory.RemoveItem(new Item { ItemType = EItems.MANAPOTION, Amount = 1 });
+        UpdateInfoBox(0, "Dextery used Mana Potion!");
+
+        m_inventoryPanel.SetActive(false);
+
+        m_playerTurn = false;
     }
     #endregion
 }

@@ -12,7 +12,7 @@ public class Idle : StateMachineBehaviour
         m_nav = animator.GetComponent<NavMeshAgent>();
         m_cm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
 
-        animator.transform.position = animator.GetComponent<EnemySetter>().m_spawnPos;
+        animator.transform.position = animator.GetComponent<EnemySetter>().m_SpawnPos;
 
         m_nav.isStopped = true;
     }
@@ -29,7 +29,7 @@ public class Idle : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.transform.position = animator.GetComponent<EnemySetter>().m_spawnPos;
+        animator.transform.position = animator.GetComponent<EnemySetter>().m_SpawnPos;
         m_nav.isStopped = false;       
     }
 }

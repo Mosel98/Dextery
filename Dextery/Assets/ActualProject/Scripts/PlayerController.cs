@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using UnityEngine;
 
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    private CombatManager m_combatManager;
     [SerializeField]
     private float m_movementSpeed = 5;
     [SerializeField]
@@ -25,7 +24,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        if (!m_combatManager.m_combat)
+            Move();
     }
 
     private void Move()
