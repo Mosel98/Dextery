@@ -79,7 +79,6 @@ public class Patrol : StateMachineBehaviour
                 yVal = Terrain.activeTerrain.SampleHeight(new Vector3(randX, 0, randZ));
 
                 rndPos = new Vector3(randX, yVal, randZ);
-                Debug.Log(rndPos);
 
             } while (rndPos.x > m_terrainWidth || rndPos.x < -m_terrainWidth || rndPos.z > m_terrainLength || rndPos.z < -m_terrainLength);
 

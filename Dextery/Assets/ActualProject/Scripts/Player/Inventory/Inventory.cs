@@ -131,7 +131,7 @@ public class Inventory : MonoBehaviour
                 Button btnClick = tmpBtn.GetComponent<Button>();
                 Text btnText = tmpBtn.GetComponentInChildren<Text>();
 
-                tmpBtn.transform.parent = m_combatInventory.transform;
+                tmpBtn.transform.SetParent(m_combatInventory.transform);
                 tmpRT.anchorMin = tmpMin;
                 tmpRT.anchorMax = tmpMax;
                 tmpRT.offsetMin = new Vector2(0.0f, 0.0f);
@@ -172,7 +172,7 @@ public class Inventory : MonoBehaviour
             Button btnClick = tmpBtn.GetComponent<Button>();
             Text btnText = tmpBtn.GetComponentInChildren<Text>();
 
-            tmpBtn.transform.parent = m_InventoryContent.transform;
+            tmpBtn.transform.SetParent(m_InventoryContent.transform);
             tmpRT.offsetMin = tmpMin;
             tmpRT.offsetMax = tmpMax;
 
