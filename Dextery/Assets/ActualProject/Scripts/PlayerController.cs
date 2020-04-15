@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,21 +26,35 @@ public class PlayerController : MonoBehaviour
     {
         if (!m_combatManager.m_combat)
             Move();
+
+
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     private void Move()
     {
         Vector2 movementInput = m_controls.Player.Movement.ReadValue<Vector2>();
 
-        Vector3 movement = new Vector3(movementInput.x, 0f, movementInput.y).normalized;
+        Vector3 direction = movementInput.x * transform.right + movementInput.y * transform.forward;
+        direction = direction.normalized * m_movementSpeed;
 
-        if(movement != Vector3.zero)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), m_smoothness);
-        }
+        direction.y = m_player.velocity.y;
+        m_player.velocity = direction;
+
+        Debug.Log(direction);
         
-        movement = movement.normalized * m_movementSpeed * Time.deltaTime;
-        transform.Translate(movement, Space.World);
+
+
+        //if(direction != Vector3.zero)
+        //{
+        //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(transform.position), m_smoothness * Time.deltaTime);
+        //}
+        
+        //movement = movement.normalized * m_movementSpeed * Time.deltaTime;
+        //transform.Translate(movement, Space.World);
     }
 
     private void OnEnable()
@@ -52,4 +66,6 @@ public class PlayerController : MonoBehaviour
     {
         m_controls.Player.Disable();
     }
+
+    
 }
