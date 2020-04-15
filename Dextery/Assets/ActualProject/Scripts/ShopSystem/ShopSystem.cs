@@ -40,15 +40,7 @@ public class ShopSystem : MonoBehaviour
         m_sellInventoryScroll = tmp.transform.GetChild(1).gameObject;
         m_sellInventoryContent = m_sellInventoryScroll.transform.GetChild(0).GetChild(0).gameObject;
 
-        m_txtGold = m_shopUI.transform.GetChild(0).GetChild(1).gameObject.GetComponent<Text>();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.H) && !m_shopUI.activeSelf)
-        {
-            OpenShop();
-        }            
+        m_txtGold = m_shopUI.transform.GetChild(4).gameObject.GetComponent<Text>();
     }
 
     public void OpenShop()
@@ -245,11 +237,13 @@ public class ShopSystem : MonoBehaviour
         m_playerAttributes.SetGold(m_playerGold);
 
         m_shopUI.SetActive(false);
+        Vendor.isShoping = false;
     }
 
     public void CancelTrade()
     {
         m_shopUI.SetActive(false);
+        Vendor.isShoping = false;
     }
     #endregion
 
