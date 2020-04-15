@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,10 +29,14 @@ public class ShopSystem : MonoBehaviour
     private List<Item> m_playerItems;
     private List<Item> m_shopItems = new List<Item>();
 
+    private List<Item> m_tmpItems; 
+
     private int m_playerGold;
 
     private void Awake()
     {
+        m_playerItems = m_playerInventory.GetItemList();
+
         GameObject tmp = m_shopUI.transform.GetChild(1).gameObject;
 
         m_shopInventoryScroll = tmp.transform.GetChild(0).gameObject;
@@ -46,8 +51,8 @@ public class ShopSystem : MonoBehaviour
     public void OpenShop()
     {
         m_shopItems.Clear();
+        m_tmpItems = m_playerItems.ConvertAll(Item => new Item() { ItemType = Item.ItemType, Amount = Item.Amount, Value = Item.Value, EffectVal = Item.EffectVal});
 
-        m_playerItems = m_playerInventory.GetItemList();
         m_playerGold = m_playerAttributes.m_Gold;
         ManageGold();
 
@@ -233,8 +238,8 @@ public class ShopSystem : MonoBehaviour
     #region --- UI Btn ---
     public void AcceptTrade()
     {
-        m_playerInventory.SetItemList(m_playerItems);
         m_playerAttributes.SetGold(m_playerGold);
+        m_playerInventory.UpdateAllInventories();
 
         m_shopUI.SetActive(false);
         Vendor.isShoping = false;
@@ -242,6 +247,8 @@ public class ShopSystem : MonoBehaviour
 
     public void CancelTrade()
     {
+        m_playerItems = m_tmpItems.ConvertAll(Item => new Item() { ItemType = Item.ItemType, Amount = Item.Amount, Value = Item.Value, EffectVal = Item.EffectVal });
+
         m_shopUI.SetActive(false);
         Vendor.isShoping = false;
     }
