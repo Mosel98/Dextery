@@ -129,6 +129,13 @@ public class PlayerAttributes : MonoBehaviour
         UpdateStatsInfo();
     }
 
+    public void SetGold(int _gold)
+    {
+        m_Gold = _gold;
+
+        UpdateStatsInfo();
+    }
+
     private void UpdateStatsInfo()
     {
         m_statsText.text = $"Max Health: {m_MaxHealth}\nHealth: {m_Health}\nMax Mana: {m_MaxMana}\nMana: {m_Mana}\nAttack: {m_Atk}\nDefend: {m_Def}\n---------------\nLevel: {m_Lvl}\nExperience for next Level: {m_ExpReq}\nExp: {m_Exp}\n---------------\nGold: {m_Gold}";

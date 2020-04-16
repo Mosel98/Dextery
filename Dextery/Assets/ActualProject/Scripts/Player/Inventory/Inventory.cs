@@ -18,9 +18,9 @@ public class Inventory : MonoBehaviour
 
     private PlayerAttributes m_playAttributes;
 
-    private GameObject m_InventoryScroll;
-    private GameObject m_InventoryContent;
-    private GameObject m_StatsPanel;
+    private GameObject m_inventoryScroll;
+    private GameObject m_inventoryContent;
+    private GameObject m_statsPanel;
 
     private Vector2 m_anchorMin = new Vector2(0.05f, 0.9f);
     private Vector2 m_anchorMax = new Vector2(0.95f, 0.95f);
@@ -36,17 +36,16 @@ public class Inventory : MonoBehaviour
 
         GameObject tmp = m_normalInventory.transform.GetChild(1).gameObject;
 
-        m_InventoryScroll = tmp.transform.GetChild(0).gameObject;
-        m_StatsPanel = tmp.transform.GetChild(1).gameObject;
+        m_inventoryScroll = tmp.transform.GetChild(0).gameObject;
+        m_statsPanel = tmp.transform.GetChild(1).gameObject;
 
-        m_InventoryContent = m_InventoryScroll.transform.GetChild(0).GetChild(0).gameObject;
+        m_inventoryContent = m_inventoryScroll.transform.GetChild(0).GetChild(0).gameObject;
     }
 
     private void Start()
     {
-        AddItem(new Item { ItemType = EItems.HEALPOTION, Amount = 5});
-        AddItem(new Item { ItemType = EItems.HEALPOTION, Amount = 5});
-        AddItem(new Item { ItemType = EItems.MANAPOTION, Amount = 3 });
+        AddItem(Item.CreateItem(EItems.HEALPOTION, 8));
+        AddItem(Item.CreateItem(EItems.MANAPOTION, 3));
     }
 
     private void Update()
@@ -141,11 +140,11 @@ public class Inventory : MonoBehaviour
                 {
                     case EItems.HEALPOTION:
                         btnText.text = $"Heal Potion x{item.Amount}";
-                        btnClick.onClick.AddListener(delegate { m_combatManager.Heal(10.0f); });
+                        btnClick.onClick.AddListener(delegate { m_combatManager.Heal(item.EffectVal); });
                         break;
                     case EItems.MANAPOTION:
                         btnText.text = $"Mana Potion x{item.Amount}";
-                        btnClick.onClick.AddListener(delegate { m_combatManager.Mana(10.0f); });
+                        btnClick.onClick.AddListener(delegate { m_combatManager.Mana(item.EffectVal); });
                         break;
                 }          
 
@@ -172,7 +171,7 @@ public class Inventory : MonoBehaviour
             Button btnClick = tmpBtn.GetComponent<Button>();
             Text btnText = tmpBtn.GetComponentInChildren<Text>();
 
-            tmpBtn.transform.SetParent(m_InventoryContent.transform);
+            tmpBtn.transform.SetParent(m_inventoryContent.transform);
             tmpRT.offsetMin = tmpMin;
             tmpRT.offsetMax = tmpMax;
 
@@ -180,11 +179,11 @@ public class Inventory : MonoBehaviour
             {
                 case EItems.HEALPOTION:
                     btnText.text = $"Heal Potion x{item.Amount}";
-                    btnClick.onClick.AddListener(delegate { m_playAttributes.AddHealth(10.0f); });
+                    btnClick.onClick.AddListener(delegate { m_playAttributes.AddHealth(item.EffectVal); });
                     break;
                 case EItems.MANAPOTION:
                     btnText.text = $"Mana Potion x{item.Amount}";
-                    btnClick.onClick.AddListener(delegate { m_playAttributes.AddMana(10.0f); });
+                    btnClick.onClick.AddListener(delegate { m_playAttributes.AddMana(item.EffectVal); });
                     break;
             }
 
@@ -194,16 +193,33 @@ public class Inventory : MonoBehaviour
 
     public void ShowStats()
     {
-        m_InventoryScroll.SetActive(false);
-        m_StatsPanel.SetActive(true);
+        m_inventoryScroll.SetActive(false);
+        m_statsPanel.SetActive(true);
     }
 
     public void ShowInventory()
     {
-        m_InventoryScroll.SetActive(true);
-        m_StatsPanel.SetActive(false);
+        m_inventoryScroll.SetActive(true);
+        m_statsPanel.SetActive(false);
     }
     #endregion
+
+    #region --- Other Functions (Cleaning) ---
+    public List<Item> GetItemList()
+    {
+        return m_itemList;
+    }
+
+    public void SetItemList(List<Item> _itemList)
+    {
+        m_itemList = _itemList;
+    }
+
+    public void UpdateAllInventories()
+    {
+        UpdateNormalInventory();
+        UpdateCombatInventory();
+    }
 
     // That sounds a little bit wrong xD
     private void DestroyChildren(int _id)
@@ -220,9 +236,9 @@ public class Inventory : MonoBehaviour
                 }
                 break;
             case 1:
-                if (m_InventoryContent.transform.childCount > 0)
+                if (m_inventoryContent.transform.childCount > 0)
                 {
-                    foreach (Transform child in m_InventoryContent.transform)
+                    foreach (Transform child in m_inventoryContent.transform)
                     {
                         Destroy(child.gameObject);
                     }
@@ -230,4 +246,5 @@ public class Inventory : MonoBehaviour
                 break;
         }
     }
+    #endregion
 }
