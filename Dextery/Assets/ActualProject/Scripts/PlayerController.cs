@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float m_movementSpeed = 5;
     [SerializeField]
-    private float m_smoothness = 0.1f;
+    private float m_smoothness = 2f;
 
     private PlayerControls m_controls = null;
     private Rigidbody m_player;
+
+    private MeshFilter m_capsule;
     
 
     // Start is called before the first frame update
@@ -19,6 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         m_player = GetComponent<Rigidbody>();
         m_controls = new PlayerControls();
+        m_capsule = GetComponentInChildren<MeshFilter>();
     }
 
     // Update is called once per frame
@@ -44,17 +47,10 @@ public class PlayerController : MonoBehaviour
         direction.y = m_player.velocity.y;
         m_player.velocity = direction;
 
-        Debug.Log(direction);
         
 
-
-        //if(direction != Vector3.zero)
-        //{
-        //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(transform.position), m_smoothness * Time.deltaTime);
-        //}
-        
-        //movement = movement.normalized * m_movementSpeed * Time.deltaTime;
-        //transform.Translate(movement, Space.World);
+        if(direction != Vector3.zero)
+            m_capsule.transform.rotation = Quaternion.Slerp(m_capsule.transform.rotation, Quaternion.LookRotation(direction), m_smoothness * Time.deltaTime);
     }
 
     private void OnEnable()
