@@ -1,7 +1,16 @@
 ﻿using UnityEngine;
 
+public enum EVendor
+{
+    EVERYTHING,
+    PHARMACY,
+    ARMOR
+}
+
 public class Vendor : MonoBehaviour
 {
+    [SerializeField]
+    private EVendor m_vendorType;
     [SerializeField]
     private ShopSystem m_shopSystem;
     [SerializeField]
@@ -23,7 +32,7 @@ public class Vendor : MonoBehaviour
         if (!isShoping && m_interactable && Input.GetKeyDown(KeyCode.E))
         {
             isShoping = true;
-            m_shopSystem.OpenShop();
+            m_shopSystem.OpenShop(m_vendorType);
         }
     }
 

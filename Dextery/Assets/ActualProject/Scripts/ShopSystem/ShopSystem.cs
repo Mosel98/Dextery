@@ -48,20 +48,42 @@ public class ShopSystem : MonoBehaviour
         m_txtGold = m_shopUI.transform.GetChild(4).gameObject.GetComponent<Text>();
     }
 
-    public void OpenShop()
+    #region --- Manage Shop ---
+    public void OpenShop(EVendor _eVendor)
     {
-        m_shopItems.Clear();
+        SetUpVendorSupply(_eVendor);
+
         m_tmpItems = m_playerItems.ConvertAll(Item => new Item() { ItemType = Item.ItemType, Amount = Item.Amount, Value = Item.Value, EffectVal = Item.EffectVal});
 
         m_playerGold = m_playerAttributes.m_Gold;
         ManageGold();
 
-        AddItem(Item.CreateItem(EItems.HEALPOTION, 10), m_shopItems);
-        AddItem(Item.CreateItem(EItems.MANAPOTION, 10), m_shopItems);
-
         m_shopUI.SetActive(true);
     }
 
+    private void SetUpVendorSupply(EVendor _eVendor)
+    {
+        m_shopItems.Clear();
+
+        switch (_eVendor)
+        {
+            case EVendor.EVERYTHING:
+                AddItem(Item.CreateItem(EItems.HEALPOTION, 10), m_shopItems);
+                AddItem(Item.CreateItem(EItems.MANAPOTION, 10), m_shopItems);
+                break;
+            case EVendor.PHARMACY:
+                AddItem(Item.CreateItem(EItems.HEALPOTION, 20), m_shopItems);
+                AddItem(Item.CreateItem(EItems.MANAPOTION, 20), m_shopItems);
+                break;
+            case EVendor.ARMOR:
+                AddItem(Item.CreateItem(EItems.HEALPOTION, 5), m_shopItems);
+                AddItem(Item.CreateItem(EItems.MANAPOTION, 5), m_shopItems);
+                break;
+        }
+    }
+    #endregion
+
+    #region --- Manage Items/Money ---
     private void ManageGold(int _id = 2, int _reGold = 0)
     {
         switch (_id)
@@ -79,7 +101,6 @@ public class ShopSystem : MonoBehaviour
         m_txtGold.text = $"Gold: {m_playerGold}G";
     }
 
-    #region --- Manage Items ---
     public void AddItem(Item _item, List<Item> _itemList)
     {
         if (_item.IsStackable())
@@ -254,6 +275,7 @@ public class ShopSystem : MonoBehaviour
     }
     #endregion
 
+    #region --- Inventories Cleaning ---
     // That sounds a little bit wrong xD
     private void DestroyChildren(int _id)
     {
@@ -279,4 +301,5 @@ public class ShopSystem : MonoBehaviour
                 break;
         }
     }
+    #endregion
 }

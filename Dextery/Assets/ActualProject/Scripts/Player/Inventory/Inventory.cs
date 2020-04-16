@@ -204,6 +204,7 @@ public class Inventory : MonoBehaviour
     }
     #endregion
 
+    #region --- Other Functions (Cleaning) ---
     public List<Item> GetItemList()
     {
         return m_itemList;
@@ -240,4 +241,5 @@ public class Inventory : MonoBehaviour
                 break;
         }
     }
+    #endregion
 }
