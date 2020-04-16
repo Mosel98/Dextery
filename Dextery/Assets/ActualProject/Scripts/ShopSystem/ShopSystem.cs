@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -269,6 +267,8 @@ public class ShopSystem : MonoBehaviour
     public void CancelTrade()
     {
         m_playerItems = m_tmpItems.ConvertAll(Item => new Item() { ItemType = Item.ItemType, Amount = Item.Amount, Value = Item.Value, EffectVal = Item.EffectVal });
+        m_playerInventory.SetItemList(m_playerItems);
+        m_playerInventory.UpdateAllInventories();
 
         m_shopUI.SetActive(false);
         Vendor.isShoping = false;
