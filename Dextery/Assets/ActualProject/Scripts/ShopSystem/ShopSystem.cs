@@ -49,6 +49,7 @@ public class ShopSystem : MonoBehaviour
     #region --- Manage Shop ---
     public void OpenShop(EVendor _eVendor)
     {
+        GameManager.isOccupied = true;
         SetUpVendorSupply(_eVendor);
 
         m_tmpItems = m_playerItems.ConvertAll(Item => new Item() { ItemType = Item.ItemType, Amount = Item.Amount, Value = Item.Value, EffectVal = Item.EffectVal});
@@ -261,7 +262,7 @@ public class ShopSystem : MonoBehaviour
         m_playerInventory.UpdateAllInventories();
 
         m_shopUI.SetActive(false);
-        Vendor.isShoping = false;
+        GameManager.isOccupied = false;
     }
 
     public void CancelTrade()
@@ -271,7 +272,7 @@ public class ShopSystem : MonoBehaviour
         m_playerInventory.UpdateAllInventories();
 
         m_shopUI.SetActive(false);
-        Vendor.isShoping = false;
+        GameManager.isOccupied = false;
     }
     #endregion
 

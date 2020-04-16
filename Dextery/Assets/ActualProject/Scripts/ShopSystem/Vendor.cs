@@ -20,8 +20,6 @@ public class Vendor : MonoBehaviour
 
     private bool m_interactable = false;
 
-    public static bool isShoping = false;
-
     private void Awake()
     {
         m_interactableE = transform.GetChild(0).gameObject;
@@ -29,14 +27,13 @@ public class Vendor : MonoBehaviour
 
     void Update()
     {
-        if (!isShoping && m_interactable && Input.GetKeyDown(KeyCode.E))
+        if (!GameManager.isOccupied && m_interactable && Input.GetKeyDown(KeyCode.E))
         {
-            isShoping = true;
             m_shopSystem.OpenShop(m_vendorType);
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
@@ -45,7 +42,13 @@ public class Vendor : MonoBehaviour
 
             if (!m_interactableE.activeSelf)
                 m_interactableE.SetActive(true);
+        }
+    }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
             m_interactableE.transform.LookAt(m_playerCamera);           
         }
     }
