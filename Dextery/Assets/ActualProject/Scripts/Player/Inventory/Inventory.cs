@@ -210,12 +210,14 @@ public class Inventory : MonoBehaviour
         return m_itemList;
     }
 
-    public void SetItemList(List<Item> _itemList)
+    public void UpdateItemList(List<Item> _newItems)
     {
-        m_itemList = _itemList;
+        m_itemList = _newItems;
+
+        UpdateAllInventories();
     }
 
-    public void UpdateAllInventories()
+    private void UpdateAllInventories()
     {
         UpdateNormalInventory();
         UpdateCombatInventory();
