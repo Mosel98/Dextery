@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private CombatManager m_combatManager;
-    [SerializeField]
     private float m_movementSpeed = 5;
     [SerializeField]
     private float m_smoothness = 2f;
@@ -27,7 +25,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!m_combatManager.m_combat)
+        if (!GameManager.isOccupied)
             Move();
 
 

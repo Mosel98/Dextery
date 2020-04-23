@@ -25,9 +25,9 @@ public class ShopSystem : MonoBehaviour
     private Vector2 m_offsetMax = new Vector2(-10.0f, -10.0f);
 
     private List<Item> m_playerItems;
-    private List<Item> m_shopItems = new List<Item>();
+    private List<Item> m_sellItems; 
 
-    private List<Item> m_tmpItems; 
+    private List<Item> m_shopItems = new List<Item>();
 
     private int m_playerGold;
 
@@ -49,9 +49,10 @@ public class ShopSystem : MonoBehaviour
     #region --- Manage Shop ---
     public void OpenShop(EVendor _eVendor)
     {
-        SetUpVendorSupply(_eVendor);
+        GameManager.isOccupied = true;
 
-        m_tmpItems = m_playerItems.ConvertAll(Item => new Item() { ItemType = Item.ItemType, Amount = Item.Amount, Value = Item.Value, EffectVal = Item.EffectVal});
+        m_sellItems = m_playerItems.ConvertAll(Item => new Item() { ItemType = Item.ItemType, Amount = Item.Amount, Value = Item.Value, EffectVal = Item.EffectVal});
+        SetUpVendorSupply(_eVendor);
 
         m_playerGold = m_playerAttributes.m_Gold;
         ManageGold();
@@ -158,7 +159,7 @@ public class ShopSystem : MonoBehaviour
     {
         bool tmp = true;
 
-        if (_removeList == m_playerItems)
+        if (_removeList == m_sellItems)
         {
             ManageGold(0, _item.Value);
         }
@@ -205,11 +206,11 @@ public class ShopSystem : MonoBehaviour
             {
                 case EItems.HEALPOTION:
                     btnText.text = $"Heal Potion x{item.Amount} | {item.Value}G";
-                    btnClick.onClick.AddListener(delegate { ManageItem(Item.CreateItem(EItems.HEALPOTION), m_shopItems, m_playerItems); });
+                    btnClick.onClick.AddListener(delegate { ManageItem(Item.CreateItem(EItems.HEALPOTION), m_shopItems, m_sellItems); });
                     break;
                 case EItems.MANAPOTION:
                     btnText.text = $"Mana Potion x{item.Amount} | {item.Value}G";
-                    btnClick.onClick.AddListener(delegate { ManageItem(Item.CreateItem(EItems.MANAPOTION), m_shopItems, m_playerItems); });
+                    btnClick.onClick.AddListener(delegate { ManageItem(Item.CreateItem(EItems.MANAPOTION), m_shopItems, m_sellItems); });
                     break;
             }
 
@@ -223,7 +224,7 @@ public class ShopSystem : MonoBehaviour
 
         int count = 0;
 
-        foreach (Item item in m_playerItems)
+        foreach (Item item in m_sellItems)
         {
             Vector2 tmpMin = new Vector2(m_offsetMin.x, m_offsetMin.y - (30.0f * count));
             Vector2 tmpMax = new Vector2(m_offsetMax.x, m_offsetMax.y - (30.0f * count));
@@ -241,11 +242,11 @@ public class ShopSystem : MonoBehaviour
             {
                 case EItems.HEALPOTION:
                     btnText.text = $"Heal Potion x{item.Amount} | {item.Value}G";
-                    btnClick.onClick.AddListener(delegate { ManageItem(Item.CreateItem(EItems.HEALPOTION), m_playerItems, m_shopItems); });
+                    btnClick.onClick.AddListener(delegate { ManageItem(Item.CreateItem(EItems.HEALPOTION), m_sellItems, m_shopItems); });
                     break;
                 case EItems.MANAPOTION:
                     btnText.text = $"Mana Potion x{item.Amount} | {item.Value}G";
-                    btnClick.onClick.AddListener(delegate { ManageItem(Item.CreateItem(EItems.MANAPOTION), m_playerItems, m_shopItems); });
+                    btnClick.onClick.AddListener(delegate { ManageItem(Item.CreateItem(EItems.MANAPOTION), m_sellItems, m_shopItems); });
                     break;
             }
 
@@ -257,21 +258,19 @@ public class ShopSystem : MonoBehaviour
     #region --- UI Btn ---
     public void AcceptTrade()
     {
+        m_playerItems = m_sellItems.ConvertAll(Item => new Item() { ItemType = Item.ItemType, Amount = Item.Amount, Value = Item.Value, EffectVal = Item.EffectVal });
+        m_playerInventory.UpdateItemList(m_playerItems);
+
         m_playerAttributes.SetGold(m_playerGold);
-        m_playerInventory.UpdateAllInventories();
 
         m_shopUI.SetActive(false);
-        Vendor.isShoping = false;
+        GameManager.isOccupied = false;
     }
 
     public void CancelTrade()
     {
-        m_playerItems = m_tmpItems.ConvertAll(Item => new Item() { ItemType = Item.ItemType, Amount = Item.Amount, Value = Item.Value, EffectVal = Item.EffectVal });
-        m_playerInventory.SetItemList(m_playerItems);
-        m_playerInventory.UpdateAllInventories();
-
         m_shopUI.SetActive(false);
-        Vendor.isShoping = false;
+        GameManager.isOccupied = false;
     }
     #endregion
 

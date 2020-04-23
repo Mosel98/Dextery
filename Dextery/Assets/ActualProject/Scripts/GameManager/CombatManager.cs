@@ -99,6 +99,8 @@ public class CombatManager : MonoBehaviour
     #region --- Combat Settings ---
     public void SetCombat(GameObject _player, GameObject _enemy)
     {
+        GameManager.isOccupied = true;
+
         m_player = _player;
         m_enemy = _enemy;
 
@@ -149,6 +151,7 @@ public class CombatManager : MonoBehaviour
         }
 
         CleanInfoBoxes();
+        GameManager.isOccupied = false;
     }
     #endregion
 
