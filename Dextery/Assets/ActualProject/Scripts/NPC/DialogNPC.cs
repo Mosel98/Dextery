@@ -96,6 +96,7 @@ public class DialogNPC : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             m_interactableE.transform.LookAt(m_playerCamera);
+            transform.LookAt(other.gameObject.transform);
         }
     }
 
