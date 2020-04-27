@@ -34,7 +34,19 @@ public class PatrolNPC : MonoBehaviour
     private void PatrolOnRoute()
     {
         // Sets patrolPoint as next destination
-        m_meshAgent.destination = m_patPoints[m_nxt];
+        if (!GameManager.isOccupied)
+        {
+            if(m_meshAgent.destination != m_patPoints[m_nxt])
+                m_meshAgent.destination = m_patPoints[m_nxt];
+
+            if (m_meshAgent.isStopped)
+                m_meshAgent.isStopped = false;
+        }
+        else
+        {
+            if(!m_meshAgent.isStopped)
+                m_meshAgent.isStopped = true;
+        }           
 
         // Check if enemy reached one of the patrolPoints
         if (!m_waiting && ((int)transform.position.x >= (int)m_patPoints[m_nxt].x - 0.5f && (int)transform.position.x <= (int)m_patPoints[m_nxt].x + 0.5f &&

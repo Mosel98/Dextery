@@ -89,7 +89,8 @@ public class Patrol : StateMachineBehaviour
     void WalkPatrolRoute(Animator _animator)
     {
         // Sets patrolPoint as next destination
-        m_nav.destination = m_patPoints[point];
+        if (m_nav.destination != m_patPoints[point])
+            m_nav.destination = m_patPoints[point];
 
         // Check if enemy reached one of the patrolPoints
         if ((int)_animator.transform.position.x >= (int)m_patPoints[point].x - 0.5f && (int)_animator.transform.position.x <= (int)m_patPoints[point].x + 0.5f &&
