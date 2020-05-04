@@ -32,6 +32,8 @@ public class CombatManager : MonoBehaviour
     private GameObject m_enemy;
     private GameObject m_tmpCombatField;
 
+    private QuestSystem m_questSystem;
+
     private bool m_playerTurn;
 
     private float m_tmpDefendPlay = 0.0f;
@@ -55,6 +57,10 @@ public class CombatManager : MonoBehaviour
     private Vector3 m_pCombatPos;
     private Vector3 m_eCombatPos;
 
+    private void Awake()
+    {
+        m_questSystem = GetComponent<QuestSystem>();
+    }
 
     private void Update()
     {
@@ -243,6 +249,7 @@ public class CombatManager : MonoBehaviour
 
                 if (m_enemyHealth <= 0.0f)
                 {
+                    m_questSystem.UpdateQuestStatus(EQuest.FIGHT, null, (int) m_enemy.GetComponent<EnemySetter>().EnemyType);
                     EndCombat(true, m_enemy, m_tmpCombatField);
                 }
             }

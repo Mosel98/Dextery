@@ -15,7 +15,7 @@ public class QuestGiver : DialogNPC
     private EItem m_eItem;
 
     [SerializeField]
-    private GameObject m_reciever;
+    private GameObject m_receiver;
 
     [SerializeField]
     private bool m_extraPara = false;
@@ -62,11 +62,11 @@ public class QuestGiver : DialogNPC
             case EQuest.DELIVER:
                 if (m_extraPara)
                 {
-                    m_questSystem.AddQuest(Quest.CreateDeliverQuest(m_eQuest, m_eItem, m_reciever, m_amount, m_gold, m_exp));
+                    m_questSystem.AddQuest(Quest.CreateDeliverQuest(m_eQuest, m_eItem, m_receiver, m_amount, m_gold, m_exp));
                 }
                 else
                 {
-                    m_questSystem.AddQuest(Quest.CreateDeliverQuest(m_eQuest, m_eItem, m_reciever));
+                    m_questSystem.AddQuest(Quest.CreateDeliverQuest(m_eQuest, m_eItem, m_receiver));
                 }
                 break;
         }
@@ -84,7 +84,7 @@ public class QuestGiver : DialogNPC
         SerializedProperty p_eQuest;
         SerializedProperty p_eEnemy;
         SerializedProperty p_eItem;
-        SerializedProperty p_reciever;
+        SerializedProperty p_receiver;
 
         SerializedProperty p_extraPara;
         SerializedProperty p_amount;
@@ -100,7 +100,7 @@ public class QuestGiver : DialogNPC
             p_eQuest = serializedObject.FindProperty("m_eQuest");
             p_eEnemy = serializedObject.FindProperty("m_eEnemy");
             p_eItem = serializedObject.FindProperty("m_eItem");
-            p_reciever = serializedObject.FindProperty("m_reciever");
+            p_receiver = serializedObject.FindProperty("m_receiver");
 
             p_extraPara = serializedObject.FindProperty("m_extraPara");
             p_amount = serializedObject.FindProperty("m_amount");
@@ -128,7 +128,7 @@ public class QuestGiver : DialogNPC
                     break;
                 case (int) EQuest.DELIVER:
                     EditorGUILayout.PropertyField(p_eItem);
-                    EditorGUILayout.PropertyField(p_reciever);
+                    EditorGUILayout.PropertyField(p_receiver);
                     break;
                 default:
                     return;

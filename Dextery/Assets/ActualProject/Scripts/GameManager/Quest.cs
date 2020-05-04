@@ -19,7 +19,7 @@ public class Quest
     public float m_Exp;
     public string m_Dialog;
 
-    public GameObject m_Reciever;
+    public GameObject m_Receiver;
 
     #region --- Create Quest Functions ---
     public static Quest CreateFightQuest(EQuest _quest, EEnemy _enemy, int _amount = 1, int _gold = 10, float _exp = 10.0f)
@@ -58,9 +58,9 @@ public class Quest
     {
         string tmpDialog;
 
-        tmpDialog = $"Deliver {_amount} of {GetItemName(_item)} to {_reciever}";
+        tmpDialog = $"Deliver {_amount} of {GetItemName(_item)} to {_reciever.GetComponent<Receiver>().nameNPC}";
 
-        return new Quest { m_QuestType = _quest, m_eItem = _item, m_Reciever = _reciever, m_Amount = _amount, m_Gold = _gold, m_Exp = _exp, m_Dialog = tmpDialog };
+        return new Quest { m_QuestType = _quest, m_eItem = _item, m_Receiver = _reciever, m_Amount = _amount, m_Gold = _gold, m_Exp = _exp, m_Dialog = tmpDialog };
     }
     #endregion
 

@@ -15,6 +15,7 @@ public class Inventory : MonoBehaviour
     private CombatManager m_combatManager;
 
     private PlayerAttributes m_playAttributes;
+    private QuestSystem m_questSystem;
 
     private GameObject m_inventoryScroll;
     private GameObject m_inventoryContent;
@@ -32,6 +33,7 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         m_playAttributes = GetComponent<PlayerAttributes>();
+        m_questSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<QuestSystem>();
 
         GameObject tmp = m_normalInventory.transform.GetChild(1).gameObject;
 
@@ -224,6 +226,7 @@ public class Inventory : MonoBehaviour
         m_itemList = _newItems;
 
         UpdateAllInventories();
+        m_questSystem.UpdateQuestStatus(EQuest.COLLECT);
     }
 
     private void UpdateAllInventories()
@@ -258,4 +261,15 @@ public class Inventory : MonoBehaviour
         }
     }
     #endregion
+
+    public Item SearchItem(EItem _eItem)
+    {
+        foreach (Item item in m_itemList)
+        {
+            if (item.ItemType == _eItem)
+                return item;
+        }
+
+        return null;
+    }
 }

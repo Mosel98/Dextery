@@ -3,8 +3,7 @@
 public enum EEnemy
 {
     CASUAL,
-    WRATH,
-    NULL
+    WRATH
 }
 
 public class EnemySetter : MonoBehaviour

@@ -11,16 +11,30 @@ public class QuestSystem : MonoBehaviour
     [SerializeField]
     private Transform m_questContent;
 
+    private PlayerAttributes m_playAttributes;
+    private Inventory m_inventory;
+
     private Vector2 m_anchorMin = new Vector2(0.05f, 0.9f);
     private Vector2 m_anchorMax = new Vector2(0.95f, 0.95f);
 
     private Vector2 m_offsetMin = new Vector2(-10.0f, -40.0f);
     private Vector2 m_offsetMax = new Vector2(-10.0f, -10.0f);
 
+    private void Awake()
+    {
+        GameObject tmp = GameObject.FindGameObjectWithTag("Player");
+
+        m_playAttributes = tmp.GetComponent<PlayerAttributes>();
+        m_inventory = tmp.GetComponent<Inventory>();
+    }
+
     public void AddQuest(Quest _quest)
     {
         m_questList.Add(_quest);
         UpdateQuestLog();
+
+        UpdateQuestStatus(EQuest.COLLECT);
+        // UpdateQuestStatus(EQuest.DELIVER);
     }
 
    private void UpdateQuestLog()
@@ -47,6 +61,74 @@ public class QuestSystem : MonoBehaviour
            count++;
        }
    }
+
+    public void UpdateQuestStatus(EQuest _quest, GameObject _receiver = null, int _id = -1)
+    {
+        List<Quest> removeQuestList = new List<Quest>();
+        List<Item> m_playInventory = m_inventory.GetItemList();
+
+        foreach (Quest quest in m_questList)
+        {
+            if (quest.m_QuestType == _quest)
+            {
+                switch (_quest)
+                {
+                    case EQuest.FIGHT:
+                        if (quest.m_eEnemy == (EEnemy)_id)
+                        {
+                            quest.m_Amount--;
+
+                            if (quest.m_Amount <= 0)
+                            {
+                                m_playAttributes.SetEarnGold(quest.m_Gold);
+                                m_playAttributes.SetEarnExp(quest.m_Exp);
+
+                                removeQuestList.Add(quest);
+                            }
+                        }
+                        break;
+                    case EQuest.COLLECT:
+                        foreach (Item item in m_playInventory)
+                        {
+                            if(quest.m_eItem == item.ItemType && item.Amount >= quest.m_Amount)
+                            {
+                                m_playAttributes.SetEarnGold(quest.m_Gold);
+                                m_playAttributes.SetEarnExp(quest.m_Exp);
+
+                                removeQuestList.Add(quest);
+                            }
+                        }
+                        break;
+                    case EQuest.DELIVER:
+                        if(quest.m_Receiver == _receiver)
+                        {
+                            foreach (Item item in m_playInventory)
+                            {
+                                if (quest.m_eItem == item.ItemType && item.Amount >= quest.m_Amount)
+                                {
+                                    item.Amount -= quest.m_Amount;
+                                    m_inventory.UpdateItemList(m_playInventory);
+
+                                    m_playAttributes.SetEarnGold(quest.m_Gold);
+                                    m_playAttributes.SetEarnExp(quest.m_Exp);
+
+                                    removeQuestList.Add(quest);
+                                    break;
+                                }
+                            }                          
+                        }
+                        break;
+                }
+            }
+        }
+
+        foreach (Quest quest in removeQuestList)
+        {
+            m_questList.Remove(quest);
+        }
+
+        UpdateQuestLog();
+    }
    
    // That sounds a little bit wrong xD
    private void DestroyChildren()
