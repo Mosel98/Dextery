@@ -1,12 +1,13 @@
-﻿public enum EItems
+﻿public enum EItem
 {
     HEALPOTION,
-    MANAPOTION
+    MANAPOTION,
+    NULL
 }
 
 public class Item
 {
-    public EItems ItemType;
+    public EItem ItemType;
     public int Amount;
     public int Value;
     public float EffectVal;
@@ -15,22 +16,22 @@ public class Item
     {
         switch (ItemType)
         {
-            case EItems.HEALPOTION:
+            case EItem.HEALPOTION:
                 return true;
-            case EItems.MANAPOTION:
+            case EItem.MANAPOTION:
                 return true;
             default:
                 return false;
         }
     }
 
-    public static Item CreateItem(EItems _item, int _amount = 1)
+    public static Item CreateItem(EItem _item, int _amount = 1)
     {
         switch (_item)
         {
-            case EItems.HEALPOTION:
+            case EItem.HEALPOTION:
                 return new Item { ItemType = _item, Amount = _amount, Value = 10, EffectVal = 10.0f };
-            case EItems.MANAPOTION:
+            case EItem.MANAPOTION:
                 return new Item { ItemType = _item, Amount = _amount, Value = 10, EffectVal = 10.0f };
         }
 

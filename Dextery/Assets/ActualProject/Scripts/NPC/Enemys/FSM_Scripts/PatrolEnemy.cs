@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Patrol : StateMachineBehaviour
+public class PatrolEnemy : StateMachineBehaviour
 {
     private int point = 0;
     private float m_maxDistance;

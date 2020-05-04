@@ -67,16 +67,16 @@ public class ShopSystem : MonoBehaviour
         switch (_eVendor)
         {
             case EVendor.EVERYTHING:
-                AddItem(Item.CreateItem(EItems.HEALPOTION, 10), m_shopItems);
-                AddItem(Item.CreateItem(EItems.MANAPOTION, 10), m_shopItems);
+                AddItem(Item.CreateItem(EItem.HEALPOTION, 10), m_shopItems);
+                AddItem(Item.CreateItem(EItem.MANAPOTION, 10), m_shopItems);
                 break;
             case EVendor.PHARMACY:
-                AddItem(Item.CreateItem(EItems.HEALPOTION, 20), m_shopItems);
-                AddItem(Item.CreateItem(EItems.MANAPOTION, 20), m_shopItems);
+                AddItem(Item.CreateItem(EItem.HEALPOTION, 20), m_shopItems);
+                AddItem(Item.CreateItem(EItem.MANAPOTION, 20), m_shopItems);
                 break;
             case EVendor.ARMOR:
-                AddItem(Item.CreateItem(EItems.HEALPOTION, 5), m_shopItems);
-                AddItem(Item.CreateItem(EItems.MANAPOTION, 5), m_shopItems);
+                AddItem(Item.CreateItem(EItem.HEALPOTION, 5), m_shopItems);
+                AddItem(Item.CreateItem(EItem.MANAPOTION, 5), m_shopItems);
                 break;
         }
     }
@@ -204,13 +204,13 @@ public class ShopSystem : MonoBehaviour
 
             switch (item.ItemType)
             {
-                case EItems.HEALPOTION:
+                case EItem.HEALPOTION:
                     btnText.text = $"Heal Potion x{item.Amount} | {item.Value}G";
-                    btnClick.onClick.AddListener(delegate { ManageItem(Item.CreateItem(EItems.HEALPOTION), m_shopItems, m_sellItems); });
+                    btnClick.onClick.AddListener(delegate { ManageItem(Item.CreateItem(EItem.HEALPOTION), m_shopItems, m_sellItems); });
                     break;
-                case EItems.MANAPOTION:
+                case EItem.MANAPOTION:
                     btnText.text = $"Mana Potion x{item.Amount} | {item.Value}G";
-                    btnClick.onClick.AddListener(delegate { ManageItem(Item.CreateItem(EItems.MANAPOTION), m_shopItems, m_sellItems); });
+                    btnClick.onClick.AddListener(delegate { ManageItem(Item.CreateItem(EItem.MANAPOTION), m_shopItems, m_sellItems); });
                     break;
             }
 
@@ -240,13 +240,13 @@ public class ShopSystem : MonoBehaviour
 
             switch (item.ItemType)
             {
-                case EItems.HEALPOTION:
+                case EItem.HEALPOTION:
                     btnText.text = $"Heal Potion x{item.Amount} | {item.Value}G";
-                    btnClick.onClick.AddListener(delegate { ManageItem(Item.CreateItem(EItems.HEALPOTION), m_sellItems, m_shopItems); });
+                    btnClick.onClick.AddListener(delegate { ManageItem(Item.CreateItem(EItem.HEALPOTION), m_sellItems, m_shopItems); });
                     break;
-                case EItems.MANAPOTION:
+                case EItem.MANAPOTION:
                     btnText.text = $"Mana Potion x{item.Amount} | {item.Value}G";
-                    btnClick.onClick.AddListener(delegate { ManageItem(Item.CreateItem(EItems.MANAPOTION), m_sellItems, m_shopItems); });
+                    btnClick.onClick.AddListener(delegate { ManageItem(Item.CreateItem(EItem.MANAPOTION), m_sellItems, m_shopItems); });
                     break;
             }
 

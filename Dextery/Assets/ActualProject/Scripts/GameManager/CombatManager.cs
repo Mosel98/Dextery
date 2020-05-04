@@ -173,12 +173,12 @@ public class CombatManager : MonoBehaviour
     {
         // Get enemy type
         EnemySetter es = m_enemy.GetComponent<EnemySetter>();
-        EEnemyTypes eType = es.EnemyType;
+        EEnemy eType = es.EnemyType;
 
         // Set Enemy battle parameters
         switch (eType)
         {
-            case EEnemyTypes.CASUAL:
+            case EEnemy.CASUAL:
                 m_eSlider.maxValue = 50.0f;
                 m_eSlider.value = 50.0f;
                 m_enemyHealth = 50.0f;
@@ -188,7 +188,7 @@ public class CombatManager : MonoBehaviour
                 m_exp = 50.0f;
                 m_gold = 10;
                 break;
-            case EEnemyTypes.WRATH:
+            case EEnemy.WRATH:
                 m_eSlider.maxValue = 20.0f;
                 m_eSlider.value = 20.0f;
                 m_enemyHealth = 20.0f;
@@ -319,7 +319,7 @@ public class CombatManager : MonoBehaviour
         m_playHealth += _heal;
         m_hpSlider.value = m_playHealth;
 
-        m_inventory.RemoveItem(new Item { ItemType = EItems.HEALPOTION, Amount = 1});
+        m_inventory.RemoveItem(new Item { ItemType = EItem.HEALPOTION, Amount = 1});
         UpdateInfoBox(0, "Dextery used Heald Potion!");
 
         m_inventoryPanel.SetActive(false);
@@ -332,7 +332,7 @@ public class CombatManager : MonoBehaviour
         m_playMana += _mana;
         m_manaSlider.value = m_playMana;
 
-        m_inventory.RemoveItem(new Item { ItemType = EItems.MANAPOTION, Amount = 1 });
+        m_inventory.RemoveItem(new Item { ItemType = EItem.MANAPOTION, Amount = 1 });
         UpdateInfoBox(0, "Dextery used Mana Potion!");
 
         m_inventoryPanel.SetActive(false);

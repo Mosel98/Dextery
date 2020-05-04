@@ -3,12 +3,13 @@ using UnityEngine.UI;
 
 public class DialogNPC : MonoBehaviour
 {
+    [Header ("Dialog Settings")]
     [SerializeField]
-    private string m_txtFile;
+    private TextAsset m_txtFile;
     [SerializeField]
     private Transform m_playerCamera;
     [SerializeField]
-    private GameObject m_DialogUI;
+    private GameObject m_dialogUI;
 
     private GameObject m_interactableE;
 
@@ -19,14 +20,14 @@ public class DialogNPC : MonoBehaviour
 
     private bool m_isDialog = false;
     private bool m_interactable = false;
+    private bool m_questGiver = false;
 
-    private void Awake()
+    virtual public void Awake()
     {
         m_interactableE = transform.GetChild(0).gameObject;
-        m_dialogTxt = m_DialogUI.GetComponentInChildren<Text>();
+        m_dialogTxt = m_dialogUI.GetComponentInChildren<Text>();
 
-        TextAsset txtAsset = (TextAsset)Resources.Load($"NPCDialogs/{m_txtFile}");
-        string txtContent = txtAsset.text.Replace("\r", "").Replace("\n", "");
+        string txtContent = m_txtFile.text.Replace("\r", "").Replace("\n", "");
 
         m_txtAContent = txtContent.Split('#');
     }
@@ -53,7 +54,7 @@ public class DialogNPC : MonoBehaviour
     {
         GameManager.isOccupied = true;
 
-        m_DialogUI.SetActive(true);
+        m_dialogUI.SetActive(true);
         m_count = 0;
 
         SetDialogText();
@@ -61,9 +62,9 @@ public class DialogNPC : MonoBehaviour
         m_isDialog = true;
     }
 
-    private void EndDialog()
+    virtual public void EndDialog()
     {
-        m_DialogUI.SetActive(false);
+        m_dialogUI.SetActive(false);
         m_isDialog = false;
 
         GameManager.isOccupied = false;

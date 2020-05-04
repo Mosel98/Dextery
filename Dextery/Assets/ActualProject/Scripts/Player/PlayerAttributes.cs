@@ -78,7 +78,7 @@ public class PlayerAttributes : MonoBehaviour
             m_Health += _health;
         }
 
-        m_inventory.RemoveItem(new Item { ItemType = EItems.HEALPOTION, Amount = 1 });
+        m_inventory.RemoveItem(new Item { ItemType = EItem.HEALPOTION, Amount = 1 });
         UpdateStatsInfo();
     }
 
@@ -93,7 +93,7 @@ public class PlayerAttributes : MonoBehaviour
             m_Mana += _mana;
         }
 
-        m_inventory.RemoveItem(new Item { ItemType = EItems.MANAPOTION, Amount = 1 });
+        m_inventory.RemoveItem(new Item { ItemType = EItem.MANAPOTION, Amount = 1 });
         UpdateStatsInfo();
     }
 

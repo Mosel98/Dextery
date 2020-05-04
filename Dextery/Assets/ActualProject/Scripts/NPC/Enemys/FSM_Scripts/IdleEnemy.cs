@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class Idle : StateMachineBehaviour
+public class IdleEnemy : StateMachineBehaviour
 {
     private NavMeshAgent m_nav;
     private CombatManager m_cm;

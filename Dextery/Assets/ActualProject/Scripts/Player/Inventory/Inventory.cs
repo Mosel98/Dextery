@@ -9,8 +9,6 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject m_normalInventory;
     [SerializeField]
-    private GameObject m_btnItemCombat;
-    [SerializeField]
     private GameObject m_btnItemInventory;
 
     [SerializeField]
@@ -21,6 +19,7 @@ public class Inventory : MonoBehaviour
     private GameObject m_inventoryScroll;
     private GameObject m_inventoryContent;
     private GameObject m_statsPanel;
+    private GameObject m_questScroll;
 
     private Vector2 m_anchorMin = new Vector2(0.05f, 0.9f);
     private Vector2 m_anchorMax = new Vector2(0.95f, 0.95f);
@@ -36,16 +35,17 @@ public class Inventory : MonoBehaviour
 
         GameObject tmp = m_normalInventory.transform.GetChild(1).gameObject;
 
-        m_inventoryScroll = tmp.transform.GetChild(0).gameObject;
-        m_statsPanel = tmp.transform.GetChild(1).gameObject;
+        m_statsPanel = tmp.transform.GetChild(0).gameObject;
+        m_inventoryScroll = tmp.transform.GetChild(1).gameObject;
+        m_questScroll = tmp.transform.GetChild(2).gameObject;
 
         m_inventoryContent = m_inventoryScroll.transform.GetChild(0).GetChild(0).gameObject;
     }
 
     private void Start()
     {
-        AddItem(Item.CreateItem(EItems.HEALPOTION, 8));
-        AddItem(Item.CreateItem(EItems.MANAPOTION, 3));
+        AddItem(Item.CreateItem(EItem.HEALPOTION, 8));
+        AddItem(Item.CreateItem(EItem.MANAPOTION, 3));
     }
 
     private void Update()
@@ -120,12 +120,12 @@ public class Inventory : MonoBehaviour
 
         foreach (Item item in m_itemList)
         {
-            if(item.ItemType == EItems.HEALPOTION || item.ItemType == EItems.MANAPOTION)
+            if(item.ItemType == EItem.HEALPOTION || item.ItemType == EItem.MANAPOTION)
             {
                 Vector2 tmpMin = new Vector2(m_anchorMin.x, m_anchorMin.y - (0.05f * count));
                 Vector2 tmpMax = new Vector2(m_anchorMax.x, m_anchorMax.y - (0.05f * count));
 
-                GameObject tmpBtn = Instantiate(m_btnItemCombat);
+                GameObject tmpBtn = Instantiate(m_btnItemInventory);
                 RectTransform tmpRT = tmpBtn.GetComponent<RectTransform>();
                 Button btnClick = tmpBtn.GetComponent<Button>();
                 Text btnText = tmpBtn.GetComponentInChildren<Text>();
@@ -138,11 +138,11 @@ public class Inventory : MonoBehaviour
 
                 switch (item.ItemType)
                 {
-                    case EItems.HEALPOTION:
+                    case EItem.HEALPOTION:
                         btnText.text = $"Heal Potion x{item.Amount}";
                         btnClick.onClick.AddListener(delegate { m_combatManager.Heal(item.EffectVal); });
                         break;
-                    case EItems.MANAPOTION:
+                    case EItem.MANAPOTION:
                         btnText.text = $"Mana Potion x{item.Amount}";
                         btnClick.onClick.AddListener(delegate { m_combatManager.Mana(item.EffectVal); });
                         break;
@@ -177,11 +177,11 @@ public class Inventory : MonoBehaviour
 
             switch (item.ItemType)
             {
-                case EItems.HEALPOTION:
+                case EItem.HEALPOTION:
                     btnText.text = $"Heal Potion x{item.Amount}";
                     btnClick.onClick.AddListener(delegate { m_playAttributes.AddHealth(item.EffectVal); });
                     break;
-                case EItems.MANAPOTION:
+                case EItem.MANAPOTION:
                     btnText.text = $"Mana Potion x{item.Amount}";
                     btnClick.onClick.AddListener(delegate { m_playAttributes.AddMana(item.EffectVal); });
                     break;
@@ -193,14 +193,23 @@ public class Inventory : MonoBehaviour
 
     public void ShowStats()
     {
-        m_inventoryScroll.SetActive(false);
         m_statsPanel.SetActive(true);
+        m_inventoryScroll.SetActive(false);
+        m_questScroll.SetActive(false);
     }
 
     public void ShowInventory()
     {
-        m_inventoryScroll.SetActive(true);
         m_statsPanel.SetActive(false);
+        m_inventoryScroll.SetActive(true);
+        m_questScroll.SetActive(false);
+    }
+
+    public void ShowQuestLog()
+    {
+        m_inventoryScroll.SetActive(false);
+        m_statsPanel.SetActive(false);
+        m_questScroll.SetActive(true);
     }
     #endregion
 
