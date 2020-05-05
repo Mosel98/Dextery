@@ -28,6 +28,7 @@ public class QuestSystem : MonoBehaviour
         m_inventory = tmp.GetComponent<Inventory>();
     }
 
+    #region --- Manage Quest ---
     public void AddQuest(Quest _quest)
     {
         m_questList.Add(_quest);
@@ -100,22 +101,47 @@ public class QuestSystem : MonoBehaviour
                         }
                         break;
                     case EQuest.DELIVER:
-                        if(quest.m_Receiver == _receiver)
+                        switch (_id)
                         {
-                            foreach (Item item in m_playInventory)
-                            {
-                                if (quest.m_eItem == item.ItemType && item.Amount >= quest.m_Amount)
+                            case -1:
+                                foreach (Item item in m_playInventory)
                                 {
-                                    item.Amount -= quest.m_Amount;
-                                    m_inventory.UpdateItemList(m_playInventory);
-
-                                    m_playAttributes.SetEarnGold(quest.m_Gold);
-                                    m_playAttributes.SetEarnExp(quest.m_Exp);
-
-                                    removeQuestList.Add(quest);
-                                    break;
+                                    if (quest.m_eItem == item.ItemType && item.Amount >= quest.m_Amount)
+                                    {
+                                        quest.m_Receiver.GetComponent<Receiver>().m_fq = true;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        quest.m_Receiver.GetComponent<Receiver>().m_fq = false;
+                                    }
                                 }
-                            }                          
+                                break;
+                            case 0:
+                                if (quest.m_Receiver == _receiver)
+                                {
+                                    foreach (Item item in m_playInventory)
+                                    {
+                                        if (quest.m_eItem == item.ItemType && item.Amount >= quest.m_Amount)
+                                        {
+                                            item.Amount -= quest.m_Amount;
+                                            m_inventory.UpdateItemList(m_playInventory);
+
+                                            m_playAttributes.SetEarnGold(quest.m_Gold);
+                                            m_playAttributes.SetEarnExp(quest.m_Exp);
+
+                                            removeQuestList.Add(quest);
+
+                                            Receiver tmp = _receiver.GetComponent<Receiver>();
+                                            tmp.m_allowDialog = false;
+                                            tmp.m_interactable = false;
+                                            tmp.m_interactableE.SetActive(false);
+
+                                            break;
+                                        }
+                                    }
+                                }
+                                break;
                         }
                         break;
                 }
@@ -129,10 +155,16 @@ public class QuestSystem : MonoBehaviour
 
         UpdateQuestLog();
     }
-   
-   // That sounds a little bit wrong xD
-   private void DestroyChildren()
-   {
+    #endregion
+
+    public List<Quest> GetQuestList()
+    {
+        return m_questList;
+    }
+
+    // That sounds a little bit wrong xD
+    private void DestroyChildren()
+    {
         foreach (Transform child in m_questContent)
         {
             Destroy(child.gameObject);

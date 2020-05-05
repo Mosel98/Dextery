@@ -53,7 +53,10 @@ public class Inventory : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
+        {
             m_normalInventory.SetActive(!m_normalInventory.activeSelf);
+            GameManager.isOccupied = !GameManager.isOccupied;
+        }            
     }
 
     #region --- Manage Items ---
@@ -227,6 +230,7 @@ public class Inventory : MonoBehaviour
 
         UpdateAllInventories();
         m_questSystem.UpdateQuestStatus(EQuest.COLLECT);
+        m_questSystem.UpdateQuestStatus(EQuest.DELIVER);
     }
 
     private void UpdateAllInventories()
@@ -261,15 +265,4 @@ public class Inventory : MonoBehaviour
         }
     }
     #endregion
-
-    public Item SearchItem(EItem _eItem)
-    {
-        foreach (Item item in m_itemList)
-        {
-            if (item.ItemType == _eItem)
-                return item;
-        }
-
-        return null;
-    }
 }

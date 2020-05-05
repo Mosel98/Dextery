@@ -11,16 +11,18 @@ public class DialogNPC : MonoBehaviour
     [SerializeField]
     private GameObject m_dialogUI;
 
-    private GameObject m_interactableE;
+    public GameObject m_interactableE;
 
-    private Text m_dialogTxt;
+    public bool m_interactable = false;
+    public bool m_allowDialog = true;
 
-    private string[] m_txtAContent;
-    private int m_count;
+    protected Text m_dialogTxt;
+
+    protected string[] m_txtAContent;
+    protected int m_count;
 
     private bool m_isDialog = false;
-    private bool m_interactable = false;
-    private bool m_questGiver = false;
+    
 
     virtual public void Awake()
     {
@@ -70,19 +72,18 @@ public class DialogNPC : MonoBehaviour
         GameManager.isOccupied = false;
     }
 
-    private void SetDialogText()
+    virtual public void SetDialogText()
     {
         if (m_count != (m_txtAContent.Length - 1))
             m_dialogTxt.text = m_txtAContent[m_count];
         else
             EndDialog();
-
     }
     #endregion
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && m_allowDialog)
         {
             if (!m_interactable)
                 m_interactable = true;
@@ -94,7 +95,7 @@ public class DialogNPC : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && m_allowDialog)
         {
             m_interactableE.transform.LookAt(m_playerCamera);
             transform.LookAt(other.gameObject.transform);

@@ -5,10 +5,6 @@ using UnityEngine.UI;
 public class ShopSystem : MonoBehaviour
 {
     [SerializeField]
-    private Inventory m_playerInventory;
-    [SerializeField]
-    private PlayerAttributes m_playerAttributes;
-    [SerializeField]
     private GameObject m_btnItemInventory;
     [SerializeField]
     private GameObject m_shopUI;
@@ -18,6 +14,9 @@ public class ShopSystem : MonoBehaviour
 
     private GameObject m_sellInventoryScroll;
     private GameObject m_sellInventoryContent;
+
+    private Inventory m_playerInventory;
+    private PlayerAttributes m_playerAttributes;
 
     private Text m_txtGold;
 
@@ -33,6 +32,11 @@ public class ShopSystem : MonoBehaviour
 
     private void Awake()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        m_playerInventory = player.GetComponent<Inventory>();
+        m_playerAttributes = player.GetComponent<PlayerAttributes>();
+
         m_playerItems = m_playerInventory.GetItemList();
 
         GameObject tmp = m_shopUI.transform.GetChild(1).gameObject;

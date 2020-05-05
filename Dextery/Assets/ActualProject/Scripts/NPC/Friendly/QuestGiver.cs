@@ -70,6 +70,12 @@ public class QuestGiver : DialogNPC
                 }
                 break;
         }
+
+        m_allowDialog = false;       
+        m_interactable = false;
+        m_interactableE.SetActive(false);
+
+        m_receiver.GetComponent<Receiver>().m_allowDialog = true;
     }
 
     #region --- Custom Inspector ---

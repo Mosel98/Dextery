@@ -142,6 +142,13 @@ public class PlayerAttributes : MonoBehaviour
     }
     #endregion
 
+    public float[] GetStats()
+    {
+        float[] tmp = { m_MaxHealth, m_Health, m_MaxMana, m_Mana, m_Atk, m_Def, m_Exp, m_ExpReq, m_Lvl, m_Gold};
+
+        return tmp;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))

@@ -11,28 +11,21 @@ public class CombatManager : MonoBehaviour
     private GameObject m_combatField;
     [SerializeField]
     private GameObject m_combatUI;
-    [SerializeField]
-    private GameObject m_inventoryPanel;
-    [SerializeField]
-    private Slider m_hpSlider;
-    [SerializeField]
-    private Slider m_manaSlider;
-    [SerializeField]
-    private Slider m_eSlider;
-    [SerializeField]
-    private Text m_playerInfo;
-    [SerializeField]
-    private Text m_enemyInfo;
-    [SerializeField]
-    private PlayerAttributes m_playAttr;
-    [SerializeField]
-    private Inventory m_inventory;
 
+    private GameObject m_inventoryPanel;  
+    private Slider m_hpSlider;  
+    private Slider m_manaSlider;   
+    private Slider m_eSlider;    
+    private Text m_playerInfo;   
+    private Text m_enemyInfo;
+   
     private GameObject m_player;
     private GameObject m_enemy;
     private GameObject m_tmpCombatField;
 
     private QuestSystem m_questSystem;
+    private PlayerAttributes m_playAttr;  
+    private Inventory m_inventory;
 
     private bool m_playerTurn;
 
@@ -59,7 +52,22 @@ public class CombatManager : MonoBehaviour
 
     private void Awake()
     {
+        GameObject tmp = GameObject.FindGameObjectWithTag("Player");
+
+        m_playAttr = tmp.GetComponent<PlayerAttributes>();
+        m_inventory = tmp.GetComponent<Inventory>();
+
         m_questSystem = GetComponent<QuestSystem>();
+
+        m_inventoryPanel = m_combatUI.transform.GetChild(8).gameObject;
+        m_hpSlider = m_combatUI.transform.GetChild(4).GetComponent<Slider>();
+        m_manaSlider = m_combatUI.transform.GetChild(5).GetComponent<Slider>();
+        m_eSlider = m_combatUI.transform.GetChild(6).GetComponent<Slider>();
+
+        Transform info = m_combatUI.transform.GetChild(7);
+
+        m_playerInfo = info.GetChild(0).GetComponent<Text>();
+        m_enemyInfo = info.GetChild(1).GetComponent<Text>();
     }
 
     private void Update()
