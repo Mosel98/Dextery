@@ -5,7 +5,6 @@ using Cinemachine;
 
 public class ThirdPersonCam : MonoBehaviour
 {
-
     private PlayerControls m_controls = null;
     private Vector2 m_lookDelta;
 

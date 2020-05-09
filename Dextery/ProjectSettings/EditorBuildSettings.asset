@@ -17,7 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/ActualProject/Scenes/TestPlayerScene.unity
     guid: c75dc62fee29583438c3de69de1fd812
-  - enabled: 1
+  - enabled: 0
     path: Assets/ActualProject/Scenes/AlphaTest.unity
     guid: 224d2dc54646b0c49bd00aa22a81443c
+  - enabled: 1
+    path: Assets/ActualProject/Scenes/Heddwyn.unity
+    guid: b9ea4dd9c26e9df49b116767a3d75b44
   m_configObjects: {}

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Escape))
         {
-            Application.Quit();
+            SceneManager.LoadScene("Heddwyn");
         }
     }
 
@@ -60,6 +61,4 @@ public class PlayerController : MonoBehaviour
     {
         m_controls.Player.Disable();
     }
-
-    
 }
