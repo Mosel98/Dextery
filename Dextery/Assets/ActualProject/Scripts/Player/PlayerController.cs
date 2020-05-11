@@ -1,17 +1,22 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private float m_movementSpeed = 5;
     [SerializeField]
-    private float m_smoothness = 2f;
+    private float m_smoothness = 5f;
+
+    [SerializeField]
+    private Transform m_camera;
 
     private PlayerControls m_controls = null;
     private Rigidbody m_player;
 
     private MeshFilter m_capsule;
+    
     
 
     // Start is called before the first frame update
@@ -31,23 +36,25 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Escape))
         {
-            Application.Quit();
+            SceneManager.LoadScene("Heddwyn");
         }
     }
 
     private void Move()
     {
+
         Vector2 movementInput = m_controls.Player.Movement.ReadValue<Vector2>();
 
         Vector3 direction = movementInput.x * transform.right + movementInput.y * transform.forward;
         direction = direction.normalized * m_movementSpeed;
 
+        direction = m_camera.TransformDirection(direction);
+
         direction.y = m_player.velocity.y;
         m_player.velocity = direction;
+       
 
-        
-
-        if(direction != Vector3.zero)
+        if (direction != Vector3.zero)
             m_capsule.transform.rotation = Quaternion.Slerp(m_capsule.transform.rotation, Quaternion.LookRotation(direction), m_smoothness * Time.deltaTime);
     }
 
@@ -60,6 +67,4 @@ public class PlayerController : MonoBehaviour
     {
         m_controls.Player.Disable();
     }
-
-    
 }
