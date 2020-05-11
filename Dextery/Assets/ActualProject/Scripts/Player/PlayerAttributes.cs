@@ -153,7 +153,8 @@ public class PlayerAttributes : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            m_combatManager.SetCombat(gameObject, collision.gameObject);
+            if(!GameObject.FindGameObjectWithTag("CombatField"))
+                m_combatManager.SetCombat(gameObject, collision.gameObject);
         }
     }
 }
