@@ -8,7 +8,7 @@ public class LightingManager : MonoBehaviour
     [SerializeField]
     private Light m_directionalLight;
     [SerializeField]
-    private LightingPreset m_preset;
+    private LightingPreset m_preset = null;
 
     [SerializeField, Range(0, 24)]
     private float m_timeOfDay;
