@@ -84,8 +84,7 @@ public class Inventory : MonoBehaviour
             m_itemList.Add(_item);
         }
 
-        UpdateCombatInventory();
-        UpdateNormalInventory();
+        UpdateAllInventories();
     }
 
     public void RemoveItem(Item _item)
@@ -111,8 +110,7 @@ public class Inventory : MonoBehaviour
             }            
         }
 
-        UpdateCombatInventory();
-        UpdateNormalInventory();
+        UpdateAllInventories();
     }
     #endregion
 
@@ -229,14 +227,15 @@ public class Inventory : MonoBehaviour
         m_itemList = _newItems;
 
         UpdateAllInventories();
-        m_questSystem.UpdateQuestStatus(EQuest.COLLECT);
-        m_questSystem.UpdateQuestStatus(EQuest.DELIVER);
     }
 
     private void UpdateAllInventories()
     {
         UpdateNormalInventory();
         UpdateCombatInventory();
+
+        m_questSystem.UpdateQuestStatus(EQuest.COLLECT);
+        m_questSystem.UpdateQuestStatus(EQuest.DELIVER);
     }
 
     // That sounds a little bit wrong xD
