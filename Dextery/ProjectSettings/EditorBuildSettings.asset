@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/ActualProject/Scenes/Heddwyn.unity
     guid: b9ea4dd9c26e9df49b116767a3d75b44
+  - enabled: 1
+    path: Assets/ActualProject/Scenes/Overworld.unity
+    guid: 87ea30f8a1f6426459cf2114bc02d74d
   m_configObjects: {}

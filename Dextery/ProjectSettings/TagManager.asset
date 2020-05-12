@@ -10,6 +10,7 @@ TagManager:
   - Canvas
   - GameManager
   - CombatField
+  - SceneTrigger
   layers:
   - Default
   - TransparentFX

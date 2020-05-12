@@ -36,18 +36,18 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Escape))
         {
-            SceneManager.LoadScene("Heddwyn");
+            SceneManager.LoadScene("MainMenu");
         }
     }
 
     private void Move()
     {
-
         Vector2 movementInput = m_controls.Player.Movement.ReadValue<Vector2>();
 
         Vector3 direction = movementInput.x * transform.right + movementInput.y * transform.forward;
         direction = direction.normalized * m_movementSpeed;
 
+        // move in relation to camera view
         direction = m_camera.TransformDirection(direction);
 
         direction.y = m_player.velocity.y;
@@ -56,6 +56,14 @@ public class PlayerController : MonoBehaviour
 
         if (direction != Vector3.zero)
             m_capsule.transform.rotation = Quaternion.Slerp(m_capsule.transform.rotation, Quaternion.LookRotation(direction), m_smoothness * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider _col)
+    {
+        if(_col.gameObject.tag == "SceneTrigger")
+        {
+            SceneManager.LoadScene("Overworld");
+        }
     }
 
     private void OnEnable()
