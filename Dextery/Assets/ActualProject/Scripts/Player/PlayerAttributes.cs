@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerAttributes : MonoBehaviour
@@ -7,6 +8,8 @@ public class PlayerAttributes : MonoBehaviour
     private CombatManager m_combatManager;
     [SerializeField]
     private Text m_statsText;
+    [SerializeField]
+    private InputField m_inputLvlFld;
 
     private Inventory m_inventory;
 
@@ -106,15 +109,15 @@ public class PlayerAttributes : MonoBehaviour
             float tmpExp = m_Exp - m_ExpReq;
 
             m_Exp = tmpExp;
-            m_ExpReq *= 2;
+            m_ExpReq = (float)Math.Round((m_ExpReq * 1.25f) * 100f) / 100f;
 
-            m_MaxHealth *= 1.1f;
+            m_MaxHealth = (int) (m_MaxHealth * 1.1f);
             m_Health = m_MaxHealth;
-            m_MaxMana *= 1.1f;
+            m_MaxMana = (int) (m_MaxMana * 1.1f);
             m_Mana = m_MaxMana;
 
-            m_Atk *= 1.1f;
-            m_Def *= 1.1f;
+            m_Atk = (float)Math.Round((m_Atk * 1.1f) * 100f) / 100f;
+            m_Def = (float)Math.Round((m_Def * 1.1f) * 100f) / 100f;
 
             m_Lvl++;
         }
@@ -147,6 +150,29 @@ public class PlayerAttributes : MonoBehaviour
         float[] tmp = { m_MaxHealth, m_Health, m_MaxMana, m_Mana, m_Atk, m_Def, m_Exp, m_ExpReq, m_Lvl, m_Gold};
 
         return tmp;
+    }
+
+    public void ChangeLvl()
+    {
+        m_inputLvlFld.Select();
+
+        int wantedLvl = int.Parse(m_inputLvlFld.text);
+        float tmpExp = 0.0f;
+        
+        if(wantedLvl > m_Lvl)
+        {
+            while (m_Lvl != wantedLvl)
+            {
+                if (m_Exp > 0.0f)
+                    tmpExp = m_ExpReq - m_Exp;
+                else
+                    tmpExp = m_ExpReq;
+
+                SetEarnExp(tmpExp);
+            }
+        }
+
+        m_inputLvlFld.text = "";
     }
 
     private void OnCollisionEnter(Collision collision)
