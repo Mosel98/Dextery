@@ -188,26 +188,27 @@ public class CombatManager : MonoBehaviour
         // Get enemy type
         EnemySetter es = m_enemy.GetComponent<EnemySetter>();
         EEnemy eType = es.EnemyType;
+        int lvl = es.m_Lvl;
 
         // Set Enemy battle parameters
         switch (eType)
         {
             case EEnemy.CASUAL:
-                m_eSlider.maxValue = 50.0f;
-                m_eSlider.value = 50.0f;
-                m_enemyHealth = 50.0f;
-                m_enemyAtk = 10.0f;
-                m_enemyDef = 10.0f;
-                m_enemyMana = 1.0f;
-                m_exp = 50.0f;
-                m_gold = 10;
+                m_eSlider.maxValue = 50.0f * lvl;
+                m_eSlider.value = 50.0f * lvl;
+                m_enemyHealth = 50.0f * lvl;
+                m_enemyAtk = 10.0f * lvl;
+                m_enemyDef = 10.0f * lvl;
+                m_enemyMana = 1.0f * lvl;
+                m_exp = 50.0f * lvl;
+                m_gold = 10 * lvl;
                 break;
             case EEnemy.WRATH:
-                m_eSlider.maxValue = 20.0f;
-                m_eSlider.value = 20.0f;
-                m_enemyHealth = 20.0f;
-                m_enemyAtk = 5.0f;
-                m_enemyDef = 10.0f;
+                m_eSlider.maxValue = 150.0f;
+                m_eSlider.value = 150.0f;
+                m_enemyHealth = 150.0f;
+                m_enemyAtk = 50.0f;
+                m_enemyDef = 500.0f;
                 m_enemyMana = 10.0f;
                 m_exp = 1000.0f;
                 m_gold = 1000;

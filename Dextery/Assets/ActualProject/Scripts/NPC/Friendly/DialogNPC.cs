@@ -5,24 +5,21 @@ public class DialogNPC : MonoBehaviour
 {
     [Header ("Dialog Settings")]
     [SerializeField]
-    private TextAsset m_txtFile;
+    protected TextAsset m_txtFile;
+    [SerializeField]
+    protected GameObject m_dialogUI;
     [SerializeField]
     private Transform m_playerCamera;
-    [SerializeField]
-    private GameObject m_dialogUI;
-
-    public GameObject m_interactableE;
 
     public bool m_interactable = false;
     public bool m_allowDialog = true;
 
+    protected GameObject m_interactableE;
     protected Text m_dialogTxt;
+    protected int m_count;    
 
-    protected string[] m_txtAContent;
-    protected int m_count;
-
-    private bool m_isDialog = false;
-    
+    private string[] m_txtAContent;  
+    private bool m_isDialog = false;   
 
     virtual public void Awake()
     {
@@ -74,7 +71,7 @@ public class DialogNPC : MonoBehaviour
 
     virtual public void SetDialogText()
     {
-        if (m_count != (m_txtAContent.Length - 1))
+        if (m_count != m_txtAContent.Length)
             m_dialogTxt.text = m_txtAContent[m_count];
         else
             EndDialog();

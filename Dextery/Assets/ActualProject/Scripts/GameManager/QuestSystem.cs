@@ -135,7 +135,7 @@ public class QuestSystem : MonoBehaviour
                                             Receiver tmp = _receiver.GetComponent<Receiver>();
                                             tmp.m_allowDialog = false;
                                             tmp.m_interactable = false;
-                                            tmp.m_interactableE.SetActive(false);
+                                            tmp.DeactivateE();
 
                                             break;
                                         }
