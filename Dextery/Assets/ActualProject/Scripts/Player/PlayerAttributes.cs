@@ -5,31 +5,35 @@ using UnityEngine.UI;
 public class PlayerAttributes : MonoBehaviour
 {
     [SerializeField]
-    private CombatManager m_combatManager;
-    [SerializeField]
     private Text m_statsText;
     [SerializeField]
     private InputField m_inputLvlFld;
 
+    private CombatManager m_combatManager;
+    private StoryManager m_storyManager;
     private Inventory m_inventory;
 
-    public float m_MaxHealth { get; private set; }
-    public float m_Health { get; private set; }
-
-    public float m_MaxMana { get; private set; }
-    public float m_Mana { get; private set; }
-
-    public float m_Atk { get; private set; }
-    public float m_Def { get; private set; }
-
-    public float m_Exp { get; private set; }
-    public float m_ExpReq { get; private set; }
-
-    public int m_Lvl { get; private set; }
-    public int m_Gold { get; private set; }
+    public static float m_MaxHealth { get; private set; }
+    public static float m_Health { get; private set; }
+            
+    public static float m_MaxMana { get; private set; }
+    public static float m_Mana { get; private set; }
+            
+    public static float m_Atk { get; private set; }
+    public static float m_Def { get; private set; }
+           
+    public static float m_Exp { get; private set; }
+    public static float m_ExpReq { get; private set; }
+           
+    public static int m_Lvl { get; private set; }
+    public static int m_Gold { get; private set; }
 
     private void Awake()
     {
+        GameObject tmp = GameObject.FindGameObjectWithTag("GameManager");
+        m_combatManager = tmp.GetComponent<CombatManager>();
+        m_storyManager = tmp.GetComponent<StoryManager>();
+
         m_inventory = GetComponent<Inventory>();
     }
 
@@ -139,27 +143,14 @@ public class PlayerAttributes : MonoBehaviour
         UpdateStatsInfo();
     }
 
-    private void UpdateStatsInfo()
-    {
-        m_statsText.text = $"Max Health: {m_MaxHealth}\nHealth: {m_Health}\nMax Mana: {m_MaxMana}\nMana: {m_Mana}\nAttack: {m_Atk}\nDefend: {m_Def}\n---------------\nLevel: {m_Lvl}\nExperience for next Level: {m_ExpReq}\nExp: {m_Exp}\n---------------\nGold: {m_Gold}";
-    }
-    #endregion
-
-    public float[] GetStats()
-    {
-        float[] tmp = { m_MaxHealth, m_Health, m_MaxMana, m_Mana, m_Atk, m_Def, m_Exp, m_ExpReq, m_Lvl, m_Gold};
-
-        return tmp;
-    }
-
     public void ChangeLvl()
     {
         m_inputLvlFld.Select();
 
         int wantedLvl = int.Parse(m_inputLvlFld.text);
         float tmpExp = 0.0f;
-        
-        if(wantedLvl > m_Lvl)
+
+        if (wantedLvl > m_Lvl)
         {
             while (m_Lvl != wantedLvl)
             {
@@ -173,6 +164,20 @@ public class PlayerAttributes : MonoBehaviour
         }
 
         m_inputLvlFld.text = "";
+    }
+
+    private void UpdateStatsInfo()
+    {
+        m_statsText.text = $"Max Health: {m_MaxHealth}\nHealth: {m_Health}\nMax Mana: {m_MaxMana}\nMana: {m_Mana}\nAttack: {m_Atk}\nDefend: {m_Def}\n---------------\nLevel: {m_Lvl}\nExperience for next Level: {m_ExpReq}\nExp: {m_Exp}\n---------------\nGold: {m_Gold}";
+        m_storyManager.CurrentPlayerLvl(m_Lvl);
+    }
+    #endregion
+
+    public float[] GetStats()
+    {
+        float[] tmp = { m_MaxHealth, m_Health, m_MaxMana, m_Mana, m_Atk, m_Def, m_Exp, m_ExpReq, m_Lvl, m_Gold};
+
+        return tmp;
     }
 
     private void OnCollisionEnter(Collision collision)

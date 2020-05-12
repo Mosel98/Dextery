@@ -172,15 +172,15 @@ public class CombatManager : MonoBehaviour
     #region --- Setting Duellist ---
     private void SetPlayer()
     {
-        m_hpSlider.maxValue = m_playAttr.m_MaxHealth;
-        m_hpSlider.value = m_playAttr.m_Health;
-        m_manaSlider.maxValue = m_playAttr.m_MaxMana;
-        m_manaSlider.value = m_playAttr.m_Mana;
+        m_hpSlider.maxValue = PlayerAttributes.m_MaxHealth;
+        m_hpSlider.value = PlayerAttributes.m_Health;
+        m_manaSlider.maxValue = PlayerAttributes.m_MaxMana;
+        m_manaSlider.value = PlayerAttributes.m_Mana;
 
-        m_playHealth = m_playAttr.m_Health;
-        m_playMana = m_playAttr.m_Mana;
-        m_playAtk = m_playAttr.m_Atk;
-        m_playDef = m_playAttr.m_Def;
+        m_playHealth = PlayerAttributes.m_Health;
+        m_playMana = PlayerAttributes.m_Mana;
+        m_playAtk = PlayerAttributes.m_Atk;
+        m_playDef = PlayerAttributes.m_Def;
     }
 
     private void SetEnemy()

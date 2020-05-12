@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class QuestSystem : MonoBehaviour
 {
-    private List<Quest> m_questList = new List<Quest>();
+    private static List<Quest> m_questList = new List<Quest>();
 
     [SerializeField]
     private GameObject m_txtQuest;
@@ -26,6 +26,12 @@ public class QuestSystem : MonoBehaviour
 
         m_playAttributes = tmp.GetComponent<PlayerAttributes>();
         m_inventory = tmp.GetComponent<Inventory>();
+    }
+
+    private void Start()
+    {
+        if (m_questList.Count > 0)
+            UpdateQuestLog();
     }
 
     #region --- Manage Quest ---
@@ -113,7 +119,8 @@ public class QuestSystem : MonoBehaviour
                                     }
                                     else
                                     {
-                                        quest.m_Receiver.GetComponent<Receiver>().m_fq = false;
+                                        if(quest.m_Receiver != null)
+                                            quest.m_Receiver.GetComponent<Receiver>().m_fq = false;
                                     }
                                 }
                                 break;
@@ -148,12 +155,16 @@ public class QuestSystem : MonoBehaviour
             }
         }
 
+        bool change = false;
+
         foreach (Quest quest in removeQuestList)
         {
             m_questList.Remove(quest);
+            change = true;
         }
 
-        UpdateQuestLog();
+        if(change)
+            UpdateQuestLog();
     }
     #endregion
 

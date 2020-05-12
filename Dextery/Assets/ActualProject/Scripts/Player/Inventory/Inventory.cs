@@ -11,11 +11,9 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject m_btnItemInventory;
 
-    [SerializeField]
-    private CombatManager m_combatManager;
-
     private PlayerAttributes m_playAttributes;
     private QuestSystem m_questSystem;
+    private CombatManager m_combatManager;
 
     private GameObject m_inventoryScroll;
     private GameObject m_inventoryContent;
@@ -28,12 +26,14 @@ public class Inventory : MonoBehaviour
     private Vector2 m_offsetMin = new Vector2(-10.0f, -40.0f);
     private Vector2 m_offsetMax = new Vector2(-10.0f, -10.0f);
 
-    private List<Item> m_itemList = new List<Item>();
+    private static List<Item> m_itemList = new List<Item>();
+    private static bool firstItems = true;
 
     private void Awake()
     {
         m_playAttributes = GetComponent<PlayerAttributes>();
         m_questSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<QuestSystem>();
+        m_combatManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
 
         GameObject tmp = m_normalInventory.transform.GetChild(1).gameObject;
 
@@ -46,8 +46,17 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        AddItem(Item.CreateItem(EItem.HEALPOTION, 8));
-        AddItem(Item.CreateItem(EItem.MANAPOTION, 3));
+        if (firstItems)
+        {
+            AddItem(Item.CreateItem(EItem.HEALPOTION, 8));
+            AddItem(Item.CreateItem(EItem.MANAPOTION, 3));
+
+            firstItems = false;
+        }
+        else
+        {
+            UpdateAllInventories();
+        }
     }
 
     private void Update()

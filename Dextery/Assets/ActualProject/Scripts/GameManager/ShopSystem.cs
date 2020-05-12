@@ -58,7 +58,7 @@ public class ShopSystem : MonoBehaviour
         m_sellItems = m_playerItems.ConvertAll(Item => new Item() { ItemType = Item.ItemType, Amount = Item.Amount, Value = Item.Value, EffectVal = Item.EffectVal});
         SetUpVendorSupply(_eVendor);
 
-        m_playerGold = m_playerAttributes.m_Gold;
+        m_playerGold = PlayerAttributes.m_Gold;
         ManageGold();
 
         m_shopUI.SetActive(true);
