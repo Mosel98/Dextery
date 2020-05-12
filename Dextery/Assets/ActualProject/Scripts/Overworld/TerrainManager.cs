@@ -6,8 +6,8 @@ public class TerrainManager : MonoBehaviour
 {
     public int m_Depth = 15;
 
-    public int m_Width = 256;
-    public int m_Height = 256;
+    public int m_Width = 129;
+    public int m_Height = 129;
 
     public float m_Scale = 10f;
 
