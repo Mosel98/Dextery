@@ -187,5 +187,13 @@ public class PlayerAttributes : MonoBehaviour
             if(!GameObject.FindGameObjectWithTag("CombatField"))
                 m_combatManager.SetCombat(gameObject, collision.gameObject);
         }
+
+        // Lightning Damage on Overworld
+        if(collision.gameObject.tag == "Lightning")
+        {
+            Debug.Log("Oh shit!");
+            m_Health -= 10;
+
+        }
     }
 }
