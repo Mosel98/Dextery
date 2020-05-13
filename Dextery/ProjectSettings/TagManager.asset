@@ -11,6 +11,7 @@ TagManager:
   - GameManager
   - CombatField
   - SceneTrigger
+  - Lightning
   layers:
   - Default
   - TransparentFX

@@ -971,6 +971,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightningStrike
       objectReference: {fileID: 0}
+    - target: {fileID: 7787267365528540228, guid: 6ca5d3045638e0648a36be0be079f8ff,
+        type: 3}
+      propertyPath: m_TagString
+      value: Lightning
+      objectReference: {fileID: 0}
     - target: {fileID: 7787267365528540235, guid: 6ca5d3045638e0648a36be0be079f8ff,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1336,12 +1341,12 @@ PrefabInstance:
     - target: {fileID: 8728178886569359272, guid: 783cf145cc03a10478bd844529bec176,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000004275851
+      value: 0.000000004275851
       objectReference: {fileID: 0}
     - target: {fileID: 8728178886569359272, guid: 783cf145cc03a10478bd844529bec176,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 4.699202e-10
+      value: -4.6991966e-10
       objectReference: {fileID: 0}
     - target: {fileID: 8728178886717231955, guid: 783cf145cc03a10478bd844529bec176,
         type: 3}
