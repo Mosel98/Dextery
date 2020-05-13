@@ -10,6 +10,15 @@ public class Inventory : MonoBehaviour
     private GameObject m_normalInventory;
     [SerializeField]
     private GameObject m_btnItemInventory;
+    
+    [SerializeField]
+    private Sprite m_playerStatsUI;
+    [SerializeField]
+    private Sprite m_inventoryUI;
+    [SerializeField]
+    private Sprite m_questUI;
+
+    private Image m_backgroundUI;
 
     private PlayerAttributes m_playAttributes;
     private QuestSystem m_questSystem;
@@ -35,6 +44,9 @@ public class Inventory : MonoBehaviour
         m_questSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<QuestSystem>();
         m_combatManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
 
+
+        m_backgroundUI = m_normalInventory.GetComponent<Image>();
+
         GameObject tmp = m_normalInventory.transform.GetChild(1).gameObject;
 
         m_statsPanel = tmp.transform.GetChild(0).gameObject;
@@ -42,6 +54,7 @@ public class Inventory : MonoBehaviour
         m_questScroll = tmp.transform.GetChild(2).gameObject;
 
         m_inventoryContent = m_inventoryScroll.transform.GetChild(0).GetChild(0).gameObject;
+
     }
 
     private void Start()
@@ -205,6 +218,7 @@ public class Inventory : MonoBehaviour
 
     public void ShowStats()
     {
+        m_backgroundUI.sprite = m_playerStatsUI;
         m_statsPanel.SetActive(true);
         m_inventoryScroll.SetActive(false);
         m_questScroll.SetActive(false);
@@ -212,6 +226,7 @@ public class Inventory : MonoBehaviour
 
     public void ShowInventory()
     {
+        m_backgroundUI.sprite = m_inventoryUI;
         m_statsPanel.SetActive(false);
         m_inventoryScroll.SetActive(true);
         m_questScroll.SetActive(false);
@@ -219,6 +234,7 @@ public class Inventory : MonoBehaviour
 
     public void ShowQuestLog()
     {
+        m_backgroundUI.sprite = m_questUI;
         m_inventoryScroll.SetActive(false);
         m_statsPanel.SetActive(false);
         m_questScroll.SetActive(true);
