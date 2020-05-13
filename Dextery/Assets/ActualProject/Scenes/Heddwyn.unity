@@ -8574,12 +8574,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1695202540}
-<<<<<<< HEAD
-    - target: {fileID: 229988193706770755, guid: 706f373856d015e40a6751731049202a,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ExitGame
-=======
     - target: {fileID: 425285567019964113, guid: 706f373856d015e40a6751731049202a,
         type: 3}
       propertyPath: m_Color.a
@@ -8659,7 +8653,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.84700006
->>>>>>> develop
       objectReference: {fileID: 0}
     - target: {fileID: 1588949977642089788, guid: 706f373856d015e40a6751731049202a,
         type: 3}
