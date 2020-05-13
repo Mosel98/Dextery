@@ -8,6 +8,7 @@ public class PatrolEnemy : StateMachineBehaviour
     private float m_maxDistance;
     private float m_terrainWidth;
     private float m_terrainLength;
+    private float m_onMeshThreshold = 3;
 
     private bool m_walkPatrol = true;
 
@@ -90,7 +91,11 @@ public class PatrolEnemy : StateMachineBehaviour
     {
         // Sets patrolPoint as next destination
         if (m_nav.destination != m_patPoints[point])
-            m_nav.destination = m_patPoints[point];
+        {
+            if (IsAgentOnNavMesh(_animator))
+                m_nav.destination = m_patPoints[point];
+
+        }
 
         // Check if enemy reached one of the patrolPoints
         if ((int)_animator.transform.position.x >= (int)m_patPoints[point].x - 0.5f && (int)_animator.transform.position.x <= (int)m_patPoints[point].x + 0.5f &&
@@ -123,5 +128,27 @@ public class PatrolEnemy : StateMachineBehaviour
         {
             m_walkPatrol = true;
         }
+    }
+
+    // Function and float m_onMeshThreshold, from Serlite from Stackflow 
+    // Serlite (2017): Check if disabled navmesh agent (player) is on navmesh, [online] https://stackoverflow.com/questions/45416515/check-if-disabled-navmesh-agent-player-is-on-navmesh [13.05.2020]
+    public bool IsAgentOnNavMesh(Animator _animator)
+    {
+        Vector3 agentPosition = _animator.transform.position;
+        NavMeshHit hit;
+
+        // Check for nearest point on navmesh to agent, within onMeshThreshold
+        if (NavMesh.SamplePosition(agentPosition, out hit, m_onMeshThreshold, NavMesh.AllAreas))
+        {
+            // Check if the positions are vertically aligned
+            if (Mathf.Approximately(agentPosition.x, hit.position.x)
+                && Mathf.Approximately(agentPosition.z, hit.position.z))
+            {
+                // Lastly, check if object is below navmesh
+                return agentPosition.y >= hit.position.y;
+            }
+        }
+
+        return false;
     }
 }
