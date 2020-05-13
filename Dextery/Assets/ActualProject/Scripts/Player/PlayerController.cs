@@ -62,7 +62,15 @@ public class PlayerController : MonoBehaviour
     {
         if(_col.gameObject.tag == "SceneTrigger")
         {
-            SceneManager.LoadScene("Overworld");
+            switch (SceneManager.GetActiveScene().name)
+            {
+                case "Heddwyn":
+                    SceneManager.LoadScene("Overworld");
+                    break;
+                case "Overworld":
+                    SceneManager.LoadScene("Heddwyn");
+                    break;
+            }
         }
     }
 
