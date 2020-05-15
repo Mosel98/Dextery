@@ -2092,12 +2092,12 @@ PrefabInstance:
     - target: {fileID: 8728178886569359272, guid: 783cf145cc03a10478bd844529bec176,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000004275854
+      value: -0.000000004275851
       objectReference: {fileID: 0}
     - target: {fileID: 8728178886569359272, guid: 783cf145cc03a10478bd844529bec176,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -4.699204e-10
+      value: 4.6992e-10
       objectReference: {fileID: 0}
     - target: {fileID: 8728178886717231955, guid: 783cf145cc03a10478bd844529bec176,
         type: 3}
@@ -2127,7 +2127,7 @@ PrefabInstance:
     - target: {fileID: 8728178886754926756, guid: 783cf145cc03a10478bd844529bec176,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -7.246663e-17
+      value: -7.2466646e-17
       objectReference: {fileID: 0}
     - target: {fileID: 8728178886754926756, guid: 783cf145cc03a10478bd844529bec176,
         type: 3}
@@ -2386,6 +2386,24 @@ PrefabInstance:
       propertyPath: m_combatInventory
       value: 
       objectReference: {fileID: 1284453856}
+    - target: {fileID: 5562738074481830172, guid: 30a8f48fecd4cb14593693d44fcbda87,
+        type: 3}
+      propertyPath: m_playerStatsUI
+      value: 
+      objectReference: {fileID: 21300000, guid: 398b033b7196b3b45bde1d9739e10e1f,
+        type: 3}
+    - target: {fileID: 5562738074481830172, guid: 30a8f48fecd4cb14593693d44fcbda87,
+        type: 3}
+      propertyPath: m_inventoryUI
+      value: 
+      objectReference: {fileID: 21300000, guid: ba4b97554608c9d46be685336bd8ad63,
+        type: 3}
+    - target: {fileID: 5562738074481830172, guid: 30a8f48fecd4cb14593693d44fcbda87,
+        type: 3}
+      propertyPath: m_questUI
+      value: 
+      objectReference: {fileID: 21300000, guid: f06cce90f4e7e714588fa00170f8748e,
+        type: 3}
     - target: {fileID: 5562738074481830173, guid: 30a8f48fecd4cb14593693d44fcbda87,
         type: 3}
       propertyPath: m_LocalPosition.x

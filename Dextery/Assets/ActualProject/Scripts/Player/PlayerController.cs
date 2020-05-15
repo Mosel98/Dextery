@@ -54,8 +54,11 @@ public class PlayerController : MonoBehaviour
         m_player.velocity = direction;
        
 
+        direction.y = 0;
         if (direction != Vector3.zero)
+        {
             m_capsule.transform.rotation = Quaternion.Slerp(m_capsule.transform.rotation, Quaternion.LookRotation(direction), m_smoothness * Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter(Collider _col)
