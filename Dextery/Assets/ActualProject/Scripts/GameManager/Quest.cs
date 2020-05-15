@@ -22,7 +22,7 @@ public class Quest
     public GameObject m_Receiver;
 
     #region --- Create Quest Functions ---
-    public static Quest CreateFightQuest(EQuest _quest, EEnemy _enemy, int _amount = 1, int _gold = 10, float _exp = 10.0f)
+    public static Quest CreateFightQuest(EQuest _quest, EEnemy _enemy, GameObject _reciever = null, int _amount = 1, int _gold = 10, float _exp = 10.0f)
     {
         string tmpDialog;
         string tmpEnemy = null;
@@ -42,23 +42,23 @@ public class Quest
 
         tmpDialog = $"Defeat {_amount} of {tmpEnemy}";
 
-        return new Quest { m_QuestType = _quest, m_eEnemy = _enemy, m_Amount = _amount, m_Gold = _gold, m_Exp = _exp, m_Dialog = tmpDialog };
+        return new Quest { m_QuestType = _quest, m_eEnemy = _enemy, m_Receiver = _reciever, m_Amount = _amount, m_Gold = _gold, m_Exp = _exp, m_Dialog = tmpDialog };
     }
 
-    public static Quest CreateCollectQuest(EQuest _quest, EItem _item, int _amount = 1, int _gold = 10, float _exp = 10.0f)
+    public static Quest CreateCollectQuest(EQuest _quest, EItem _item, GameObject _reciever = null, int _amount = 1, int _gold = 10, float _exp = 10.0f)
     {
         string tmpDialog;
 
         tmpDialog = $"Collect {_amount} of {GetItemName(_item)}";
 
-        return new Quest { m_QuestType = _quest, m_eItem = _item, m_Amount = _amount, m_Gold = _gold, m_Exp = _exp, m_Dialog = tmpDialog };
+        return new Quest { m_QuestType = _quest, m_eItem = _item, m_Receiver = _reciever, m_Amount = _amount, m_Gold = _gold, m_Exp = _exp, m_Dialog = tmpDialog };
     }
 
     public static Quest CreateDeliverQuest(EQuest _quest, EItem _item, GameObject _reciever, int _amount = 1, int _gold = 10, float _exp = 10.0f)
     {
         string tmpDialog;
 
-        tmpDialog = $"Deliver {_amount} of {GetItemName(_item)} to {_reciever.GetComponent<Receiver>().nameNPC}";
+        tmpDialog = $"Deliver {_amount} of {GetItemName(_item)} to {_reciever.GetComponent<DialogNPC>().m_NameNPC}";
 
         return new Quest { m_QuestType = _quest, m_eItem = _item, m_Receiver = _reciever, m_Amount = _amount, m_Gold = _gold, m_Exp = _exp, m_Dialog = tmpDialog };
     }

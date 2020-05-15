@@ -1,8 +1,7 @@
 ﻿public enum EItem
 {
     HEALPOTION,
-    MANAPOTION,
-    NULL
+    MANAPOTION
 }
 
 public class Item

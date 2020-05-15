@@ -1,17 +1,14 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Receiver : DialogNPC
 {
-    [Header ("Receiver Settings")]
-    public string nameNPC;
-    public bool m_fq = false;          // fq = finished quest
-
     private QuestSystem m_questSystem;
     private string[] m_txtAContentNFQ;      // NFQ = Not Finished Quest
     private string[] m_txtAContentFQ;       // FQ = finished quest
 
-    public override void Awake()
+    protected override void Awake()
     {
         m_questSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<QuestSystem>();
 
@@ -25,16 +22,17 @@ public class Receiver : DialogNPC
         m_txtAContentFQ = m_tmpTxtContent[1].Split('#');
     }
 
-    public override void EndDialog()
+    #region --- Dialog Manage ---
+    protected override void EndDialog()
     {
         base.EndDialog();
 
-        m_questSystem.UpdateQuestStatus(EQuest.DELIVER, gameObject, 0);
+        m_questSystem.UpdateQuestStatus(EQuest.DELIVER, gameObject, 1);
     }
 
-    public override void SetDialogText()
+    protected override void SetDialogText()
     {
-        if (m_fq)
+        if (m_FQ)
         {
             if (m_count != m_txtAContentFQ.Length)
                 m_dialogTxt.text = m_txtAContentFQ[m_count];
@@ -49,9 +47,22 @@ public class Receiver : DialogNPC
                 EndDialog();
         }
     }
+    #endregion
 
-    public void DeactivateE()
+    #region --- Custom Inspector ---
+    // Custom Editor using SerializedProperties.
+    [CustomEditor(typeof(Receiver))]
+    public class CostumEditorGUILayout : EditorGUILayoutPropertyField
     {
-        m_interactableE.SetActive(false);
+        protected override void OnEnable()
+        {
+            base.OnEnable();    
+        }
+
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+        }
     }
+    #endregion
 }
