@@ -91,6 +91,9 @@ public class QuestSystem : MonoBehaviour
                                 m_playAttributes.SetEarnExp(quest.m_Exp);
 
                                 removeQuestList.Add(quest);
+
+                                if (quest.m_Receiver != null)
+                                    quest.m_Receiver.GetComponent<QuestGiver>().m_fq = true;
                             }
                         }
                         break;
@@ -103,6 +106,9 @@ public class QuestSystem : MonoBehaviour
                                 m_playAttributes.SetEarnExp(quest.m_Exp);
 
                                 removeQuestList.Add(quest);
+
+                                if (quest.m_Receiver != null)
+                                    quest.m_Receiver.GetComponent<QuestGiver>().m_fq = true;
                             }
                         }
                         break;
