@@ -58,7 +58,7 @@ public class Quest
     {
         string tmpDialog;
 
-        tmpDialog = $"Deliver {_amount} of {GetItemName(_item)} to {_reciever.GetComponent<Receiver>().nameNPC}";
+        tmpDialog = $"Deliver {_amount} of {GetItemName(_item)} to {_reciever.GetComponent<DialogNPC>().m_NameNPC}";
 
         return new Quest { m_QuestType = _quest, m_eItem = _item, m_Receiver = _reciever, m_Amount = _amount, m_Gold = _gold, m_Exp = _exp, m_Dialog = tmpDialog };
     }

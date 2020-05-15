@@ -41,7 +41,7 @@ public class QuestSystem : MonoBehaviour
         UpdateQuestLog();
 
         UpdateQuestStatus(EQuest.COLLECT);
-        // UpdateQuestStatus(EQuest.DELIVER);
+        UpdateQuestStatus(EQuest.DELIVER);
     }
 
    private void UpdateQuestLog()
@@ -69,10 +69,11 @@ public class QuestSystem : MonoBehaviour
        }
    }
 
-    public void UpdateQuestStatus(EQuest _quest, GameObject _receiver = null, int _id = -1)
+    public void UpdateQuestStatus(EQuest _quest, GameObject _receiver = null, int _id = 0)
     {
         List<Quest> removeQuestList = new List<Quest>();
-        List<Item> m_playInventory = m_inventory.GetItemList();
+        List<Item> playInventory = m_inventory.GetItemList();
+        bool breakNow = false;
 
         foreach (Quest quest in m_questList)
         {
@@ -93,12 +94,12 @@ public class QuestSystem : MonoBehaviour
                                 removeQuestList.Add(quest);
 
                                 if (quest.m_Receiver != null)
-                                    quest.m_Receiver.GetComponent<QuestGiver>().m_fq = true;
+                                    quest.m_Receiver.GetComponent<DialogNPC>().QuestManagement(true);
                             }
                         }
                         break;
                     case EQuest.COLLECT:
-                        foreach (Item item in m_playInventory)
+                        foreach (Item item in playInventory)
                         {
                             if(quest.m_eItem == item.ItemType && item.Amount >= quest.m_Amount)
                             {
@@ -108,47 +109,50 @@ public class QuestSystem : MonoBehaviour
                                 removeQuestList.Add(quest);
 
                                 if (quest.m_Receiver != null)
-                                    quest.m_Receiver.GetComponent<QuestGiver>().m_fq = true;
+                                    quest.m_Receiver.GetComponent<DialogNPC>().QuestManagement(true);
                             }
                         }
                         break;
                     case EQuest.DELIVER:
                         switch (_id)
                         {
-                            case -1:
-                                foreach (Item item in m_playInventory)
-                                {
-                                    if (quest.m_eItem == item.ItemType && item.Amount >= quest.m_Amount)
-                                    {
-                                        quest.m_Receiver.GetComponent<Receiver>().m_fq = true;
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        if(quest.m_Receiver != null)
-                                            quest.m_Receiver.GetComponent<Receiver>().m_fq = false;
-                                    }
-                                }
-                                break;
                             case 0:
-                                if (quest.m_Receiver == _receiver)
+                                if (quest.m_Receiver != null)
                                 {
-                                    foreach (Item item in m_playInventory)
+                                    foreach (Item item in playInventory)
                                     {
                                         if (quest.m_eItem == item.ItemType && item.Amount >= quest.m_Amount)
                                         {
+                                            quest.m_Receiver.GetComponent<DialogNPC>().QuestManagement(true);                                           
+                                        }
+                                    }
+                                }
+                                break;
+                            case 1:
+                                if (quest.m_Receiver == _receiver)
+                                {
+                                    foreach (Item item in playInventory)
+                                    {
+                                        if (quest.m_eItem == item.ItemType && item.Amount >= quest.m_Amount)
+                                        {                                          
                                             item.Amount -= quest.m_Amount;
-                                            m_inventory.UpdateItemList(m_playInventory);
+
+                                            CheckIfQuestIsStillFinished(quest.m_eItem, playInventory, _receiver);
+
+                                            if (item.Amount <= 0)
+                                                m_inventory.RemoveItem(item);
+                                            else
+                                                m_inventory.UpdateItemList(playInventory);
 
                                             m_playAttributes.SetEarnGold(quest.m_Gold);
                                             m_playAttributes.SetEarnExp(quest.m_Exp);
 
                                             removeQuestList.Add(quest);
 
-                                            Receiver tmp = _receiver.GetComponent<Receiver>();
-                                            tmp.m_allowDialog = false;
-                                            tmp.m_interactable = false;
-                                            tmp.DeactivateE();
+                                            DialogNPC tmp = _receiver.GetComponent<DialogNPC>();
+                                            tmp.Deactivate();
+                                            
+                                            breakNow = true;
 
                                             break;
                                         }
@@ -158,6 +162,9 @@ public class QuestSystem : MonoBehaviour
                         }
                         break;
                 }
+
+                if (breakNow)
+                    break;
             }
         }
 
@@ -172,12 +179,25 @@ public class QuestSystem : MonoBehaviour
         if(change)
             UpdateQuestLog();
     }
-    #endregion
 
-    public List<Quest> GetQuestList()
+    private void CheckIfQuestIsStillFinished(EItem _item, List<Item> _playInventory, GameObject _receiver)
     {
-        return m_questList;
+        foreach (Quest quest in m_questList)
+        {
+            if (quest.m_eItem == _item && quest.m_Receiver != null && quest.m_Receiver != _receiver)
+            {
+                foreach (Item item in _playInventory)
+                {
+                    if (quest.m_Receiver.GetComponent<DialogNPC>().m_FQ && quest.m_Amount > item.Amount)
+                    {
+                        quest.m_Receiver.GetComponent<DialogNPC>().QuestManagement(false);
+                        break;
+                    }                        
+                }
+            }
+        }
     }
+    #endregion
 
     // That sounds a little bit wrong xD
     private void DestroyChildren()

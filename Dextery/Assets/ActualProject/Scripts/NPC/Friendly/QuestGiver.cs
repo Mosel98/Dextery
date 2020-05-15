@@ -3,25 +3,20 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class QuestGiver : DialogNPC
-{
-    private QuestSystem m_questSystem;
-    
-    [Header ("Quest Settings")]
+{      
+    [Header("Quest Settings")]
     [SerializeField]
-    private EQuest m_eQuest;
-    
+    private EQuest m_eQuest;    
     [SerializeField]
     private EEnemy m_eEnemy;
     [SerializeField]
-    private EItem m_eItem;
-    
+    private EItem m_eItem;    
     [SerializeField]
     private GameObject m_receiver;
 
     [SerializeField]
     private bool m_extraDialog = false;
-    public bool m_fq = false;          // fq = finished quest
-
+    
     [SerializeField]
     private bool m_extraPara = false;
     [SerializeField]
@@ -31,15 +26,14 @@ public class QuestGiver : DialogNPC
     [SerializeField]
     private float m_exp;
 
+    private QuestSystem m_questSystem;
     private string[] m_txtAContentNFQ;      // NFQ = Not Finished Quest
     private string[] m_txtAContentFQ;       // FQ = finished quest
+    private bool questGiven = false;
 
-    public override void Awake()
+    protected override void Awake()
     {
         m_questSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<QuestSystem>();
-
-        if (m_extraDialog && m_eQuest == EQuest.DELIVER)
-            m_extraDialog = false;
 
         if(!m_extraDialog)
             base.Awake();
@@ -56,7 +50,8 @@ public class QuestGiver : DialogNPC
         }        
     }
 
-    public override void SetDialogText()
+    #region --- Dialog Manage ---
+    protected override void SetDialogText()
     {
         if (!m_extraDialog)
         {
@@ -64,7 +59,7 @@ public class QuestGiver : DialogNPC
         }
         else
         {
-            if (m_fq)
+            if (m_FQ)
             {
                 if (m_count != m_txtAContentFQ.Length)
                     m_dialogTxt.text = m_txtAContentFQ[m_count];
@@ -81,11 +76,14 @@ public class QuestGiver : DialogNPC
         }
     }
 
-    public override void EndDialog()
+    protected override void EndDialog()
     {
         base.EndDialog();
 
-        if (!m_fq)
+        if (m_FQ && m_eQuest == EQuest.DELIVER)
+            m_questSystem.UpdateQuestStatus(EQuest.DELIVER, gameObject, 1);
+
+        if (!questGiven)
         {
             switch (m_eQuest)
             {
@@ -110,37 +108,46 @@ public class QuestGiver : DialogNPC
                     }
                     break;
                 case EQuest.DELIVER:
-                    if (m_extraPara)
+                    GameObject tmpReceiver = null;
+
+                    if (m_extraDialog)
                     {
-                        m_questSystem.AddQuest(Quest.CreateDeliverQuest(m_eQuest, m_eItem, m_receiver, m_amount, m_gold, m_exp));
+                        tmpReceiver = gameObject;
                     }
                     else
                     {
-                        m_questSystem.AddQuest(Quest.CreateDeliverQuest(m_eQuest, m_eItem, m_receiver));
+                        tmpReceiver = m_receiver;
+                    }
+
+
+                    if (m_extraPara)
+                    {
+                        m_questSystem.AddQuest(Quest.CreateDeliverQuest(m_eQuest, m_eItem, tmpReceiver, m_amount, m_gold, m_exp));
+                    }
+                    else
+                    {
+                        m_questSystem.AddQuest(Quest.CreateDeliverQuest(m_eQuest, m_eItem, tmpReceiver));
                     }
                     break;
             }
+
+            questGiven = true;
         }
 
         if (!m_extraDialog)
         {
-            m_allowDialog = false;
-            m_interactable = false;
-            m_interactableE.SetActive(false);
+            Deactivate();
         }      
     }
+    #endregion
 
 #if UNITY_EDITOR
 
     #region --- Custom Inspector ---
     // Custom Editor using SerializedProperties.
     [CustomEditor(typeof(QuestGiver))]
-    public class EditorGUILayoutPropertyField : Editor
+    public class CostumEditorGUILayout : EditorGUILayoutPropertyField
     {
-        SerializedProperty p_txtFile;
-        SerializedProperty p_playerCamera;
-        SerializedProperty p_dialogUI;
-    
         SerializedProperty p_eQuest;
         SerializedProperty p_eEnemy;
         SerializedProperty p_eItem;
@@ -153,12 +160,10 @@ public class QuestGiver : DialogNPC
         SerializedProperty p_gold;
         SerializedProperty p_exp;
     
-        private void OnEnable()
+        protected override void OnEnable()
         {
-            p_txtFile = serializedObject.FindProperty("m_txtFile");
-            p_playerCamera = serializedObject.FindProperty("m_playerCamera");
-            p_dialogUI = serializedObject.FindProperty("m_dialogUI");
-    
+            base.OnEnable();
+
             p_eQuest = serializedObject.FindProperty("m_eQuest");
             p_eEnemy = serializedObject.FindProperty("m_eEnemy");
             p_eItem = serializedObject.FindProperty("m_eItem");
@@ -175,11 +180,9 @@ public class QuestGiver : DialogNPC
         public override void OnInspectorGUI()
         {
             // serializedObject.Update();
-    
-            EditorGUILayout.PropertyField(p_txtFile);
-            EditorGUILayout.PropertyField(p_playerCamera);
-            EditorGUILayout.PropertyField(p_dialogUI);
-    
+
+            base.OnInspectorGUI();
+
             EditorGUILayout.PropertyField(p_eQuest);          
     
             switch (p_eQuest.enumValueIndex)
@@ -198,9 +201,8 @@ public class QuestGiver : DialogNPC
                     return;
             }
 
-            if(!(p_eQuest.enumValueIndex == (int)EQuest.DELIVER))
-                EditorGUILayout.PropertyField(p_extraDialog);
-
+            EditorGUILayout.PropertyField(p_extraDialog);
+                
             EditorGUILayout.PropertyField(p_extraPara);
     
             if (p_extraPara.boolValue)
