@@ -13,26 +13,41 @@ public class Menu : MonoBehaviour
     [SerializeField]
     private Animator m_panelAnimator;
     [SerializeField]
-    private Animator m_selectionToggle;
+    private Animator m_crossfade;
+
+    [SerializeField]
+    private float m_crossfadeTime = 1.05f;
 
     public void SwitchPanels()
     {
         m_panelAnimator.SetBool("isButtonPressed", true);
 
         // deactivate Panel when done with animation
-        if(this.m_panelAnimator.GetCurrentAnimatorStateInfo(0).IsName("StartPanelVanish"))
-        {
-            m_startPanel.SetActive(false);
-        }
+        //if(this.m_panelAnimator.GetCurrentAnimatorStateInfo(0).IsName("StartPanelVanish"))
+        //{
+        //    m_startPanel.SetActive(false);
+        //}
     }
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Heddwyn");
+        StartCoroutine(LoadLevel("Heddwyn"));
     }
 
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    IEnumerator LoadLevel(string _levelName)
+    {
+        Debug.Log("what the fuck??");
+        m_mainPanel.SetActive(false);
+
+        m_crossfade.SetTrigger("Start");
+
+        yield return new WaitForSeconds(m_crossfadeTime);
+
+        SceneManager.LoadScene(_levelName);
     }
 }

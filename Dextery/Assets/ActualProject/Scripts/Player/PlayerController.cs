@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Transform m_camera;
+
+    [SerializeField]
+    private Animator m_crossfade;
+    [SerializeField]
+    private float m_crossfadeTime = 1.05f;
 
     private PlayerControls m_controls = null;
     private Rigidbody m_player;
@@ -68,13 +74,22 @@ public class PlayerController : MonoBehaviour
             switch (SceneManager.GetActiveScene().name)
             {
                 case "Heddwyn":
-                    SceneManager.LoadScene("Overworld");
+                    StartCoroutine(LoadLevel("Overworld"));
                     break;
                 case "Overworld":
-                    SceneManager.LoadScene("Heddwyn");
+                    StartCoroutine(LoadLevel("Heddwyn"));
                     break;
             }
         }
+    }
+
+    IEnumerator LoadLevel(string _levelName)
+    {
+        m_crossfade.SetTrigger("Start");
+
+        yield return new WaitForSeconds(m_crossfadeTime);
+
+        SceneManager.LoadScene(_levelName);
     }
 
     private void OnEnable()
