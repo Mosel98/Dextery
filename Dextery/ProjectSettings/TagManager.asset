@@ -12,6 +12,7 @@ TagManager:
   - CombatField
   - SceneTrigger
   - Lightning
+  - EndBackground
   layers:
   - Default
   - TransparentFX

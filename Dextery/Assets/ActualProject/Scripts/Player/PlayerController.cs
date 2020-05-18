@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float m_crossfadeTime = 1.05f;
 
+    private float m_tmpMoveSpeed;
+
     private PlayerControls m_controls = null;
     private Rigidbody m_player;
 
@@ -31,6 +33,8 @@ public class PlayerController : MonoBehaviour
         m_player = GetComponent<Rigidbody>();
         m_controls = new PlayerControls();
         m_capsule = GetComponentInChildren<MeshFilter>();
+
+        m_tmpMoveSpeed = m_movementSpeed;
     }
 
     // Update is called once per frame
@@ -48,10 +52,20 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (m_tmpMoveSpeed != m_movementSpeed * 2)
+                m_tmpMoveSpeed = m_movementSpeed * 2;
+        }
+        else if(m_tmpMoveSpeed != m_movementSpeed)
+        {
+            m_tmpMoveSpeed = m_movementSpeed;
+        }
+
         Vector2 movementInput = m_controls.Player.Movement.ReadValue<Vector2>();
 
         Vector3 direction = movementInput.x * transform.right + movementInput.y * transform.forward;
-        direction = direction.normalized * m_movementSpeed;
+        direction = direction.normalized * m_tmpMoveSpeed;
 
         // move in relation to camera view
         direction = m_camera.TransformDirection(direction);

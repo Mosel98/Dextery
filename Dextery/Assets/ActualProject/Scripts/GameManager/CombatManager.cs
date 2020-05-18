@@ -24,7 +24,8 @@ public class CombatManager : MonoBehaviour
     private GameObject m_tmpCombatField;
 
     private QuestSystem m_questSystem;
-    private PlayerAttributes m_playAttr;  
+    private PlayerAttributes m_playAttr;
+    private EnemySetter m_enemySetter;
     private Inventory m_inventory;
 
     private bool m_playerTurn;
@@ -91,6 +92,9 @@ public class CombatManager : MonoBehaviour
                         m_hpSlider.value = m_playHealth;
 
                         UpdateInfoBox(1, "Dextery takes damage!");
+
+                        if (m_playHealth <= 0.0f)
+                            EndCombat(false, m_tmpCombatField);
                     }
                     else
                     {
@@ -142,6 +146,11 @@ public class CombatManager : MonoBehaviour
 
     private void EndCombat(bool _win, params GameObject[] _destroys)
     {
+        GameManager.isOccupied = false;
+
+        if (m_enemySetter.EnemyType == EEnemy.WRATH)
+            GameManager.ToTheEnd(_win);
+
         m_combatUI.SetActive(false);
         m_combat = false;
 
@@ -161,11 +170,10 @@ public class CombatManager : MonoBehaviour
         if (_win)
         {
             m_playAttr.SetEarnExp(m_exp);
-            m_playAttr.SetEarnGold(m_gold);
+            m_playAttr.SetEarnGold(m_gold);            
         }
 
         CleanInfoBoxes();
-        GameManager.isOccupied = false;
     }
     #endregion
 
@@ -186,9 +194,9 @@ public class CombatManager : MonoBehaviour
     private void SetEnemy()
     {
         // Get enemy type
-        EnemySetter es = m_enemy.GetComponent<EnemySetter>();
-        EEnemy eType = es.EnemyType;
-        int lvl = es.m_Lvl;
+        m_enemySetter = m_enemy.GetComponent<EnemySetter>();
+        EEnemy eType = m_enemySetter.EnemyType;
+        int lvl = m_enemySetter.m_Lvl;
 
         // Set Enemy battle parameters
         switch (eType)
@@ -207,8 +215,8 @@ public class CombatManager : MonoBehaviour
                 m_eSlider.maxValue = 150.0f;
                 m_eSlider.value = 150.0f;
                 m_enemyHealth = 150.0f;
-                m_enemyAtk = 50.0f;
-                m_enemyDef = 500.0f;
+                m_enemyAtk = 10.0f;
+                m_enemyDef = 10.0f;
                 m_enemyMana = 10.0f;
                 m_exp = 1000.0f;
                 m_gold = 1000;
@@ -296,7 +304,7 @@ public class CombatManager : MonoBehaviour
     {
         float rnd = Random.Range(0, 4);
 
-        if (rnd < 3)
+        if (rnd < 3 && m_enemySetter.EnemyType != EEnemy.WRATH)
         {
             EndCombat(false, m_tmpCombatField);
         }
