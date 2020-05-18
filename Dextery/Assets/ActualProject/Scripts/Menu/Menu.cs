@@ -13,7 +13,10 @@ public class Menu : MonoBehaviour
     [SerializeField]
     private Animator m_panelAnimator;
     [SerializeField]
-    private Animator m_selectionToggle;
+    private Animator m_crossfade;
+
+    [SerializeField]
+    private float m_crossfadeTime = 1.05f;
 
     public void SwitchPanels()
     {
@@ -28,11 +31,23 @@ public class Menu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Heddwyn");
+        m_mainPanel.SetActive(false);
+        StartCoroutine(LoadLevel("Heddwyn"));
     }
 
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    IEnumerator LoadLevel(string _levelName)
+    {
+        Debug.Log("what the fuck??");
+
+        m_crossfade.SetTrigger("Start");
+
+        yield return new WaitForSeconds(m_crossfadeTime);
+
+        SceneManager.LoadScene(_levelName);
     }
 }
