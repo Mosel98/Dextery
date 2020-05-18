@@ -23,14 +23,15 @@ public class Menu : MonoBehaviour
         m_panelAnimator.SetBool("isButtonPressed", true);
 
         // deactivate Panel when done with animation
-        //if(this.m_panelAnimator.GetCurrentAnimatorStateInfo(0).IsName("StartPanelVanish"))
-        //{
-        //    m_startPanel.SetActive(false);
-        //}
+        if(this.m_panelAnimator.GetCurrentAnimatorStateInfo(0).IsName("StartPanelVanish"))
+        {
+            m_startPanel.SetActive(false);
+        }
     }
 
     public void StartGame()
     {
+        m_mainPanel.SetActive(false);
         StartCoroutine(LoadLevel("Heddwyn"));
     }
 
@@ -42,7 +43,6 @@ public class Menu : MonoBehaviour
     IEnumerator LoadLevel(string _levelName)
     {
         Debug.Log("what the fuck??");
-        m_mainPanel.SetActive(false);
 
         m_crossfade.SetTrigger("Start");
 
