@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
     public static bool win = false;
     public static bool firstTime = true;
 
+    [SerializeField]
+    private GameObject m_winText;
+    [SerializeField]
+    private GameObject m_loseText;
+
     private void Awake()
     {
         switch(SceneManager.GetActiveScene().name)
@@ -28,6 +33,25 @@ public class GameManager : MonoBehaviour
                     endBack.color = Color.red;
                 }
                 break;
+            if (!win)
+            {
+                endBack.color = Color.red;
+                m_loseText.SetActive(true);
+            }
+
+            if(win)
+            {
+                m_winText.SetActive(true);
+            }
+
+        }
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
         }
     }
 
