@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Transform m_camera;
+    [SerializeField]
+    private Transform m_dextery;
 
     [SerializeField]
     private Animator m_crossfade;
@@ -23,7 +25,6 @@ public class PlayerController : MonoBehaviour
     private PlayerControls m_controls = null;
     private Rigidbody m_player;
 
-    private MeshFilter m_capsule;
     
     
 
@@ -32,7 +33,6 @@ public class PlayerController : MonoBehaviour
     {
         m_player = GetComponent<Rigidbody>();
         m_controls = new PlayerControls();
-        m_capsule = GetComponentInChildren<MeshFilter>();
 
         m_tmpMoveSpeed = m_movementSpeed;
     }
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         direction.y = 0;
         if (direction != Vector3.zero)
         {
-            m_capsule.transform.rotation = Quaternion.Slerp(m_capsule.transform.rotation, Quaternion.LookRotation(direction), m_smoothness * Time.deltaTime);
+            m_dextery.transform.rotation = Quaternion.Slerp(m_dextery.transform.rotation, Quaternion.LookRotation(direction), m_smoothness * Time.deltaTime);
         }
     }
 
