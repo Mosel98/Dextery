@@ -31,6 +31,12 @@ public class GameManager : MonoBehaviour
                     Image endBack = GameObject.FindGameObjectWithTag("EndBackground").GetComponent<Image>();
 
                     endBack.color = Color.red;
+
+                    m_loseText.SetActive(true);
+                }
+                else if(win)
+                {
+                    m_winText.SetActive(true);
                 }
                 break;
             if (!win)
