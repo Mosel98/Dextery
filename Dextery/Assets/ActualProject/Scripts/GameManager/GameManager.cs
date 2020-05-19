@@ -39,16 +39,9 @@ public class GameManager : MonoBehaviour
                     m_winText.SetActive(true);
                 }
                 break;
-            if (!win)
-            {
-                endBack.color = Color.red;
-                m_loseText.SetActive(true);
-            }
+            
 
-            if(win)
-            {
-                m_winText.SetActive(true);
-            }
+            
 
         }
     }
