@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+// Script by Mario Luetzenkirchen
 public class CombatManager : MonoBehaviour
 {
     public bool m_combat { get; private set; }
@@ -94,7 +95,7 @@ public class CombatManager : MonoBehaviour
                         UpdateInfoBox(1, "Dextery takes damage!");
 
                         if (m_playHealth <= 0.0f)
-                            EndCombat(false, m_tmpCombatField);
+                            EndCombat(false);
                     }
                     else
                     {
@@ -149,7 +150,10 @@ public class CombatManager : MonoBehaviour
         GameManager.isOccupied = false;
 
         if (m_enemySetter.EnemyType == EEnemy.WRATH)
+        {
             GameManager.ToTheEnd(_win);
+            return;
+        }           
 
         m_combatUI.SetActive(false);
         m_combat = false;
@@ -202,21 +206,21 @@ public class CombatManager : MonoBehaviour
         switch (eType)
         {
             case EEnemy.CASUAL:
-                m_eSlider.maxValue = 50.0f * lvl;
-                m_eSlider.value = 50.0f * lvl;
-                m_enemyHealth = 50.0f * lvl;
-                m_enemyAtk = 10.0f * lvl;
-                m_enemyDef = 10.0f * lvl;
-                m_enemyMana = 1.0f * lvl;
-                m_exp = 50.0f * lvl;
-                m_gold = 10 * lvl;
+                m_eSlider.maxValue = 50.0f;
+                m_eSlider.value = 50.0f;
+                m_enemyHealth = 50.0f;
+                m_enemyAtk = 10.0f;
+                m_enemyDef = 40.0f;
+                m_enemyMana = 1.0f;
+                m_exp = 50.0f;
+                m_gold = 10;
                 break;
             case EEnemy.WRATH:
                 m_eSlider.maxValue = 150.0f;
                 m_eSlider.value = 150.0f;
                 m_enemyHealth = 150.0f;
-                m_enemyAtk = 10.0f;
-                m_enemyDef = 10.0f;
+                m_enemyAtk = 20.0f;
+                m_enemyDef = 60.0f;
                 m_enemyMana = 10.0f;
                 m_exp = 1000.0f;
                 m_gold = 1000;

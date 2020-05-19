@@ -7,6 +7,7 @@ public enum EQuest
     DELIVER
 }
 
+// Script by Mario Luetzenkirchen
 public class Quest
 {
     public EQuest m_QuestType;

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// Script by Mario Luetzenkirchen
 public class PlayerAttributes : MonoBehaviour
 {
     [SerializeField]
@@ -166,6 +167,11 @@ public class PlayerAttributes : MonoBehaviour
         m_inputLvlFld.text = "";
     }
 
+    public static void ClearLvl()
+    {
+        m_Lvl = 0;
+    }
+
     private void UpdateStatsInfo()
     {
         m_statsText.text = $"Max Health: {m_MaxHealth}\nHealth: {m_Health}\nMax Mana: {m_MaxMana}\nMana: {m_Mana}\nAttack: {m_Atk}\nDefend: {m_Def}\n---------------\nLevel: {m_Lvl}\nExperience for next Level: {m_ExpReq}\nExp: {m_Exp}\n---------------\nGold: {m_Gold}";
@@ -188,7 +194,7 @@ public class PlayerAttributes : MonoBehaviour
                 m_combatManager.SetCombat(gameObject, collision.gameObject);
         }
 
-        // Lightning Damage on Overworld
+        // Lightning Damage on Overworld (Tamara)
         if(collision.gameObject.tag == "Lightning")
         {
             Debug.Log("Oh shit!");

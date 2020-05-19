@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Script by Mario Luetzenkirchen
 public class StoryManager : MonoBehaviour
 {
     [SerializeField]

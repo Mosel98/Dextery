@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// Script by Mario Luetzenkirchen
 public class QuestSystem : MonoBehaviour
 {
     private static List<Quest> m_questList = new List<Quest>();
@@ -196,6 +197,11 @@ public class QuestSystem : MonoBehaviour
                 }
             }
         }
+    }
+
+    public static void ClearQuestList()
+    {
+        m_questList.Clear();
     }
     #endregion
 

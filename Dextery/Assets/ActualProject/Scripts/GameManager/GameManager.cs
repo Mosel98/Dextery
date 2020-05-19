@@ -2,20 +2,40 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// Script by Mario Luetzenkirchen
 public class GameManager : MonoBehaviour
 {
     public static bool isOccupied = false;
     public static bool win = false;
+    public static bool firstTime = true;
 
     private void Awake()
     {
-        if(SceneManager.GetActiveScene().buildIndex == 3)
+        switch(SceneManager.GetActiveScene().name)
         {
-            Image endBack = GameObject.FindGameObjectWithTag("EndBackground").GetComponent<Image>();
+            case "MainMenu":
+                if (!firstTime)
+                {
+                    ClearStaticVariable();
+                    firstTime = false;
+                }                    
+                break;
+            case "TheEnd":
+                if (!win)
+                {
+                    Image endBack = GameObject.FindGameObjectWithTag("EndBackground").GetComponent<Image>();
 
-            if (!win)
-                endBack.color = Color.red;
+                    endBack.color = Color.red;
+                }
+                break;
         }
+    }
+
+    private void ClearStaticVariable()
+    {
+        PlayerAttributes.ClearLvl();
+        Inventory.ClearInventory();
+        QuestSystem.ClearQuestList();
     }
 
     public void ExitGame()

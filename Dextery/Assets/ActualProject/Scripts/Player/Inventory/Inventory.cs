@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// Script by Mario Luetzenkirchen
 public class Inventory : MonoBehaviour
 {
     [SerializeField]
@@ -252,6 +253,13 @@ public class Inventory : MonoBehaviour
         m_itemList = _newItems;
 
         UpdateAllInventories();
+    }
+
+    public static void ClearInventory()
+    {
+        firstItems = true;
+
+        m_itemList.Clear();
     }
 
     private void UpdateAllInventories()

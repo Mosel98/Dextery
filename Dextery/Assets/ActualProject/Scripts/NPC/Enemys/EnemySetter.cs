@@ -6,6 +6,7 @@ public enum EEnemy
     WRATH
 }
 
+// Script by Mario Luetzenkirchen
 public class EnemySetter : MonoBehaviour
 {
     public EEnemy EnemyType;

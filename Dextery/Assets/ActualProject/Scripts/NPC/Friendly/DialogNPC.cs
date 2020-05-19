@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// Script by Mario Luetzenkirchen
 public class DialogNPC : MonoBehaviour
 {
     public bool m_FQ { get; protected set; }   // FQ = finished quest (only Child relevant (Questsystem))
@@ -17,6 +18,7 @@ public class DialogNPC : MonoBehaviour
 
     protected GameObject m_interactableE;
     protected Text m_dialogTxt;
+    protected Text m_npcNameTxt;
     protected int m_count;
 
     protected bool m_interactable = false;
@@ -30,7 +32,8 @@ public class DialogNPC : MonoBehaviour
         m_FQ = false;
 
         m_interactableE = transform.GetChild(0).gameObject;
-        m_dialogTxt = m_dialogUI.GetComponentInChildren<Text>();
+        m_dialogTxt = m_dialogUI.transform.GetChild(0).GetComponentInChildren<Text>();
+        m_npcNameTxt = m_dialogUI.transform.GetChild(1).GetComponentInChildren<Text>();
 
         string txtContent = m_txtFile.text.Replace("\r", "").Replace("\n", "");
 
@@ -72,6 +75,8 @@ public class DialogNPC : MonoBehaviour
     private void StartDialog()
     {
         GameManager.isOccupied = true;
+
+        m_npcNameTxt.text = m_NameNPC;
 
         m_dialogUI.SetActive(true);
         m_count = 0;

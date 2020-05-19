@@ -7,6 +7,7 @@ public enum EVendor
     ARMOR
 }
 
+// Script by Mario Luetzenkirchen
 public class Vendor : MonoBehaviour
 {
     [SerializeField]

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// Script by Mario Luetzenkirchen
 public class QuestGiver : DialogNPC
 {      
     [Header("Quest Settings")]
@@ -39,8 +40,11 @@ public class QuestGiver : DialogNPC
             base.Awake();
         else
         {
+            m_FQ = false;
+
             m_interactableE = transform.GetChild(0).gameObject;
-            m_dialogTxt = m_dialogUI.GetComponentInChildren<Text>();
+            m_dialogTxt = m_dialogUI.transform.GetChild(0).GetComponentInChildren<Text>();
+            m_npcNameTxt = m_dialogUI.transform.GetChild(1).GetComponentInChildren<Text>();
 
             string txtContent = m_txtFile.text.Replace("\r", "").Replace("\n", "");
             string[] m_tmpTxtContent = txtContent.Split('~');

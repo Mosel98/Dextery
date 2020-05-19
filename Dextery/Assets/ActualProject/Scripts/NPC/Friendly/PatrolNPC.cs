@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+// Script by Mario Luetzenkirchen
 public class PatrolNPC : MonoBehaviour
 {
     [SerializeField]

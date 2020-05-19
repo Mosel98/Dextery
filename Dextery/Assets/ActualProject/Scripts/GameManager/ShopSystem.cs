@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// Script by Mario Luetzenkirchen
 public class ShopSystem : MonoBehaviour
 {
     [SerializeField]

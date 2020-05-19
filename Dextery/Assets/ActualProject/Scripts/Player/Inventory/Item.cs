@@ -4,6 +4,7 @@
     MANAPOTION
 }
 
+// Script by Mario Luetzenkirchen
 public class Item
 {
     public EItem ItemType;
