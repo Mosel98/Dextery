@@ -53,6 +53,7 @@ public class Receiver : DialogNPC
     }
     #endregion
 
+#if UNITY_EDITOR
     #region --- Custom Inspector ---
     // Custom Editor using SerializedProperties.
     [CustomEditor(typeof(Receiver))]
@@ -69,4 +70,6 @@ public class Receiver : DialogNPC
         }
     }
     #endregion
+
+#endif
 }

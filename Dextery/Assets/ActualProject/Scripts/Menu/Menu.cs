@@ -42,8 +42,6 @@ public class Menu : MonoBehaviour
 
     IEnumerator LoadLevel(string _levelName)
     {
-        Debug.Log("what the fuck??");
-
         m_crossfade.SetTrigger("Start");
 
         yield return new WaitForSeconds(m_crossfadeTime);

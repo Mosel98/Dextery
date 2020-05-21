@@ -138,6 +138,9 @@ public class DialogNPC : MonoBehaviour
     }
     #endregion
 
+
+#if UNITY_EDITOR   
+    
     #region --- Custom Inspector ---
     // Custom Editor using SerializedProperties.
     [CustomEditor(typeof(DialogNPC))]
@@ -179,4 +182,6 @@ public class DialogNPC : MonoBehaviour
         }
     }
     #endregion
+
+#endif
 }
