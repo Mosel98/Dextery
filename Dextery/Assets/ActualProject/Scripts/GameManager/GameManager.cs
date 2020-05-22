@@ -46,14 +46,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene(0);
-        }
-    }
-
     private void ClearStaticVariable()
     {
         PlayerAttributes.ClearLvl();
