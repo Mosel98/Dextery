@@ -181,6 +181,7 @@ public class QuestSystem : MonoBehaviour
             UpdateQuestLog();
     }
 
+    // Check if a Quest can be still marked as finished after finishing a deliever quest
     private void CheckIfQuestIsStillFinished(EItem _item, List<Item> _playInventory, GameObject _receiver)
     {
         foreach (Quest quest in m_questList)

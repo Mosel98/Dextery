@@ -160,6 +160,7 @@ public class ShopSystem : MonoBehaviour
         UpdateSellInventory();
     }
 
+    // Check if the next action is a add/remove from player/shop
     public void ManageItem(Item _item, List<Item> _removeList, List<Item> _addList)
     {
         bool tmp = true;

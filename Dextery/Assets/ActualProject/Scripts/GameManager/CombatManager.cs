@@ -72,6 +72,7 @@ public class CombatManager : MonoBehaviour
         m_enemyInfo = info.GetChild(1).GetComponent<Text>();
     }
 
+    // Functions as enemy KI during combat
     private void Update()
     {
         if (m_combat)
@@ -149,6 +150,7 @@ public class CombatManager : MonoBehaviour
     {
         GameManager.isOccupied = false;
 
+        // Go to EndScreen after defeat/defeated by Wrath
         if (m_enemySetter.EnemyType == EEnemy.WRATH)
         {
             GameManager.ToTheEnd(_win);
@@ -237,6 +239,7 @@ public class CombatManager : MonoBehaviour
         m_eCombatPos = m_tmpCombatField.transform.GetChild(1).position;
     }
 
+    // Check if participant are still on their Combat Position
     private void CheckCombatPositions()
     {
         Vector2 tmpP = new Vector2(m_player.transform.position.x, m_player.transform.position.z);

@@ -16,7 +16,7 @@ public class QuestGiver : DialogNPC
     private GameObject m_receiver;
 
     [SerializeField]
-    private bool m_extraDialog = false;
+    private bool m_extraDialog = false;     // extra Dialog funtions as a method to let the NPC talk a new sentence after even finishing the quest
     
     [SerializeField]
     private bool m_extraPara = false;
@@ -87,6 +87,7 @@ public class QuestGiver : DialogNPC
         if (m_FQ && m_eQuest == EQuest.DELIVER)
             m_questSystem.UpdateQuestStatus(EQuest.DELIVER, gameObject, 1);
 
+        // When NPC hasn't still given a quest, give quest 
         if (!questGiven)
         {
             switch (m_eQuest)

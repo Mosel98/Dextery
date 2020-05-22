@@ -15,6 +15,7 @@ public class StoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // if player reached level 5 -> spawn Boss Wrath in Overworld Scene
         if (!m_isSpawned && (m_playLvl >= 5 && SceneManager.GetActiveScene().buildIndex == 2))
         {
             Instantiate(m_Wrath, m_wrathSpawn.position, m_Wrath.transform.rotation, m_Wrath.transform.parent);
@@ -22,6 +23,7 @@ public class StoryManager : MonoBehaviour
         }
     }
 
+    // Update level status to check if player is ready for a Boss
     public void CurrentPlayerLvl(int _lvl)
     {
         m_playLvl = _lvl;
