@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 323765105917880451}
   - component: {fileID: 8729445133124752053}
   - component: {fileID: 3033650928719900236}
+  - component: {fileID: 1166521006818501500}
   m_Layer: 0
   m_Name: SM_Marketplace
   m_TagString: Untagged
@@ -80,3 +81,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1166521006818501500
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3613408070915332752}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.6514454, y: 2.5860236, z: 2.1346023}
+  m_Center: {x: 0.35708892, y: 0.63280773, z: 1.0481125}
