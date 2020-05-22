@@ -871,7 +871,7 @@ PrefabInstance:
     - target: {fileID: 4432485069282072482, guid: bc4959bddbdc55a448fb52f7645ed0b4,
         type: 3}
       propertyPath: m_Name
-      value: DeliverPLANTNPC
+      value: DeliverSenateNPC
       objectReference: {fileID: 0}
     - target: {fileID: 4432485069282072536, guid: bc4959bddbdc55a448fb52f7645ed0b4,
         type: 3}
@@ -956,12 +956,12 @@ PrefabInstance:
     - target: {fileID: 4432485069282072541, guid: bc4959bddbdc55a448fb52f7645ed0b4,
         type: 3}
       propertyPath: m_amount
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4432485069282072541, guid: bc4959bddbdc55a448fb52f7645ed0b4,
         type: 3}
       propertyPath: m_extraDialog
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4432485069282072541, guid: bc4959bddbdc55a448fb52f7645ed0b4,
         type: 3}
@@ -981,7 +981,7 @@ PrefabInstance:
     - target: {fileID: 4432485069282072541, guid: bc4959bddbdc55a448fb52f7645ed0b4,
         type: 3}
       propertyPath: m_extraPara
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4432485069282072541, guid: bc4959bddbdc55a448fb52f7645ed0b4,
         type: 3}
@@ -991,7 +991,7 @@ PrefabInstance:
     - target: {fileID: 4432485069282072541, guid: bc4959bddbdc55a448fb52f7645ed0b4,
         type: 3}
       propertyPath: m_NameNPC
-      value: Otto
+      value: Palpatine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc4959bddbdc55a448fb52f7645ed0b4, type: 3}
@@ -7617,7 +7617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2810970a9db75934d97b8b3ff814a80e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NameNPC: Palpatine
+  m_NameNPC: Ganon
   m_txtFile: {fileID: 4900000, guid: 6f1966884f44a83418948121a9d16e50, type: 3}
   m_dialogUI: {fileID: 1844222627}
   m_playerCamera: {fileID: 1236168673}
@@ -35712,12 +35712,12 @@ PrefabInstance:
     - target: {fileID: 8728178886569359272, guid: 783cf145cc03a10478bd844529bec176,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000046218624
+      value: -0.000000003929839
       objectReference: {fileID: 0}
     - target: {fileID: 8728178886569359272, guid: 783cf145cc03a10478bd844529bec176,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000003618314
+      value: -0.0000000026784743
       objectReference: {fileID: 0}
     - target: {fileID: 8728178886569359272, guid: 783cf145cc03a10478bd844529bec176,
         type: 3}
