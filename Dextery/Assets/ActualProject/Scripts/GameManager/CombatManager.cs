@@ -151,7 +151,7 @@ public class CombatManager : MonoBehaviour
         GameManager.isOccupied = false;
 
         // Go to EndScreen after defeat/defeated by Wrath
-        if (m_enemySetter.EnemyType == EEnemy.WRATH)
+        if (!_win || m_enemySetter.EnemyType == EEnemy.WRATH)
         {
             GameManager.ToTheEnd(_win);
             return;
@@ -202,7 +202,7 @@ public class CombatManager : MonoBehaviour
         // Get enemy type
         m_enemySetter = m_enemy.GetComponent<EnemySetter>();
         EEnemy eType = m_enemySetter.EnemyType;
-        int lvl = m_enemySetter.m_Lvl;
+        // int lvl = m_enemySetter.m_Lvl;
 
         // Set Enemy battle parameters
         switch (eType)
@@ -212,7 +212,7 @@ public class CombatManager : MonoBehaviour
                 m_eSlider.value = 50.0f;
                 m_enemyHealth = 50.0f;
                 m_enemyAtk = 10.0f;
-                m_enemyDef = 40.0f;
+                m_enemyDef = 5.0f;
                 m_enemyMana = 1.0f;
                 m_exp = 50.0f;
                 m_gold = 10;
@@ -222,7 +222,7 @@ public class CombatManager : MonoBehaviour
                 m_eSlider.value = 150.0f;
                 m_enemyHealth = 150.0f;
                 m_enemyAtk = 20.0f;
-                m_enemyDef = 60.0f;
+                m_enemyDef = 15.0f;
                 m_enemyMana = 10.0f;
                 m_exp = 1000.0f;
                 m_gold = 1000;
