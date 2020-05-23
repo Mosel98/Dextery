@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static bool isOccupied = false;
     public static bool win = false;
-    public static bool firstTime = true;
+    
 
     [SerializeField]
     private GameObject m_winText;
@@ -19,11 +19,7 @@ public class GameManager : MonoBehaviour
         switch(SceneManager.GetActiveScene().name)
         {
             case "MainMenu":
-                if (!firstTime)
-                {
-                    ClearStaticVariable();
-                    firstTime = false;
-                }                    
+                ClearStaticVariable();                   
                 break;
             case "TheEnd":
                 if (!win)
@@ -51,6 +47,7 @@ public class GameManager : MonoBehaviour
         PlayerAttributes.ClearLvl();
         Inventory.ClearInventory();
         QuestSystem.ClearQuestList();
+        isOccupied = false;
     }
 
     public void ExitGame()
