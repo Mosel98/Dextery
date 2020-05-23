@@ -1,11 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 // Script by Mario Luetzenkirchen
 public class CombatManager : MonoBehaviour
 {
     public bool m_combat { get; private set; }
-
+    [SerializeField]
+    private AudioSource m_fightingSound;
+    [SerializeField]
+    private AudioSource m_fightingMusic;
+    [SerializeField]
+    private AudioSource m_overworldMusic;
     [SerializeField]
     private GameObject m_playCamera;
     [SerializeField]
@@ -85,6 +91,7 @@ public class CombatManager : MonoBehaviour
 
                 if (rnd < 2)
                 {
+                    m_fightingSound.Play();
                     float tmp = m_tmpDefendPlay - m_enemyAtk;
                     m_tmpDefendPlay = 0.0f;
 
@@ -142,10 +149,31 @@ public class CombatManager : MonoBehaviour
         m_playerTurn = true;
         m_combat = true;
 
+        m_fightingMusic.Stop();
+        m_fightingMusic.Play();
+        StartCoroutine(CrossFade(m_overworldMusic, m_fightingMusic));
+
         m_player.transform.position = m_pCombatPos;
         m_enemy.transform.position = m_eCombatPos;
     }
 
+    private IEnumerator CrossFade(AudioSource _start, AudioSource _end)
+    {
+        float goalVolume = _start.volume;
+        float time = 0;
+        // seconds needed
+        float speed = 1.0f;
+
+        while (time < 1)
+        {
+            _start.volume = Mathf.Lerp(goalVolume, 0, time);
+            _end.volume = Mathf.Lerp(0, goalVolume, time);
+            time += Time.deltaTime / speed;
+            yield return null;
+        }
+        _start.volume = 0;
+        _end.volume = goalVolume;
+    }
     private void EndCombat(bool _win, params GameObject[] _destroys)
     {
         GameManager.isOccupied = false;
@@ -178,6 +206,7 @@ public class CombatManager : MonoBehaviour
             m_playAttr.SetEarnExp(m_exp);
             m_playAttr.SetEarnGold(m_gold);            
         }
+        StartCoroutine(CrossFade(m_fightingMusic, m_overworldMusic));
 
         CleanInfoBoxes();
     }
@@ -261,6 +290,7 @@ public class CombatManager : MonoBehaviour
     {
         if (m_playerTurn)
         {
+            m_fightingSound.Play();
             float tmp = m_tmpDefendEnemy - m_playAtk;
 
             if(tmp <= 0.0f)

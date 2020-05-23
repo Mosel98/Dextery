@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     [SerializeField]
+    private AudioSource m_potionSound;
+    [SerializeField]
     private GameObject m_combatInventory;
     [SerializeField]
     private GameObject m_normalInventory;
@@ -166,11 +168,25 @@ public class Inventory : MonoBehaviour
                 {
                     case EItem.HEALPOTION:
                         btnText.text = $"Heal Potion x{item.Amount}";
-                        btnClick.onClick.AddListener(delegate { m_combatManager.Heal(item.EffectVal); });
+                        btnClick.onClick.AddListener(delegate 
+                        { 
+                            m_combatManager.Heal(item.EffectVal);
+                            if (!m_potionSound.isPlaying)
+                            {
+                                m_potionSound.Play();
+                            }
+                        });
                         break;
                     case EItem.MANAPOTION:
                         btnText.text = $"Mana Potion x{item.Amount}";
-                        btnClick.onClick.AddListener(delegate { m_combatManager.Mana(item.EffectVal); });
+                        btnClick.onClick.AddListener(delegate 
+                        { 
+                            m_combatManager.Mana(item.EffectVal);
+                            if (!m_potionSound.isPlaying)
+                            {
+                                m_potionSound.Play();
+                            }
+                        });
                         break;
                 }          
 
@@ -205,12 +221,27 @@ public class Inventory : MonoBehaviour
             {
                 case EItem.HEALPOTION:
                     btnText.text = $"Heal Potion x{item.Amount}";
-                    btnClick.onClick.AddListener(delegate { m_playAttributes.AddHealth(item.EffectVal); });
+                    btnClick.onClick.AddListener(delegate 
+                    { 
+                        m_playAttributes.AddHealth(item.EffectVal); 
+                        if (!m_potionSound.isPlaying)
+                        {
+                            m_potionSound.Play(); 
+                        }
+                    });
                     break;
                 case EItem.MANAPOTION:
                     btnText.text = $"Mana Potion x{item.Amount}";
-                    btnClick.onClick.AddListener(delegate { m_playAttributes.AddMana(item.EffectVal); });
+                    btnClick.onClick.AddListener(delegate 
+                    { 
+                        m_playAttributes.AddMana(item.EffectVal);
+                        if (!m_potionSound.isPlaying)
+                        {
+                            m_potionSound.Play();
+                        }
+                    });
                     break;
+
             }
 
             count++;
