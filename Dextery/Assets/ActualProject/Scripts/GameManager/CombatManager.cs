@@ -179,7 +179,7 @@ public class CombatManager : MonoBehaviour
         GameManager.isOccupied = false;
 
         // Go to EndScreen after defeat/defeated by Wrath
-        if (!_win || m_enemySetter.EnemyType == EEnemy.WRATH)
+        if (!_win && (m_enemySetter.EnemyType == EEnemy.WRATH || m_playHealth <= 0.0f))
         {
             GameManager.ToTheEnd(_win);
             return;

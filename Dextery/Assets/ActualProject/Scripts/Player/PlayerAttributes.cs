@@ -107,27 +107,33 @@ public class PlayerAttributes : MonoBehaviour
 
     public void SetEarnExp(float _exp)
     {
-        m_Exp += _exp;
-
-        while (m_Exp >= m_ExpReq)
+        if(m_Lvl != 100)
         {
-            float tmpExp = m_Exp - m_ExpReq;
+            m_Exp += _exp;
 
-            m_Exp = tmpExp;
-            m_ExpReq = (float)Math.Round((m_ExpReq * 1.25f) * 100f) / 100f;
+            while (m_Exp >= m_ExpReq)
+            {
+                float tmpExp = m_Exp - m_ExpReq;
 
-            m_MaxHealth = (int) (m_MaxHealth * 1.1f);
-            m_Health = m_MaxHealth;
-            m_MaxMana = (int) (m_MaxMana * 1.1f);
-            m_Mana = m_MaxMana;
+                m_Exp = tmpExp;
+                m_ExpReq = (float)Math.Round((m_ExpReq * 1.25f) * 100f) / 100f;
 
-            m_Atk = (float)Math.Round((m_Atk * 1.1f) * 100f) / 100f;
-            m_Def = (float)Math.Round((m_Def * 1.1f) * 100f) / 100f;
+                m_MaxHealth = (int)(m_MaxHealth * 1.1f);
+                m_Health = m_MaxHealth;
+                m_MaxMana = (int)(m_MaxMana * 1.1f);
+                m_Mana = m_MaxMana;
 
-            m_Lvl++;
+                m_Atk = (float)Math.Round((m_Atk * 1.1f) * 100f) / 100f;
+                m_Def = (float)Math.Round((m_Def * 1.1f) * 100f) / 100f;
+
+                m_Lvl++;
+
+                if (m_Lvl == 100)
+                    break;
+            }
+
+            UpdateStatsInfo();
         }
-
-        UpdateStatsInfo();
     }
 
     public void SetEarnGold(int _gold)
