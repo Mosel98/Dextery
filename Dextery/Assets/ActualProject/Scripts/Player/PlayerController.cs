@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private AudioSource m_footstepsSound;
+    
     [SerializeField]
     private float m_movementSpeed = 5;
     [SerializeField]
@@ -46,11 +45,14 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.isOccupied)
             Move();
+
         else
-            m_footstepsSound.Pause();
+        {
+            m_walkAnimation.SetBool("isMoving", false);
 
+        }
 
-        if(Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape))
         {
             SceneManager.LoadScene("MainMenu");
         }
@@ -84,16 +86,16 @@ public class PlayerController : MonoBehaviour
         if (direction != Vector3.zero)
         {
             m_dextery.transform.rotation = Quaternion.Slerp(m_dextery.transform.rotation, Quaternion.LookRotation(direction), m_smoothness * Time.deltaTime);
-            if (!m_footstepsSound.isPlaying)
-            {
+            
+            
                 m_walkAnimation.SetBool("isMoving", true);
-                m_footstepsSound.Play();
-            }
+                
+            
         }
         else
         {
             m_walkAnimation.SetBool("isMoving", false);
-            m_footstepsSound.Pause();
+          
         }
     }
 
