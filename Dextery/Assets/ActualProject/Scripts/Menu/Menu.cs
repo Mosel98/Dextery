@@ -17,7 +17,7 @@ public class Menu : MonoBehaviour
 
     [SerializeField]
     private float m_crossfadeTime = 1.05f;
-
+    
     public void SwitchPanels()
     {
         m_panelAnimator.SetBool("isButtonPressed", true);
@@ -29,10 +29,15 @@ public class Menu : MonoBehaviour
         }
     }
 
-    public void StartGame()
+    public void LoadGame()
     {
         m_mainPanel.SetActive(false);
         StartCoroutine(LoadLevel("Heddwyn"));
+    }
+
+    public void NewGame()
+    {
+        SceneManager.LoadScene("Intro");
     }
 
     public void ExitGame()
@@ -48,4 +53,6 @@ public class Menu : MonoBehaviour
 
         SceneManager.LoadScene(_levelName);
     }
+
+   
 }
