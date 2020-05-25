@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     private Animator m_crossfade;
     [SerializeField]
     private float m_crossfadeTime = 1.05f;
+    [SerializeField]
+    private Animator m_walkAnimation;
 
     private float m_tmpMoveSpeed;
 
@@ -84,11 +86,13 @@ public class PlayerController : MonoBehaviour
             m_dextery.transform.rotation = Quaternion.Slerp(m_dextery.transform.rotation, Quaternion.LookRotation(direction), m_smoothness * Time.deltaTime);
             if (!m_footstepsSound.isPlaying)
             {
+                m_walkAnimation.SetBool("isMoving", true);
                 m_footstepsSound.Play();
             }
         }
         else
         {
+            m_walkAnimation.SetBool("isMoving", false);
             m_footstepsSound.Pause();
         }
     }
