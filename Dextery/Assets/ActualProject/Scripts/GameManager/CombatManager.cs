@@ -19,13 +19,13 @@ public class CombatManager : MonoBehaviour
     [SerializeField]
     private GameObject m_combatUI;
 
-    private GameObject m_inventoryPanel;  
-    private Slider m_hpSlider;  
-    private Slider m_manaSlider;   
-    private Slider m_eSlider;    
-    private Text m_playerInfo;   
+    private GameObject m_inventoryPanel;
+    private Slider m_hpSlider;
+    private Slider m_manaSlider;
+    private Slider m_eSlider;
+    private Text m_playerInfo;
     private Text m_enemyInfo;
-   
+
     private GameObject m_player;
     private GameObject m_enemy;
     private GameObject m_tmpCombatField;
@@ -183,7 +183,7 @@ public class CombatManager : MonoBehaviour
         {
             GameManager.ToTheEnd(_win);
             return;
-        }           
+        }
 
         m_combatUI.SetActive(false);
         m_combat = false;
@@ -204,7 +204,7 @@ public class CombatManager : MonoBehaviour
         if (_win)
         {
             m_playAttr.SetEarnExp(m_exp);
-            m_playAttr.SetEarnGold(m_gold);            
+            m_playAttr.SetEarnGold(m_gold);
         }
         StartCoroutine(CrossFade(m_fightingMusic, m_overworldMusic));
 
@@ -264,7 +264,15 @@ public class CombatManager : MonoBehaviour
     private void SetCombatField()
     {
         m_tmpCombatField = Instantiate(m_combatField, m_player.transform.position, m_player.transform.rotation, transform.parent);
-        m_pCombatPos = m_tmpCombatField.transform.GetChild(0).position;
+        Ray ray = new Ray(m_tmpCombatField.transform.GetChild(0).position + Vector3.up * 500, Vector3.down);
+        if (Physics.Raycast(ray, out var hit)) 
+        { 
+            m_pCombatPos = hit.point + Vector3.up; 
+        }
+        else
+        {
+            m_pCombatPos = m_tmpCombatField.transform.GetChild(0).position;
+        }
         m_eCombatPos = m_tmpCombatField.transform.GetChild(1).position;
     }
 
@@ -293,7 +301,7 @@ public class CombatManager : MonoBehaviour
             m_fightingSound.Play();
             float tmp = m_tmpDefendEnemy - m_playAtk;
 
-            if(tmp <= 0.0f)
+            if (tmp <= 0.0f)
             {
                 m_enemyHealth += tmp;
                 m_eSlider.value = m_enemyHealth;
@@ -303,7 +311,7 @@ public class CombatManager : MonoBehaviour
 
                 if (m_enemyHealth <= 0.0f)
                 {
-                    m_questSystem.UpdateQuestStatus(EQuest.FIGHT, null, (int) m_enemy.GetComponent<EnemySetter>().EnemyType);
+                    m_questSystem.UpdateQuestStatus(EQuest.FIGHT, null, (int)m_enemy.GetComponent<EnemySetter>().EnemyType);
                     EndCombat(true, m_enemy, m_tmpCombatField);
                 }
             }
@@ -380,7 +388,7 @@ public class CombatManager : MonoBehaviour
         m_playHealth += _heal;
         m_hpSlider.value = m_playHealth;
 
-        m_inventory.RemoveItem(new Item { ItemType = EItem.HEALPOTION, Amount = 1});
+        m_inventory.RemoveItem(new Item { ItemType = EItem.HEALPOTION, Amount = 1 });
         UpdateInfoBox(0, "Dextery used Heald Potion!");
 
         m_inventoryPanel.SetActive(false);
