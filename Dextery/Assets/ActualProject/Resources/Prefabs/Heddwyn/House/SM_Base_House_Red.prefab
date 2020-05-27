@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7668484935929183964}
   - component: {fileID: 5044683995621265559}
   m_Layer: 0
-  m_Name: SM_BaseHouseRed_low
+  m_Name: SM_Base_House_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,7 +164,7 @@ PrefabInstance:
     - target: {fileID: 8655611705473778757, guid: ec185cb2f2ba9084980a14919a050e1f,
         type: 3}
       propertyPath: m_Name
-      value: SM_Window_low
+      value: SM_Window
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec185cb2f2ba9084980a14919a050e1f, type: 3}
@@ -239,7 +239,7 @@ PrefabInstance:
     - target: {fileID: 8655611705473778757, guid: ec185cb2f2ba9084980a14919a050e1f,
         type: 3}
       propertyPath: m_Name
-      value: SM_Window_low (1)
+      value: SM_Window
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec185cb2f2ba9084980a14919a050e1f, type: 3}
@@ -314,7 +314,7 @@ PrefabInstance:
     - target: {fileID: 8655611705473778757, guid: ec185cb2f2ba9084980a14919a050e1f,
         type: 3}
       propertyPath: m_Name
-      value: SM_Window_low (3)
+      value: SM_Window
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec185cb2f2ba9084980a14919a050e1f, type: 3}
@@ -389,7 +389,7 @@ PrefabInstance:
     - target: {fileID: 8655611705473778757, guid: ec185cb2f2ba9084980a14919a050e1f,
         type: 3}
       propertyPath: m_Name
-      value: SM_Window_low (2)
+      value: SM_Window
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec185cb2f2ba9084980a14919a050e1f, type: 3}
@@ -409,7 +409,7 @@ PrefabInstance:
     - target: {fileID: 789178309539660436, guid: 28775947ec7b9454db9328ae16c4e911,
         type: 3}
       propertyPath: m_Name
-      value: SM_Door_low
+      value: SM_Door
       objectReference: {fileID: 0}
     - target: {fileID: 4370990438360346759, guid: 28775947ec7b9454db9328ae16c4e911,
         type: 3}

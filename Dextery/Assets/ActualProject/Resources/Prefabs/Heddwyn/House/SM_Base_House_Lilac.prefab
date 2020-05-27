@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4903401567827982355}
   - component: {fileID: 4131884433768038949}
   - component: {fileID: 7668484935929183964}
-  - component: {fileID: 4768003395010383891}
+  - component: {fileID: 5391982169650116692}
   m_Layer: 0
-  m_Name: SM_BaseHousePetrol_low
+  m_Name: SM_Base_House_Lilac
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a6b3f9ed07902804783d0de647ca1a4e, type: 2}
+  - {fileID: 2100000, guid: 1cd7c3d4b66189c4a9fc90bc4e31e275, type: 2}
   - {fileID: 2100000, guid: b417dbd597d71a0428c12c676509fc58, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -86,7 +86,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &4768003395010383891
+--- !u!65 &5391982169650116692
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,8 +97,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.595474, y: 2.4021664, z: 6.4931602}
-  m_Center: {x: 0, y: -0.5171194, z: 0}
+  m_Size: {x: 4.595474, y: 2.6053848, z: 6.4931602}
+  m_Center: {x: 0, y: -0.50599384, z: 0}
 --- !u!1001 &2998425285214557777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -164,7 +164,7 @@ PrefabInstance:
     - target: {fileID: 8655611705473778757, guid: ec185cb2f2ba9084980a14919a050e1f,
         type: 3}
       propertyPath: m_Name
-      value: SM_Window_low
+      value: SM_Window
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec185cb2f2ba9084980a14919a050e1f, type: 3}
@@ -239,7 +239,7 @@ PrefabInstance:
     - target: {fileID: 8655611705473778757, guid: ec185cb2f2ba9084980a14919a050e1f,
         type: 3}
       propertyPath: m_Name
-      value: SM_Window_low (1)
+      value: SM_Window
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec185cb2f2ba9084980a14919a050e1f, type: 3}
@@ -314,7 +314,7 @@ PrefabInstance:
     - target: {fileID: 8655611705473778757, guid: ec185cb2f2ba9084980a14919a050e1f,
         type: 3}
       propertyPath: m_Name
-      value: SM_Window_low (3)
+      value: SM_Window
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec185cb2f2ba9084980a14919a050e1f, type: 3}
@@ -389,7 +389,7 @@ PrefabInstance:
     - target: {fileID: 8655611705473778757, guid: ec185cb2f2ba9084980a14919a050e1f,
         type: 3}
       propertyPath: m_Name
-      value: SM_Window_low (2)
+      value: SM_Window
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec185cb2f2ba9084980a14919a050e1f, type: 3}
@@ -409,7 +409,7 @@ PrefabInstance:
     - target: {fileID: 789178309539660436, guid: 28775947ec7b9454db9328ae16c4e911,
         type: 3}
       propertyPath: m_Name
-      value: SM_Door_low
+      value: SM_Door
       objectReference: {fileID: 0}
     - target: {fileID: 4370990438360346759, guid: 28775947ec7b9454db9328ae16c4e911,
         type: 3}

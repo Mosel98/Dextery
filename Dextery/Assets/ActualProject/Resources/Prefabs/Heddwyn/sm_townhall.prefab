@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 7474811193293459136}
   - component: {fileID: 5854173856686658242}
   m_Layer: 0
-  m_Name: Holzbalken_low (2)
+  m_Name: SM_Townhall_Woodbeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4248867669632342495
 Transform:
@@ -91,11 +91,11 @@ GameObject:
   - component: {fileID: 7916607415655032706}
   - component: {fileID: 8715845548693913586}
   m_Layer: 0
-  m_Name: Townhall_low
+  m_Name: SM_Townhall_Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4686436737138491040
 Transform:
@@ -170,11 +170,11 @@ GameObject:
   - component: {fileID: 7285324421236691000}
   - component: {fileID: 3325984736067024816}
   m_Layer: 0
-  m_Name: Ziffern_low
+  m_Name: SM_Townhall_Numbers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8415640188049601236
 Transform:
@@ -249,11 +249,11 @@ GameObject:
   - component: {fileID: 3717371534655417207}
   - component: {fileID: 4831124153379868396}
   m_Layer: 0
-  m_Name: Clock_low
+  m_Name: SM_Townhall_Clock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1517841119228133708
 Transform:
@@ -328,11 +328,11 @@ GameObject:
   - component: {fileID: 8620496027858267724}
   - component: {fileID: 8005926350572525882}
   m_Layer: 0
-  m_Name: Holzbalken_low
+  m_Name: SM_Townhall_Woodbeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7142824274258889864
 Transform:
@@ -407,11 +407,11 @@ GameObject:
   - component: {fileID: 5303816570611141654}
   - component: {fileID: 907834392970137599}
   m_Layer: 0
-  m_Name: Zeiger_low
+  m_Name: SM_Townhall_Needle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &449554688147530177
 Transform:
@@ -486,11 +486,11 @@ GameObject:
   - component: {fileID: 7156254432087772208}
   - component: {fileID: 3129191695337734329}
   m_Layer: 0
-  m_Name: Dachziegel_low
+  m_Name: SM_Townhall_Roof_Tiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1655264945778202586
 Transform:
@@ -568,7 +568,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &998013120024523634
 Transform:
@@ -617,11 +617,11 @@ GameObject:
   - component: {fileID: 6030306114195672880}
   - component: {fileID: 7906733838224005624}
   m_Layer: 0
-  m_Name: Holzbalken_low (1)
+  m_Name: SM_Townhall_Woodbeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7714449611984163055
 Transform:

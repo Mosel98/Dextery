@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6234003772853853842}
   - component: {fileID: 1910712245675314357}
   m_Layer: 0
-  m_Name: tavern_finish:gwood_lowpoly_wood_lowpoly
+  m_Name: SM_Tavern_Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 5059283408810893482}
   - component: {fileID: 3160753191055216003}
   m_Layer: 0
-  m_Name: tavern_finish:gstairs_lowpoly_stairs_lowpoly
+  m_Name: SM_Tavern_Stairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,7 +205,7 @@ MeshCollider:
   m_GameObject: {fileID: 3350371940540146299}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 5152603923040081025}
   - component: {fileID: 6503489361313486395}
   m_Layer: 0
-  m_Name: tavern_finish:gtavern_bottom_lowpoly_tavern_bottom_lowpoly
+  m_Name: SM_Tavern_Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 5790755547760379451}
   - component: {fileID: 6070016616994495656}
   m_Layer: 0
-  m_Name: tavern_finish:geg_walls_lowpoly_eg_walls_lowpoly
+  m_Name: SM_Tavern_Eg_Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 2316104094674153697}
   - component: {fileID: 2809720123517207692}
   m_Layer: 0
-  m_Name: tavern_finish:gsign_lowpoly_sign_lowpoly
+  m_Name: SM_Tavern_Sign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 2082709680295172189}
   - component: {fileID: 2552121123305289418}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: SM_Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -553,7 +553,7 @@ GameObject:
   - component: {fileID: 4191108238366489223}
   - component: {fileID: 6366393004400755284}
   m_Layer: 0
-  m_Name: tavern_finish:gtavern_top_lowpoly_tavern_top_lowpoly
+  m_Name: SM_Tavern_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 6124576126566884135}
   - component: {fileID: 3963459884834716944}
   m_Layer: 0
-  m_Name: Cylinder002
+  m_Name: SM_Fountain_Outside_Winder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6450711740166289737
 Transform:
@@ -91,11 +91,11 @@ GameObject:
   - component: {fileID: 7723409162230194095}
   - component: {fileID: 3184303429425260754}
   m_Layer: 0
-  m_Name: Object003
+  m_Name: SM_Fountain_Outside_Woodbeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &859474718262350167
 Transform:
@@ -173,7 +173,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2179374071894535372
 Transform:
@@ -220,11 +220,11 @@ GameObject:
   - component: {fileID: 3200563404110608062}
   - component: {fileID: 3710454213421871973}
   m_Layer: 0
-  m_Name: Object004
+  m_Name: SM_Fountain_Outside_Woodbeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8574554094809988942
 Transform:
@@ -299,11 +299,11 @@ GameObject:
   - component: {fileID: 4425878263040972118}
   - component: {fileID: 1219813905209025350}
   m_Layer: 0
-  m_Name: Cylinder001
+  m_Name: SM_Fountain_Outside_Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6190135679827342432
 Transform:
@@ -378,11 +378,11 @@ GameObject:
   - component: {fileID: 5006896035968621680}
   - component: {fileID: 1716137272713909206}
   m_Layer: 0
-  m_Name: Dachdings
+  m_Name: SM_Fountain_Outside_Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5636434683056141336
 Transform:
