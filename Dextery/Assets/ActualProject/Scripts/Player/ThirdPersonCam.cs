@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
+// script by Tamara
 public class ThirdPersonCam : MonoBehaviour
 {
     private PlayerControls m_controls = null;

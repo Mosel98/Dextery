@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+// Script by Celine & Tamara
 public class IntroManager : MonoBehaviour
 {
     [SerializeField]
@@ -14,11 +16,13 @@ public class IntroManager : MonoBehaviour
         StartCoroutine(IntroStop());    
     }
 
+    // Skip the Intro immediatly, for the less patient people :3
     public void SkipIntro()
     {
         SceneManager.LoadScene("Heddwyn");
     }
 
+    // Change scene as soon as Video is over
     IEnumerator IntroStop()
     {
         yield return new WaitForSeconds(m_introLength);

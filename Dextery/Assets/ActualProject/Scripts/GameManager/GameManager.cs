@@ -35,10 +35,6 @@ public class GameManager : MonoBehaviour
                     m_winText.SetActive(true);
                 }
                 break;
-            
-
-            
-
         }
     }
 

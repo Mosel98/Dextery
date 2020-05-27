@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// script by Tamara
 public class TerrainManager : MonoBehaviour
 {
     public int m_Depth = 15;
@@ -30,6 +32,7 @@ public class TerrainManager : MonoBehaviour
         m_terrainData = GenerateTerrain(m_terrainData);
     }
 
+    // use other functions to build the terrain with given heights and randomness
     public TerrainData GenerateTerrain(TerrainData _terrainData)
     {
         _terrainData.heightmapResolution = m_Width + 1;
@@ -41,6 +44,7 @@ public class TerrainManager : MonoBehaviour
         return _terrainData;
     }
 
+    // Generate different heights
     private float[,] GenerateHeights()
     {
         float[,] heights = new float[m_Width, m_Height];
@@ -56,6 +60,7 @@ public class TerrainManager : MonoBehaviour
         return heights;
     }
 
+    // get random heights with every start
     private float CalculateHeight(int x, int y)
     {
         float xCoord = (float)x / m_Width * m_Scale + m_OffSetX;

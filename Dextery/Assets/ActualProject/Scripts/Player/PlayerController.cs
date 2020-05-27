@@ -3,9 +3,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+
+// script by Tamara
 public class PlayerController : MonoBehaviour
 {
-    
     [SerializeField]
     private float m_movementSpeed = 5;
     [SerializeField]
@@ -29,8 +30,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody m_player;
 
     
-    
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -60,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift)) // run added by Mario
         {
             if (m_tmpMoveSpeed != m_movementSpeed * 2)
                 m_tmpMoveSpeed = m_movementSpeed * 2;
@@ -70,6 +69,7 @@ public class PlayerController : MonoBehaviour
             m_tmpMoveSpeed = m_movementSpeed;
         }
 
+        // new Input System
         Vector2 movementInput = m_controls.Player.Movement.ReadValue<Vector2>();
 
         Vector3 direction = movementInput.x * transform.right + movementInput.y * transform.forward;
@@ -85,31 +85,30 @@ public class PlayerController : MonoBehaviour
         direction.y = 0;
         if (direction != Vector3.zero)
         {
-            m_dextery.transform.rotation = Quaternion.Slerp(m_dextery.transform.rotation, Quaternion.LookRotation(direction), m_smoothness * Time.deltaTime);
+            // rotate smother into the wanted direction
+            m_dextery.transform.rotation = Quaternion.Slerp(m_dextery.transform.rotation, 
+                                           Quaternion.LookRotation(direction), m_smoothness * Time.deltaTime);
             
-            
-                m_walkAnimation.SetBool("isMoving", true);
-                
-            
+            m_walkAnimation.SetBool("isMoving", true);
         }
         else
         {
             m_walkAnimation.SetBool("isMoving", false);
-          
         }
     }
 
     private void OnTriggerEnter(Collider _col)
     {
+        // switch from outside town, to inside town and other way around
         if(_col.gameObject.tag == "SceneTrigger")
         {
             switch (SceneManager.GetActiveScene().name)
             {
                 case "Heddwyn":
-                    StartCoroutine(LoadLevel("Overworld"));
+                    StartCoroutine(LoadLevel("Overworld")); // Play Loadingscreen while changing scene
                     break;
                 case "Overworld":
-                    StartCoroutine(LoadLevel("Heddwyn"));
+                    StartCoroutine(LoadLevel("Heddwyn")); // Play Loadingscreen while changing scene
                     break;
             }
         }
@@ -117,10 +116,13 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator LoadLevel(string _levelName)
     {
+        // Start animation
         m_crossfade.SetTrigger("Start");
 
+        // wait for end
         yield return new WaitForSeconds(m_crossfadeTime);
 
+        // change scene when finished
         SceneManager.LoadScene(_levelName);
     }
 
