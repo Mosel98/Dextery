@@ -14,6 +14,11 @@ public class IntroManager : MonoBehaviour
         StartCoroutine(IntroStop());    
     }
 
+    public void SkipIntro()
+    {
+        SceneManager.LoadScene("Heddwyn");
+    }
+
     IEnumerator IntroStop()
     {
         yield return new WaitForSeconds(m_introLength);
