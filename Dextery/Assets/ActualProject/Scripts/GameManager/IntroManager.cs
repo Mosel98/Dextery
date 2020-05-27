@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class IntroManager : MonoBehaviour
 {
     [SerializeField]
-    private float m_introLength = 2.21f;
+    private float m_introLength = 141f;
 
     // Start is called before the first frame update
     void Awake()
     {
-        IntroStop();    
+        StartCoroutine(IntroStop());    
     }
 
     IEnumerator IntroStop()
