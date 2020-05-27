@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// script by Tamara
 public class Menu : MonoBehaviour
 {
     [SerializeField]
@@ -29,28 +30,35 @@ public class Menu : MonoBehaviour
         }
     }
 
+    // Load the level directly whitout Intro and play Loading animatoin
     public void LoadGame()
     {
         m_mainPanel.SetActive(false);
         StartCoroutine(LoadLevel("Heddwyn"));
     }
 
+    // Start game with Intro!
     public void NewGame()
     {
         SceneManager.LoadScene("Intro");
     }
 
+    // Exit the Game 
     public void ExitGame()
     {
         Application.Quit();
     }
 
+    
     IEnumerator LoadLevel(string _levelName)
     {
+        // start loading screen animation
         m_crossfade.SetTrigger("Start");
 
+        // wait for it to finish
         yield return new WaitForSeconds(m_crossfadeTime);
 
+        // Start the Game!!
         SceneManager.LoadScene(_levelName);
     }
 

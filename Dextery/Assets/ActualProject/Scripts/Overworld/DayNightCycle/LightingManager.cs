@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// script by Tamara
 [ExecuteAlways]
 public class LightingManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class LightingManager : MonoBehaviour
             return;
         }
 
+        // 'change' day time
         if(Application.isPlaying)
         {
             m_timeOfDay += Time.deltaTime;
@@ -32,6 +34,7 @@ public class LightingManager : MonoBehaviour
         }
     }
 
+    // Get Light and colors for change per time and rotate the sun
     private void UpdateLighting(float _timePercent)
     {
         RenderSettings.ambientLight = m_preset.AmbientColor.Evaluate(_timePercent);

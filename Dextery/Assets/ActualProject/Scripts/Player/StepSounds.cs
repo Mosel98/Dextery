@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// sript by Celine & Jan
 public class StepSounds : MonoBehaviour
 {
     [SerializeField]
@@ -18,4 +19,4 @@ public class StepSounds : MonoBehaviour
     {
         m_rightFootstep.Play();
     }
-       }
+}
