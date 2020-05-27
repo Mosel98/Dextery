@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3491725440844085473}
   - component: {fileID: 7154408511038768152}
   m_Layer: 0
-  m_Name: TombstoneCeline_Mesh
+  m_Name: SM_Tombstone_Celine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

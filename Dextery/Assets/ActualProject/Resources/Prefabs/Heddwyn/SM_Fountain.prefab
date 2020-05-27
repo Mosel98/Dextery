@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 6766481964938854898}
   - component: {fileID: 4474479279233212357}
   m_Layer: 0
-  m_Name: Cylinder002
+  m_Name: SM_Fountain_Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5808529511923473308
 Transform:
@@ -90,11 +90,11 @@ GameObject:
   - component: {fileID: 1668359212979686937}
   - component: {fileID: 873803064305714563}
   m_Layer: 0
-  m_Name: SM_fountain_low
+  m_Name: SM_Fountain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1668359212979686937
 Transform:
@@ -137,11 +137,11 @@ GameObject:
   - component: {fileID: 2690826037049665111}
   - component: {fileID: 6976389415958639262}
   m_Layer: 0
-  m_Name: Cylinder003
+  m_Name: SM_Fountain_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &415904993880473256
 Transform:

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2296117592625371415}
   - component: {fileID: 7025302929610926025}
   m_Layer: 0
-  m_Name: "t\xFCre_low"
+  m_Name: SM_Church_Doors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 2727562330259609215}
   - component: {fileID: 3794321776474969111}
   m_Layer: 0
-  m_Name: Bogen_klein_low
+  m_Name: SM_Church_Archway_Small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 9117476507089317156}
   - component: {fileID: 8294346612614893799}
   m_Layer: 0
-  m_Name: Turm_low
+  m_Name: SM_Church_Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 8972045987157843257}
   - component: {fileID: 6132991388937459593}
   m_Layer: 0
-  m_Name: Teelichter_low
+  m_Name: SM_Church_Tealight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 2679801196769933013}
   - component: {fileID: 7400910635059760281}
   m_Layer: 0
-  m_Name: Treppe_low
+  m_Name: SM_Church_Stairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -407,7 +407,7 @@ GameObject:
   - component: {fileID: 4386954183553283616}
   - component: {fileID: 1389013225059709074}
   m_Layer: 0
-  m_Name: kirche_low
+  m_Name: SM_Church
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 5609706665324171455}
   - component: {fileID: 1435831787217834337}
   m_Layer: 0
-  m_Name: Kreuz_low
+  m_Name: SM_Church_Cross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -565,7 +565,7 @@ GameObject:
   - component: {fileID: 290847618519072225}
   - component: {fileID: 1051501256125092751}
   m_Layer: 0
-  m_Name: "Kerze_gro\xDF_low"
+  m_Name: SM_Church_Candle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -642,7 +642,7 @@ GameObject:
   m_Component:
   - component: {fileID: 546715596650384463}
   m_Layer: 0
-  m_Name: Roof
+  m_Name: SM_Church_Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -677,7 +677,7 @@ GameObject:
   - component: {fileID: 5232826297982635196}
   - component: {fileID: 6028744670580819928}
   m_Layer: 0
-  m_Name: Bank_original_low
+  m_Name: SM_Church_Bench
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -756,7 +756,7 @@ GameObject:
   - component: {fileID: 4506855079646934168}
   - component: {fileID: 2752671611109622766}
   m_Layer: 0
-  m_Name: Holzbalken_low
+  m_Name: SM_Church_Woodbeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -835,7 +835,7 @@ GameObject:
   - component: {fileID: 5491734248291871864}
   - component: {fileID: 3129608494787792895}
   m_Layer: 0
-  m_Name: Kerzentisch_low
+  m_Name: SM_Church_Candletable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -913,7 +913,7 @@ GameObject:
   - component: {fileID: 4967487993399011750}
   - component: {fileID: 5715379183731967432}
   m_Layer: 0
-  m_Name: church_low
+  m_Name: SM_Church
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -972,7 +972,7 @@ GameObject:
   - component: {fileID: 1262603121744437862}
   - component: {fileID: 5865415655875752389}
   m_Layer: 0
-  m_Name: "Bogen_gro\xDF_low"
+  m_Name: SM_Churchway_Archway_Big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1051,7 +1051,7 @@ GameObject:
   - component: {fileID: 2887853764905942170}
   - component: {fileID: 9201569914982976597}
   m_Layer: 0
-  m_Name: Altar_low
+  m_Name: SM_Church_Altar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1198,7 +1198,7 @@ PrefabInstance:
     - target: {fileID: 8876641206631739079, guid: a259cf06abb17044eba4e4a70ab544b5,
         type: 3}
       propertyPath: m_Name
-      value: Dachziegel_low
+      value: SM_Church_Rooftiles
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a259cf06abb17044eba4e4a70ab544b5, type: 3}
@@ -1288,7 +1288,7 @@ PrefabInstance:
     - target: {fileID: 8876641206631739079, guid: a259cf06abb17044eba4e4a70ab544b5,
         type: 3}
       propertyPath: m_Name
-      value: Dachziegel_low (2)
+      value: SM_Church_Rooftiles
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a259cf06abb17044eba4e4a70ab544b5, type: 3}
@@ -1378,7 +1378,7 @@ PrefabInstance:
     - target: {fileID: 8876641206631739079, guid: a259cf06abb17044eba4e4a70ab544b5,
         type: 3}
       propertyPath: m_Name
-      value: Dachziegel_low (1)
+      value: SM_Church_Rooftiles
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a259cf06abb17044eba4e4a70ab544b5, type: 3}
