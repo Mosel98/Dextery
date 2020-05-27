@@ -185,6 +185,12 @@ public class CombatManager : MonoBehaviour
             return;
         }
 
+        // change to Winscreen after win against Wrath (Tamara)
+        if (_win && m_enemySetter.EnemyType == EEnemy.WRATH)
+        {
+            GameManager.ToTheEnd(_win);
+        }
+
         m_combatUI.SetActive(false);
         m_combat = false;
 
