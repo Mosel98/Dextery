@@ -823,9 +823,10 @@ AudioSource:
   m_GameObject: {fileID: 531826260573708227}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7711207732165813917, guid: 9888f10a1bbd2134ab10ed565e23a2c2,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 903fe36bcc0ddf742afa96f5fa8b87ed, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1163,7 +1164,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6808632105714975896}
+        - m_Target: {fileID: 8536892122765810269}
           m_MethodName: Play
           m_Mode: 1
           m_Arguments:
@@ -1174,7 +1175,11 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 8536892122765810269}
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6808632105714975896}
           m_MethodName: Play
           m_Mode: 1
           m_Arguments:
@@ -3920,7 +3925,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6808632105714975896}
+        - m_Target: {fileID: 8536892122765810269}
           m_MethodName: Play
           m_Mode: 1
           m_Arguments:
@@ -3931,7 +3936,11 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 8536892122765810269}
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6808632105714975896}
           m_MethodName: Play
           m_Mode: 1
           m_Arguments:
@@ -5391,7 +5400,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6808632105714975896}
+        - m_Target: {fileID: 8536892122765810269}
           m_MethodName: Play
           m_Mode: 1
           m_Arguments:
@@ -5402,7 +5411,11 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 8536892122765810269}
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6808632105714975896}
           m_MethodName: Play
           m_Mode: 1
           m_Arguments:
@@ -5907,7 +5920,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6808632105714975896}
+        - m_Target: {fileID: 8536892122765810269}
           m_MethodName: Play
           m_Mode: 1
           m_Arguments:
@@ -5918,7 +5931,11 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 8536892122765810269}
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6808632105714975896}
           m_MethodName: Play
           m_Mode: 1
           m_Arguments:
@@ -5969,9 +5986,10 @@ AudioSource:
   m_GameObject: {fileID: 6151129825278185386}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7711207732165813917, guid: 9888f10a1bbd2134ab10ed565e23a2c2,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 39b6b22203999af41b7c33adf8e1bbfd, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
